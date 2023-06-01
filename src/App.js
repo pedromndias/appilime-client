@@ -1,25 +1,60 @@
-import logo from './logo.svg';
-import './App.css';
+import { Route, Routes } from "react-router-dom";
+import "./App.css";
+import Footer from "./components/navigation/Footer";
+import Navbar from "./components/navigation/Navbar";
+import Home from "./pages/Home"
+import Signup from "./pages/auth/Signup.jsx"
+import Login from "./pages/auth/Login.jsx"
+import Error from "./pages/errors/Error";
+import NotFound from "./pages/errors/NotFound";
+import Main from "./pages/private/Main.jsx"
+import Profile from "./pages/private/Profile.jsx"
+import TodoList from "./pages/lists/TodoList";
+import TodoListAddForm from "./pages/lists/TodoListAddForm";
+import TodoListDetails from "./pages/lists/TodoListDetails";
+import Expenses from "./pages/expenses/Expenses";
+import ExpensesAddForm from "./pages/expenses/ExpensesAddForm";
+import ExpensesDetails from "./pages/expenses/ExpensesDetails";
+import Timer from "./pages/timer/Timer.jsx"
+import GoogleSearch from "./pages/google/GoogleSearch";
+import IsPrivate from "./components/auth/IsPrivate";
+
 
 function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+    return <div className="App app-container">
+      <Navbar />
+
+      {/* Let's define our routes: */}
+      <Routes>
+        <Route path="/" element={<Home />}/>
+        <Route path="/auth/signup" element={<Signup />}/>
+        <Route path="/auth/login" element={<Login />}/>
+        
+        {/* Note the IsPrivate as wrapper: */}
+        <Route path="/main" element={<IsPrivate><Main /></IsPrivate>}/>
+        <Route path="/profile" element={<IsPrivate><Profile /></IsPrivate>}/>
+
+        <Route path="/lists" element={<IsPrivate><TodoList /></IsPrivate>}/>
+        <Route path="/lists/create" element={<IsPrivate><TodoListAddForm /></IsPrivate>}/>
+        <Route path="/lists/:listId" element={<IsPrivate><TodoListDetails /></IsPrivate>}/>
+
+        <Route path="/expenses" element={<IsPrivate><Expenses /></IsPrivate>} />
+        <Route path="/expenses/create" element={<IsPrivate><ExpensesAddForm/> </IsPrivate>}/>
+        <Route path="/expenses/:expenseId" element={<IsPrivate><ExpensesDetails /></IsPrivate>}/>
+
+        <Route path="/timer" element={<IsPrivate><Timer /></IsPrivate>}/>
+        <Route path="/google" element={<IsPrivate><GoogleSearch /></IsPrivate>} />
+
+        {/* Error routes */}
+        <Route path="/error" element={<Error />}/>
+        <Route path="*" element={<NotFound />}/>
+      </Routes>
+
+      
+
+      <Footer />
+
+    </div>;
 }
 
 export default App;
