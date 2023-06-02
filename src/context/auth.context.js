@@ -26,8 +26,8 @@ function AuthWrapper(props) {
         try {
             // Call the verifyService:
             const response = await verifyService()
-            console.log("Token validated")
-            console.log(response);
+            // console.log("Token validated")
+            // console.log(response);
             // setIsLogin to true:
             setIsLoggedIn(true)
             // setUser with the payload:
@@ -35,8 +35,8 @@ function AuthWrapper(props) {
             // Set isLoading to false:
             setIsLoading(false)
         } catch (error) {
-            console.log("Token not valid or there is no token")
-            console.log(error);
+            // console.log("Token not valid or there is no token")
+            // console.log(error);
             // If there is a problem with the token then we should reset the states:
             setIsLoggedIn(false);
             setUser(null)

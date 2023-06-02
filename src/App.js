@@ -18,17 +18,19 @@ import ExpensesDetails from "./pages/expenses/ExpensesDetails";
 import Timer from "./pages/timer/Timer.jsx"
 import GoogleSearch from "./pages/google/GoogleSearch";
 import IsPrivate from "./components/auth/IsPrivate";
+import IsAnon from "./components/auth/IsAnon";
 
 
 function App() {
     return <div className="App app-container">
       <Navbar />
-
+      
       {/* Let's define our routes: */}
       <Routes>
-        <Route path="/" element={<Home />}/>
-        <Route path="/auth/signup" element={<Signup />}/>
-        <Route path="/auth/login" element={<Login />}/>
+        {/* Note the IsAnon as wrapper: */}
+        <Route path="/" element={<IsAnon><Home /></IsAnon>}/>
+        <Route path="/auth/signup" element={<IsAnon><Signup /></IsAnon>}/>
+        <Route path="/auth/login" element={<IsAnon><Login /></IsAnon>}/>
         
         {/* Note the IsPrivate as wrapper: */}
         <Route path="/main" element={<IsPrivate><Main /></IsPrivate>}/>
@@ -36,7 +38,7 @@ function App() {
 
         <Route path="/lists" element={<IsPrivate><TodoList /></IsPrivate>}/>
         <Route path="/lists/create" element={<IsPrivate><TodoListAddForm /></IsPrivate>}/>
-        <Route path="/lists/:listId" element={<IsPrivate><TodoListDetails /></IsPrivate>}/>
+        <Route path="/lists/:todoListId" element={<IsPrivate><TodoListDetails /></IsPrivate>}/>
 
         <Route path="/expenses" element={<IsPrivate><Expenses /></IsPrivate>} />
         <Route path="/expenses/create" element={<IsPrivate><ExpensesAddForm/> </IsPrivate>}/>
