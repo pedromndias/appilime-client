@@ -1,7 +1,6 @@
 import { useEffect, useState } from "react"
 import { Link, useNavigate } from "react-router-dom"
 
-import service from "../../services/config.services"
 import { getAllTodoListsService } from "../../services/todoLists.services"
 
 function TodoList() {
