@@ -2,6 +2,7 @@ import { useEffect, useState } from "react"
 import { Link, useNavigate } from "react-router-dom"
 
 import service from "../../services/config.services"
+import { getAllTodoListsService } from "../../services/todoLists.services"
 
 function TodoList() {
   const navigate = useNavigate()
@@ -15,7 +16,8 @@ function TodoList() {
   // Create function to call the Backend:
   const getData =  async () => {
     try {
-      const response = await service.get("http://localhost:5005/api/lists")
+      // Use a service to get all the data, change isLoading to false and set TodosList as its response.data:
+      const response = await getAllTodoListsService()
       // console.log(response);
       setIsLoading(false)
       setTodosList(response.data)

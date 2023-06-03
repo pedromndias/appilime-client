@@ -1,3 +1,5 @@
+//* Here we will configure the tool that we use to call the Backend
+// Import axios, it we will use it to make the calls:
 import axios from "axios";
 
 // Create a service object with axios that will use the base URL of our server calls:

@@ -27,6 +27,7 @@ function Navbar() {
       {isLoggedIn && <Link to="/main">Home</Link>}
       {isLoggedIn && <Link to="/profile">Profile</Link>}
       {isLoggedIn && <Link to="/lists">Todo Lists</Link>}
+      {isLoggedIn && <Link to="/expenses">Expenses</Link>}
       {isLoggedIn && <button onClick={handleLougout}>Logout</button>}
     </div>
   )

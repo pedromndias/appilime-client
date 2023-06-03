@@ -1,6 +1,6 @@
 import { useState } from "react"
-import service from "../../services/config.services"
 import { useNavigate } from "react-router-dom"
+import { createTodoListService } from "../../services/todoLists.services"
 
 
 function TodoListAddForm() {
@@ -15,9 +15,17 @@ function TodoListAddForm() {
   // Create a handler to submit the form:
   const handleSubmit = async (e) => {
     e.preventDefault()
-    console.log("Testing handleSubmit");
-    await service.post(`http://localhost:5005/api/lists/create`, {name: nameInput})
-    navigate("/lists")
+    // console.log("Testing handleSubmit");
+    try {
+      // await service.post(`http://localhost:5005/api/lists/create`, {name: nameInput})
+      // Use a service to make the post call:
+      await createTodoListService(nameInput)
+      navigate("/lists")
+    } catch (error) {
+      console.log(error)
+      navigate("/error")
+    }
+    
   }
 
   return (
