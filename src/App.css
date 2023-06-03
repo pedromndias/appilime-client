@@ -2,6 +2,11 @@
   text-align: center;
 }
 
+.leaflet-container {
+  height: 300px; /* example */
+  width: 400px; /* example */
+}
+
 .app-container {
   display: flex;
   flex-direction: column;

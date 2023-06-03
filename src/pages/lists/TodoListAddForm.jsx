@@ -8,6 +8,8 @@ function TodoListAddForm() {
 
   // Create state for the name input:
   const [nameInput, setNameInput] = useState("")
+  // State for an error message:
+  const [errorMessage, setErrorMessage] = useState("")
 
   // Create a handler for the name input change:
   const handleNameChange = (e) => setNameInput(e.target.value)
@@ -21,9 +23,15 @@ function TodoListAddForm() {
       // Use a service to make the post call:
       await createTodoListService(nameInput)
       navigate("/lists")
+      setErrorMessage("")
     } catch (error) {
-      console.log(error)
-      navigate("/error")
+      // If we get a 400 error (bad request because the cliente sent the wrong data), we can specify the error message that comes from the Backend validation:
+      if (error.response.status === 400) {
+        setErrorMessage(error.response.data.errorMessage)
+      } else {
+        // If the error is not 400 we will redirect to the Error page:
+        navigate("/error");
+      }
     }
     
   }
@@ -38,6 +46,7 @@ function TodoListAddForm() {
         <button type="submit">+ Add List</button>
 
       </form>
+      {errorMessage && <p style={{color: "red"}}>{errorMessage}</p>}
     </div>
   )
 }

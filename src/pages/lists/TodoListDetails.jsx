@@ -71,9 +71,16 @@ function TodoListDetails() {
       await editTodoListService(todoList._id, todoList.name)
       setIsLoading(false)
       setIsNameInputShowing(false)
+      setErrorMessage("")
     } catch (error) {
-      console.log(error)
-      navigate("/error")
+      // If we get a 400 error (bad request because the client sent the wrong data), we can specify the error message that comes from the Backend validation:
+      setIsLoading(false)
+      if (error.response.status === 400) {
+        setErrorMessage(error.response.data.errorMessage)
+      } else {
+        // If the error is not 400 we will redirect to the Error page:
+        navigate("/error");
+      }
     }
 
   }
@@ -151,7 +158,6 @@ function TodoListDetails() {
       // Hide any possible error message:
       setErrorMessage("")
     } catch (error) {
-      // If we get a 400 error (bad request because the cliente sent the wrong data), we can specify the error message that comes from the Backend validation:
       setIsLoading(false)
       if (error.response.status === 400) {
         setErrorMessage(error.response.data.errorMessage)
