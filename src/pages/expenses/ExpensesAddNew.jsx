@@ -10,37 +10,42 @@ function ExpensesAddNew() {
   // Create state for each input:
   const [nameInput, setNameInput] = useState("")
   const [priceInput, setPriceInput] = useState(0)
-  const [geoLocationInput, setGeoLocationInput] = useState([])
+  const [locationInput, setLocationInput] = useState("")
   // State for an error message:
   const [errorMessage, setErrorMessage] = useState("")
   // Create state for when it is loading:
   const [isLoading, setIsLoading] = useState(false)
   // Create state for the search location results:
   const [searchLocationResults, setSearchLocationResults] = useState(null)
-  // Create state for the location selected:
-  const [selectedLocation, setSelectedLocation] = useState(null)
   // Create state for the coordinates:
   const [coordinates, setCoordinates] = useState([])
 
-  // Create handlers for each input change:
+  // Create handlers for name and price input change:
   const handleNameChange = (e) => setNameInput(e.target.value)
-  const handlePriceChange = (e) => setPriceInput(e.target.value)
+  const handlePriceChange = (e) => {
+    setPriceInput(e.target.value)
+  }
+  // Create state for the geoLocation change (it will update the input value and will call a findAddress function with the value of the input)
   const handleGeoLocationChange = (e) => {
+    // console.log(e.target.value);
+    setLocationInput(e.target.value)
     const locationInputed = e.target.value
     findAddress(locationInputed)
-
-    setGeoLocationInput(e.target.value)
   }
+  
   // Create a handler to submit the form:
   const handleSubmit = async (e) => {
     e.preventDefault()
     // console.log("Testing expense submit");
     try {
+      // Do not allow to store a price with more than 2 decimals:
+      let price = Number(priceInput).toFixed(2)
       setIsLoading(true)
       // Create an object with the Expense state values:
       const expense = {
         name: nameInput,
-        price: priceInput,
+        price: price,
+        location: locationInput,
         geoLocation: coordinates
       }
       // Call the service to create a new Expense:
@@ -69,7 +74,6 @@ function ExpensesAddNew() {
       const response = await axios.get(url)
       // console.log(response.data)
       let addressArray = response.data
-      console.log(addressArray);
       // Set the state with the results:
       setSearchLocationResults(addressArray)
     } catch (error) {
@@ -79,10 +83,10 @@ function ExpensesAddNew() {
 
   // Create a function to handle the click on a selected location:
   const handleSelectedLocation = (eachLocation) => {
-    console.log(eachLocation.lat, eachLocation.lon)
+    // We get the lattitude and longitude of that location and update the coordinates state. Note the Number method so we don't save them as strings:
+    // console.log(eachLocation.lat, eachLocation.lon)
     setCoordinates([Number(eachLocation.lat), Number(eachLocation.lon)])
-    console.log(coordinates);
-    // console.log(eachLocation.lat, eachLocation.lon);
+    // console.log(coordinates) // Still not updated here!
   }
 
   // Use a check clause for when isLoading
@@ -94,8 +98,8 @@ function ExpensesAddNew() {
     <div>
       <h2>ExpensesAddNew</h2>
       <ExpensesForm 
-        nameInput={nameInput} priceInput={priceInput} geoLocationInput={geoLocationInput} handleSubmit={handleSubmit} handleNameChange={handleNameChange} handlePriceChange={handlePriceChange} handleGeoLocationChange={handleGeoLocationChange} errorMessage={errorMessage} isCreatingAnExpense={true} searchLocationResults={searchLocationResults} selectedLocation={selectedLocation} handleSelectedLocation={handleSelectedLocation}
-        setSelectedLocation={setSelectedLocation}
+        nameInput={nameInput} priceInput={priceInput} locationInput={locationInput} handleSubmit={handleSubmit} handleNameChange={handleNameChange} handlePriceChange={handlePriceChange} handleGeoLocationChange={handleGeoLocationChange} errorMessage={errorMessage} isCreatingAnExpense={true} searchLocationResults={searchLocationResults} handleSelectedLocation={handleSelectedLocation}
+        
       />
     </div>
   )

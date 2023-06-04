@@ -27,10 +27,16 @@ const editExpenseService = (expenseId, updatedExpense) => {
     return service.put(`/expenses/${expenseId}`, updatedExpense)
 }
 
+// Create a function to delete all Expenses:
+const deleteAllExpensesService = () => {
+    return service.delete("/expenses")
+}
+
 export {
     getAllExpensesService,
     createExpenseService,
     getExpenseDetailsService,
     deleteExpenseService,
-    editExpenseService
+    editExpenseService,
+    deleteAllExpensesService
 }

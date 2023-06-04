@@ -1,7 +1,7 @@
 //* This is a form component that will be reused (create new Expense and edit an Expense)
 
 function ExpensesForm(props) {
-    const {nameInput, priceInput, geoLocationInput, handleSubmit, handleNameChange, handlePriceChange, handleGeoLocationChange, errorMessage, isEditingAnExpense, isCreatingAnExpense, selectedLocation, setSelectedLocation,searchLocationResults, handleSelectedLocation} = props
+    const {nameInput, priceInput, locationInput, handleSubmit, handleNameChange, handlePriceChange, handleGeoLocationChange, errorMessage, isEditingAnExpense, isCreatingAnExpense,searchLocationResults, handleSelectedLocation} = props
   return (
     <div>
         <form onSubmit={handleSubmit}>
@@ -15,7 +15,7 @@ function ExpensesForm(props) {
         </div>
         <div>
           <label htmlFor="location">Location: </label>
-          <input type="text" name="location" onChange={handleGeoLocationChange} value={geoLocationInput}/>
+          <input type="text" name="location" onChange={handleGeoLocationChange} value={locationInput}/>
         </div>
         
         
@@ -28,10 +28,11 @@ function ExpensesForm(props) {
 
       </form>
       <div>
+        {/* In case we have some element on the searchLocationResults array, we will render them on the page. If we click one of them it will call a handler to select the coordinates of that specific location */}
           {searchLocationResults && 
           <div className="eachLocation-container">
             {searchLocationResults.map((eachLocation, index) => {
-              console.log(eachLocation)
+              // console.log(eachLocation)
               return (
                 <div key={index} className="eachLocation">
                   <p onClick={() => handleSelectedLocation(eachLocation)}>{eachLocation.display_name}</p>

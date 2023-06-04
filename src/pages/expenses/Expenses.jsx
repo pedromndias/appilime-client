@@ -3,7 +3,7 @@
 import { useEffect, useState } from "react";
 import { MapContainer, TileLayer, Marker, Popup } from "react-leaflet";
 import { Link, useNavigate } from "react-router-dom";
-import { getAllExpensesService } from "../../services/expenses.services";
+import { deleteAllExpensesService, getAllExpensesService } from "../../services/expenses.services";
 
 function Expenses() {
   // todo render map with all the expenses
@@ -19,6 +19,8 @@ function Expenses() {
   const [isLoading, setIsLoading] = useState(true)
   // Create a state for the total price of the expenses:
   const [totalPrice, setTotalPrice] = useState(0)
+  // Create state to show the deletion confirmation:
+  const [showDeletionConfirmation, setShowDeletionConfirmation] = useState(false)
 
   // Create a function to get all the data from the Expenses and change the states:
   const getData = async () => {
@@ -44,7 +46,6 @@ function Expenses() {
       setTotalPrice(totalPriceCalculated.toFixed(2))
     }
   }
-  
 
   // useEffect to call getData:
   useEffect(() => {
@@ -56,6 +57,16 @@ function Expenses() {
     calcTotalPrice()
   })
 
+  // Create a function that deletes all the expenses:
+  const handleDeleteAllExpenses = async () => {
+    setIsLoading(true)
+    // Use a service to delete all Expenses:
+    await deleteAllExpensesService()
+    // Set the expenses to null again:
+    setExpenses([])
+    setIsLoading(false)
+    setShowDeletionConfirmation(false)
+  }
 
   // Create a check clause if we are still loading (and give time to the Backend to return the data):
   if (isLoading) {
@@ -94,6 +105,10 @@ function Expenses() {
         <h3>Total</h3>
         <p>€{totalPrice}</p>
       </div>
+      {!showDeletionConfirmation && <button onClick={()=> setShowDeletionConfirmation(true)}>Delete All Expenses</button>}
+      {showDeletionConfirmation && <div>
+        <p>Are you sure you want to delete all Expenses?</p><button onClick={handleDeleteAllExpenses}>Yes</button><button onClick={() => setShowDeletionConfirmation(false)}>No</button>
+      </div>}
     </div>
   )
 }

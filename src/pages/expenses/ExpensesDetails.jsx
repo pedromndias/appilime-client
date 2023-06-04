@@ -6,6 +6,7 @@ import ClickMarker from "./ClickMarker";
 import { useNavigate, useParams } from "react-router-dom";
 import { deleteExpenseService, editExpenseService, getExpenseDetailsService } from "../../services/expenses.services";
 import ExpensesForm from "./ExpensesForm";
+import axios from "axios";
 
 
 function ExpensesDetails() {
@@ -24,14 +25,22 @@ function ExpensesDetails() {
   const [isEditing, setIsEditing] = useState(false)
   const [nameInput, setNameInput] = useState("")
   const [priceInput, setPriceInput] = useState(0)
-  const [geoLocationInput, setGeoLocationInput] = useState([])
+  const [locationInput, setLocationInput] = useState("")
   // State for an error message:
   const [errorMessage, setErrorMessage] = useState("")
+  // Create state for the search location results:
+  const [searchLocationResults, setSearchLocationResults] = useState(null)
+  // Create state for the coordinates:
+  const [coordinates, setCoordinates] = useState([])
 
   // Create handlers for each input change:
   const handleNameChange = (e) => setNameInput(e.target.value)
   const handlePriceChange = (e) => setPriceInput(e.target.value)
-  const handleGeoLocationChange = (e) => setGeoLocationInput(e.target.value)
+  const handleGeoLocationChange = (e) => {
+    setLocationInput(e.target.value)
+    const locationInputed = e.target.value
+    findAddress(locationInputed)
+  }
 
   // getData function:
   const getData = async () => {
@@ -42,7 +51,7 @@ function ExpensesDetails() {
       setExpense(response.data)
       setNameInput(response.data.name)
       setPriceInput(response.data.price)
-      setGeoLocationInput(response.data.geoLocation)
+      setLocationInput(response.data.location)
       // If there are no coordinates, we will just show a pre-defined value for the map.
       // console.log(response.data.geoLocation);
       if(response.data.geoLocation.length !== 0) {
@@ -77,9 +86,37 @@ function ExpensesDetails() {
     
   }
 
+  // todo show already 3 map option when editing: Ask Jorge
   // Create a handler to show the edit form:
   const handleShowEditForm = () => {
     setIsEditing(true)
+  }
+
+  // Create a variable to get the name of the location when editing the Expense. Note that the geoLocationInput sent the the ExpensesForm will have the name of the location and not the coordinates, it is easier to manipulate as a user.
+  let locationName = ""
+
+  // Create a function to find an address, using the Nominatim maps api:
+  const findAddress = async(locationInputed) => {
+    try {
+      let url = `https://nominatim.openstreetmap.org/search?format=json&limit=3&q=${locationInputed}`
+      const response = await axios.get(url)
+      // console.log(response.data)
+      let addressArray = response.data
+      console.log(addressArray);
+      // Set the state with the results:
+      setSearchLocationResults(addressArray)
+    } catch (error) {
+      console.log(error);
+    }
+  }
+
+  
+  // Create a function to handle the click on a selected location:
+  const handleSelectedLocation = (eachLocation) => {
+    // console.log(eachLocation.lat, eachLocation.lon)
+    setCoordinates([Number(eachLocation.lat), Number(eachLocation.lon)])
+    locationName = eachLocation.display_name
+
   }
 
   // Create a handler to edit the Expense:
@@ -92,7 +129,8 @@ function ExpensesDetails() {
       const expense = {
         name: nameInput,
         price: priceInput,
-        geoLocation: geoLocationInput
+        location: locationInput,
+        geoLocation: coordinates
       }
       // console.log(expense);
       // Use a service to edit the Expense:
@@ -104,7 +142,6 @@ function ExpensesDetails() {
       setExpense(response.data)
       setNameInput(response.data.name)
       setPriceInput(response.data.price)
-      setGeoLocationInput(response.data.geoLocation)
       if(response.data.geoLocation.length !== 0) {
         setCenter(response.data.geoLocation)
       } else {
@@ -125,7 +162,6 @@ function ExpensesDetails() {
       }
     }
   }  
-
 
   // Use a check clause for when isLoading
   if (isLoading) {
@@ -154,7 +190,7 @@ function ExpensesDetails() {
       {isEditing && 
       <div>
         <ExpensesForm 
-          nameInput={nameInput} priceInput={priceInput} geoLocationInput={geoLocationInput} handleSubmit={handleSubmit} handleNameChange={handleNameChange} handlePriceChange={handlePriceChange} handleGeoLocationChange={handleGeoLocationChange} errorMessage={errorMessage} isEditingAnExpense={true}
+          nameInput={nameInput} priceInput={priceInput} locationInput={locationInput} handleSubmit={handleSubmit} handleNameChange={handleNameChange} handlePriceChange={handlePriceChange} handleGeoLocationChange={handleGeoLocationChange} errorMessage={errorMessage} isEditingAnExpense={true} searchLocationResults={searchLocationResults} handleSelectedLocation={handleSelectedLocation}
         />
       </div>}
       
