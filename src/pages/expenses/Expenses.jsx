@@ -63,20 +63,20 @@ function Expenses() {
   }
 
   return (
-    <div>
-      <h1>Expenses</h1>
-      <Link to={"/expenses/create"}>+Add</Link>
-      {expenses.map(eachExpense => {
-        return (
-          <Link key={eachExpense._id} to={`/expenses/${eachExpense._id}`}>
-            <h3>{eachExpense.name}</h3>
-            <p>€{eachExpense.price}</p>
-          </Link>
-        )
-      })}
-      <div>
-        <h3>Total</h3>
-        <p>€{totalPrice}</p>
+    <div className="allExpenses">
+      <div className="allExpenses-header">
+        <h1>Expenses</h1>
+        <Link to={"/expenses/create"}>+Add</Link>
+      </div>
+      <div className="allExpenses-container">
+        {expenses.map(eachExpense => {
+          return (
+            <Link key={eachExpense._id} to={`/expenses/${eachExpense._id}`} className="eachExpense-link">
+              <h3>{eachExpense.name}</h3>
+              <p>€{eachExpense.price}</p>
+            </Link>
+          )
+        })}
       </div>
 
       <MapContainer center={center} zoom={13} scrollWheelZoom={false}>
@@ -89,6 +89,11 @@ function Expenses() {
           
 
       </MapContainer>
+
+      <div className="allExpenses-total">
+        <h3>Total</h3>
+        <p>€{totalPrice}</p>
+      </div>
     </div>
   )
 }

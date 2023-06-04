@@ -24,7 +24,7 @@ const deleteExpenseService = (expenseId) => {
 
 // Create a function to edit an Expense by its Id:
 const editExpenseService = (expenseId, updatedExpense) => {
-    return service.put(`/expenses/${expenseId}`, {updatedExpense})
+    return service.put(`/expenses/${expenseId}`, updatedExpense)
 }
 
 export {

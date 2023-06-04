@@ -2,6 +2,7 @@ import { useEffect, useState } from "react"
 import { Link, useNavigate } from "react-router-dom"
 
 import { getAllTodoListsService } from "../../services/todoLists.services"
+import SingleTodoList from "../../components/SingleTodoList"
 
 function TodoList() {
   const navigate = useNavigate()
@@ -37,16 +38,26 @@ function TodoList() {
   }
 
   return (
-    <div>
-      <h1>To-Do Lists</h1>
+    <div className="allTodoLists">
+      <div className="allTodoLists-header">
+        <h1>To-Do Lists</h1>
+        <Link to={"/lists/create"}>+ Add List</Link>
+      </div>
+      <div className="allTodoLists-container">
       {todosList.map(eachTodoList => {
         return (
-          <div key={eachTodoList._id}>
-            <Link to={`/lists/${eachTodoList._id}`}>{eachTodoList.name}</Link>
+          <div className="eachTodoList" key={eachTodoList._id}>
+            <Link className="eachTodoList-link" to={`/lists/${eachTodoList._id}`}>
+            <SingleTodoList
+                todoListId={eachTodoList._id}
+            />
+            </Link>
+            
           </div>
         )
       })}
-      <Link to={"/lists/create"}>+ Add List</Link>
+      </div>
+      
     </div>
   )
 }

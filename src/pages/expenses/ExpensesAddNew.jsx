@@ -1,8 +1,9 @@
 import { useState } from "react"
 import { useNavigate } from "react-router-dom"
 import { createExpenseService } from "../../services/expenses.services"
+import ExpensesForm from "./ExpensesForm"
 
-function ExpensesAddForm() {
+function ExpensesAddNew() {
   const navigate = useNavigate()
 
   // Create state for each input:
@@ -11,6 +12,8 @@ function ExpensesAddForm() {
   const [geoLocationInput, setGeoLocationInput] = useState([])
   // State for an error message:
   const [errorMessage, setErrorMessage] = useState("")
+  // Create state for when it is loading:
+  const [isLoading, setIsLoading] = useState(false)
 
   // Create handlers for each input change:
   const handleNameChange = (e) => setNameInput(e.target.value)
@@ -22,6 +25,7 @@ function ExpensesAddForm() {
     e.preventDefault()
     // console.log("Testing expense submit");
     try {
+      setIsLoading(true)
       // Create an object with the Expense state values:
       const expense = {
         name: nameInput,
@@ -32,9 +36,11 @@ function ExpensesAddForm() {
       await createExpenseService(expense)
       console.log("Document created");
       // If successful we can redirect to the Expenses page:
+      setIsLoading(false)
       setErrorMessage("")
       navigate("/expenses")
     } catch (error) {
+      setIsLoading(false)
       // If we get a 400 error we can show a message:
       if (error.response.status === 400) {
         setErrorMessage(error.response.data.errorMessage)
@@ -45,32 +51,19 @@ function ExpensesAddForm() {
     }
   }
 
+  // Use a check clause for when isLoading
+  if (isLoading) {
+    return <h3>...Loading</h3>
+  }
+
   return (
     <div>
-      <h2>ExpensesAddForm</h2>
-      <form onSubmit={handleSubmit}>
-        <div>
-          <label htmlFor="name">Name: </label>
-          <input type="text" name="name" onChange={handleNameChange} value={nameInput} autoComplete="off"/>
-        </div>
-        <div>
-          <label htmlFor="price">Price: </label>
-          <input type="number" name="price" onChange={handlePriceChange} value={priceInput} />
-        </div>
-        <div>
-          <label htmlFor="location">Location: </label>
-          <input type="text" name="location" onChange={handleGeoLocationChange} value={geoLocationInput}/>
-        </div>
-        <br />
-        <button type="submit">+ Add</button>
-
-        {errorMessage && <p style={{color: "red"}}>{errorMessage}</p>}
-
-      </form>
-      
-    
+      <h2>ExpensesAddNew</h2>
+      <ExpensesForm 
+        nameInput={nameInput} priceInput={priceInput} geoLocationInput={geoLocationInput} handleSubmit={handleSubmit} handleNameChange={handleNameChange} handlePriceChange={handlePriceChange} handleGeoLocationChange={handleGeoLocationChange} errorMessage={errorMessage} isCreatingAnExpense={true}
+      />
     </div>
   )
 }
 
-export default ExpensesAddForm
+export default ExpensesAddNew

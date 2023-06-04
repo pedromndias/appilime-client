@@ -13,7 +13,7 @@ import TodoList from "./pages/lists/TodoList";
 import TodoListAddForm from "./pages/lists/TodoListAddForm";
 import TodoListDetails from "./pages/lists/TodoListDetails";
 import Expenses from "./pages/expenses/Expenses";
-import ExpensesAddForm from "./pages/expenses/ExpensesAddForm";
+import ExpensesAddNew from "./pages/expenses/ExpensesAddNew";
 import ExpensesDetails from "./pages/expenses/ExpensesDetails";
 import Timer from "./pages/timer/Timer.jsx"
 import GoogleSearch from "./pages/google/GoogleSearch";
@@ -41,7 +41,7 @@ function App() {
         <Route path="/lists/:todoListId" element={<IsPrivate><TodoListDetails /></IsPrivate>}/>
 
         <Route path="/expenses" element={<IsPrivate><Expenses /></IsPrivate>} />
-        <Route path="/expenses/create" element={<IsPrivate><ExpensesAddForm/> </IsPrivate>}/>
+        <Route path="/expenses/create" element={<IsPrivate><ExpensesAddNew/> </IsPrivate>}/>
         <Route path="/expenses/:expenseId" element={<IsPrivate><ExpensesDetails /></IsPrivate>}/>
 
         <Route path="/timer" element={<IsPrivate><Timer /></IsPrivate>}/>

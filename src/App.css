@@ -3,8 +3,10 @@
 }
 
 .leaflet-container {
-  height: 300px; /* example */
-  width: 400px; /* example */
+  height: 200px;
+  width: 300px;
+  margin: 10px auto;
+  border-radius: 20px;
 }
 
 .app-container {
@@ -46,11 +48,97 @@
   align-items: center;
 }
 
+/* LISTS */
 
+.allTodoLists {
+  width: 400px;
+  margin: 10px auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
 
+.allTodoLists-header {
+  width: 300px;
+  margin: 0 auto;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.allTodoLists-container {
+  display: flex;
+  flex-direction: column;
+  flex-wrap: wrap;
+}
+
+.eachTodoList-link {
+  text-decoration: none;
+}
+
+.singleTodoList {
+  width: 280px;
+  border: 2px solid lightgray;
+  margin: 20px;
+  border-radius: 10px;
+}
+
+/* EXPENSES */
+
+.expense-details-container {
+  width: 350px;
+  padding: 20px;
+  margin: 10px auto;
+  border: 2px solid lightgray;
+  border-radius: 20px;
+}
+
+.allExpenses {
+  width: 350px;
+  margin: 10px auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.allExpenses-header {
+  width: 300px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.allExpenses-container {
+  width: 300px;
+}
+.allExpenses-total {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 300px;
+}
+
+.eachExpense-link {
+  display: flex;
+  justify-content: space-between;
+  text-decoration: none;
+}
+.eachExpense-link:hover {
+  background-color: lightgray;
+}
+.eachExpense-link h3,
+.eachExpense-link p {
+  margin-top: 2px;
+  margin-bottom: 2px;
+}
 
 @media (min-width: 870px) {
   .navbar {
+    flex-direction: row;
+  }
+
+  .allTodoLists {
+    width: 1000px;
+  }
+  .allTodoLists-container {
+
     flex-direction: row;
   }
   

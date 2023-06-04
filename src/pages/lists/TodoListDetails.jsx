@@ -1,6 +1,5 @@
 import { useEffect, useState } from "react"
 import { useNavigate, useParams } from "react-router-dom"
-import service from "../../services/config.services";
 import { changeTodoIsCheckedService, createSingleTodo, deleteCheckedTodosService, deleteTodoListService, editTodoListService, getAllTodosFromList, getTodoListDetailsService } from "../../services/todoLists.services";
 
 
@@ -26,9 +25,6 @@ function TodoListDetails() {
   const [newSingleTodoName, setNewSingleTodoName] = useState("")
   // State for an error message:
   const [errorMessage, setErrorMessage] = useState("")
-
-
-  // Iterate through all the todos and update the 
 
   // Create function to call the Backend and get data:
   const getData = async () =>  {
@@ -97,7 +93,6 @@ function TodoListDetails() {
       console.log(error)
       navigate("/error")
     }
-    
   }
 
   // Create handler to change the isChecked status of a single Todo:
