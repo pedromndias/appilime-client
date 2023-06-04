@@ -129,6 +129,18 @@
   margin-bottom: 2px;
 }
 
+/* SEARCH LOCATION */
+.eachLocation {
+  cursor: pointer;
+}
+.eachLocation:hover {
+  background-color: lightgray;
+}
+.eachLocation-container {
+  width: 400px;
+  margin: 10px auto;
+}
+
 @media (min-width: 870px) {
   .navbar {
     flex-direction: row;
