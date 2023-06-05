@@ -6,7 +6,6 @@ import { Link, useNavigate } from "react-router-dom";
 import { deleteAllExpensesService, getAllExpensesService } from "../../services/expenses.services";
 
 function Expenses() {
-  // todo render map with all the expenses
   let barcelonaCoords = [41.390106945633164, 2.1766662597656254]
   // Let's create state fot the map:
   const [ center, setCenter ] = useState(barcelonaCoords)
@@ -21,13 +20,27 @@ function Expenses() {
   const [totalPrice, setTotalPrice] = useState(0)
   // Create state to show the deletion confirmation:
   const [showDeletionConfirmation, setShowDeletionConfirmation] = useState(false)
+  // Create state for the map markers:
+  const [allMarkers, setAllMarkers] = useState([])
+
+  // Create an array for all the Markers:
+  let allMarkersArray = []
 
   // Create a function to get all the data from the Expenses and change the states:
   const getData = async () => {
     try {
       // Use a service to get the data:
       const response = await getAllExpensesService()
-      // console.log(response);
+      console.log(response.data);
+      // Set the states
+      // Set allMarkers as all the coordinates from each Expense:
+      response.data.forEach(el => {
+        if(el.geoLocation.length !== 0) {
+          allMarkersArray.push(el.geoLocation)
+        }
+      })
+      setAllMarkers(allMarkersArray)
+      console.log(allMarkersArray);
       setExpenses(response.data)
       setIsLoading(false)
     } catch (error) {
@@ -90,14 +103,15 @@ function Expenses() {
         })}
       </div>
 
-      <MapContainer center={center} zoom={13} scrollWheelZoom={false}>
+      <MapContainer center={center} zoom={12} scrollWheelZoom={false}>
           <TileLayer
             attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
             url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
           />
-
-          {/* invoke Marker Componentes here */}
-          
+          {/* Show a Marker for each value on our allMarkers state array: */}
+          {allMarkers.map((eachMarker, index) => {
+            return eachMarker !== null && <Marker key={index} position={eachMarker} />
+          })}
 
       </MapContainer>
 

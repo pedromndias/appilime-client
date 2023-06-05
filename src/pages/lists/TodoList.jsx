@@ -19,8 +19,8 @@ function TodoList() {
       // Use a service to get all the data, change isLoading to false and set TodosList as its response.data:
       const response = await getAllTodoListsService()
       // console.log(response);
-      setIsLoading(false)
       setTodosList(response.data)
+      setIsLoading(false)
     } catch (error) {
       // console.log(error);
       navigate("/error")

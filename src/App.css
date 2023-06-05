@@ -141,6 +141,50 @@
   margin: 10px auto;
 }
 
+/* PROFILE */
+
+.profile-container {
+  width: 400px;
+  height: 200px;
+  margin: 10px auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 20px;
+  border: 2px solid lightgray;
+  
+}
+.profile-image-container {
+  margin-top: 50px;
+  width: 150px;
+  height: 190px;
+}
+
+.profile-pic {
+  width: 100px;
+  height: 100px;
+  border: 2px solid lightgray;
+  border-radius: 5px;
+}
+
+.profile-info-container {
+  width: 300px;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+}
+.profile-info-container-username {
+  display: flex;
+  align-items: center;
+  gap: 3px;
+}
+.profile-info-container-username button {
+  height: 25px;
+  cursor: pointer;
+}
+
+
 @media (min-width: 870px) {
   .navbar {
     flex-direction: row;
@@ -150,8 +194,13 @@
     width: 1000px;
   }
   .allTodoLists-container {
-
     flex-direction: row;
+  }
+
+  .profile-container {
+    flex-direction: row;
+    justify-content: space-around;
+    width: 500px;
   }
   
 

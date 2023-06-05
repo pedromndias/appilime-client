@@ -29,14 +29,10 @@ function TodoListDetails() {
   // Create function to call the Backend and get data:
   const getData = async () =>  {
     try {
-      // Get the List with the id params.todoListId:
-      // const listResponse = await service.get(`http://localhost:5005/api/lists/${params.todoListId}`)
       // Use a service to get the details (note how we send the params.todoListId as an argument):
       const listResponse = await getTodoListDetailsService(params.todoListId)
       // console.log(listResponse.data);
       setTodoList(listResponse.data)
-      // Get the todos that have this list as the list property:
-      // const todosResponse = await service.get(`http://localhost:5005/api/todo/${params.todoListId}`)
       // Use a service to get the todos that have this list as the list property:
       const todosResponse = await getAllTodosFromList(params.todoListId)
       // console.log(todosResponse.data);
@@ -62,7 +58,6 @@ function TodoListDetails() {
     e.preventDefault()
     try {
       setIsLoading(true)
-      // await service.patch(`http://localhost:5005/api/lists/${todoList._id}`, {name: todoList.name})
       // Use a service to send the data to our Backend:
       await editTodoListService(todoList._id, todoList.name)
       setIsLoading(false)
@@ -84,8 +79,6 @@ function TodoListDetails() {
   // Create handler to delete the Todo List:
   const handleDeleteTodoList = async () => {
     try {
-      
-      // await service.delete(`http://localhost:5005/api/lists/${todoList._id}`)
       // Use a service to delete a Todo List by its Id:
       await deleteTodoListService(todoList._id)
       navigate("/lists")
@@ -100,7 +93,6 @@ function TodoListDetails() {
     // console.log(event.target.checked)
     // console.log(todoId);
     try {
-      // await service.patch(`http://localhost:5005/api/todo/${todoId}`, {isChecked: event.target.checked})
       // Use a service to call our backend:
       await changeTodoIsCheckedService(todoId, event.target.checked)
     } catch (error) {
@@ -112,12 +104,9 @@ function TodoListDetails() {
   // Create handler to delete checked todos:
   const handleDeleteCheckedTodos = async () => {
     try {
-      // Delete the todos that are checked and have todoList._id as its list:
-      // await service.delete(`http://localhost:5005/api/todo/${todoList._id}`)
       // Use a service to delete a the checked todos with that list Id:
       await deleteCheckedTodosService(todoList._id)
       // Set the TodosFromList as the new updated Todos List (by using a service):
-      // const todosResponse = await service.get(`http://localhost:5005/api/todo/${todoList._id}`)
       const todosResponse = await getAllTodosFromList(todoList._id)
       // console.log(todosResponse.data);
       setTodosFromList(todosResponse.data)
@@ -138,8 +127,6 @@ function TodoListDetails() {
     e.preventDefault()
     try {
       setIsLoading(true)
-      // Create a new todo:
-      // await service.post(`http://localhost:5005/api/todo/${todoList._id}`, {name: newSingleTodoName})
       // Use a service to create a single todo:
       await createSingleTodo(todoList._id, newSingleTodoName)
       // Update the list on the page (use a service to get the updated todos):

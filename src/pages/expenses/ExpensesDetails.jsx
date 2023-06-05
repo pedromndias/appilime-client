@@ -2,7 +2,6 @@
 import { useEffect, useState } from "react";
 // Make use of react-leaflet to render maps:
 import { MapContainer, TileLayer, Marker, Popup } from "react-leaflet";
-import ClickMarker from "./ClickMarker";
 import { useNavigate, useParams } from "react-router-dom";
 import { deleteExpenseService, editExpenseService, getExpenseDetailsService } from "../../services/expenses.services";
 import ExpensesForm from "./ExpensesForm";
@@ -12,9 +11,9 @@ import axios from "axios";
 function ExpensesDetails() {
   // Let's create state for the map:
   const [ center, setCenter ] = useState([51.505, -0.09])
-  // Let's create state for the clicked position:
-  const [clickedPosition, setClickedPosition] = useState(null);
-  let barcelonaCoords = [41.390106945633164, 2.1766662597656254]
+  // Let's create state for the marker's position position:
+  const [markerPosition, setMarkerPosition] = useState(null);
+  const barcelonaCoords = [41.390106945633164, 2.1766662597656254]
   
   const navigate = useNavigate()
   const params = useParams()
@@ -52,13 +51,14 @@ function ExpensesDetails() {
       setNameInput(response.data.name)
       setPriceInput(response.data.price)
       setLocationInput(response.data.location)
+      
       // If there are no coordinates, we will just show a pre-defined value for the map.
       // console.log(response.data.geoLocation);
       if(response.data.geoLocation.length !== 0) {
         setCenter(response.data.geoLocation)
-        setClickedPosition(response.data.geoLocation)
+        setMarkerPosition(response.data.geoLocation)
       } else {
-        setCenter([51.505, -0.09])
+        setCenter(barcelonaCoords)
       }
       setIsLoading(false)
     } catch (error) {
@@ -86,14 +86,14 @@ function ExpensesDetails() {
     
   }
 
-  // todo show already 3 map option when editing: Ask Jorge
+  // todo show already the 3 map option when editing: Ask Jorge
   // Create a handler to show the edit form:
   const handleShowEditForm = () => {
     setIsEditing(true)
   }
 
   // Create a variable to get the name of the location when editing the Expense. Note that the geoLocationInput sent the the ExpensesForm will have the name of the location and not the coordinates, it is easier to manipulate as a user.
-  let locationName = ""
+  // let locationName = ""
 
   // Create a function to find an address, using the Nominatim maps api:
   const findAddress = async(locationInputed) => {
@@ -115,7 +115,7 @@ function ExpensesDetails() {
   const handleSelectedLocation = (eachLocation) => {
     // console.log(eachLocation.lat, eachLocation.lon)
     setCoordinates([Number(eachLocation.lat), Number(eachLocation.lon)])
-    locationName = eachLocation.display_name
+    // locationName = eachLocation.display_name
 
   }
 
@@ -124,28 +124,45 @@ function ExpensesDetails() {
     e.preventDefault()
     // console.log("Testing updating an Expense");
     try {
+      // Get the previous results:
       setIsLoading(true)
-      // Create an object with the Expense state values:
-      const expense = {
-        name: nameInput,
-        price: priceInput,
-        location: locationInput,
-        geoLocation: coordinates
+      const responsePrevious = await getExpenseDetailsService(params.expenseId)
+      console.log(responsePrevious)
+      // Check if there were coordinates inputed:
+      let expense;
+      if (coordinates.length !== 0) {
+        // Create an object with the Expense state values:
+        expense = {
+          name: nameInput,
+          price: priceInput,
+          location: locationInput,
+          geoLocation: coordinates
+        }
+      } else {
+        expense = {
+          name: nameInput,
+          price: priceInput,
+          location: locationInput,
+          geoLocation: responsePrevious.data.geoLocation
+        }
       }
+    
+      
       // console.log(expense);
-      // Use a service to edit the Expense:
-      await editExpenseService(params.expenseId, expense)
+      // Use a service to edit the Expense (and it will return the updated Expense):
+      const response = await editExpenseService(params.expenseId, expense)
       console.log("Document updated");
-      // Show updated Expense:
-      const response = await getExpenseDetailsService(params.expenseId)
       // Update states:
       setExpense(response.data)
       setNameInput(response.data.name)
       setPriceInput(response.data.price)
+      
       if(response.data.geoLocation.length !== 0) {
         setCenter(response.data.geoLocation)
+        setMarkerPosition(response.data.geoLocation)
       } else {
-        setCenter([51.505, -0.09])
+        setCenter(coordinates)
+        setMarkerPosition(coordinates)
       }
       // If successful we can show the details again:
       setIsLoading(false)
@@ -179,9 +196,8 @@ function ExpensesDetails() {
             attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
             url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
           />
-          {/* Invoke the ClickMarket component */}
-          <ClickMarker setClickedPosition={setClickedPosition} />
-          { clickedPosition !== null && <Marker position={clickedPosition} /> }
+
+          { markerPosition !== null && <Marker position={markerPosition} /> }
 
         </MapContainer>
         <button onClick={handleDeleteExpense}>Delete</button>
