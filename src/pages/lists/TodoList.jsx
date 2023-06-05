@@ -3,6 +3,7 @@ import { Link, useNavigate } from "react-router-dom"
 
 import { getAllTodoListsService } from "../../services/todoLists.services"
 import SingleTodoList from "../../components/SingleTodoList"
+import { BounceLoader } from "react-spinners"
 
 function TodoList() {
   const navigate = useNavigate()
@@ -34,7 +35,11 @@ function TodoList() {
 
   // Create a check clause if we are still loading (and give time to the Backend to return the data):
   if (isLoading) {
-    return <h3>...Loading</h3>
+    return (
+      <div className="spinner-container">
+        <BounceLoader color="blanchedalmond" size={100} />
+      </div>
+    )
   }
 
   return (

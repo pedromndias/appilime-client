@@ -48,6 +48,48 @@
   align-items: center;
 }
 
+/* THEMES */
+.darkTheme {
+  .navbar,
+  .footer {
+    background-color: black;
+    color: white;
+  }
+  .navbar a {
+    color: white;
+  }
+}
+.grayTheme {
+  .navbar,
+  .footer {
+    background-color: gray;
+    color: black;
+  }
+  .navbar a {
+    color: black;
+  }
+}
+.redTheme {
+  .navbar,
+  .footer {
+    background-color: darkred;
+    color: white;
+  }
+  .navbar a {
+    color: white;
+  }
+}
+.blueTheme {
+  .navbar,
+  .footer {
+    background-color: lightblue;
+    color: white;
+  }
+  .navbar a {
+    color: white;
+  }
+}
+
 /* LISTS */
 
 .allTodoLists {

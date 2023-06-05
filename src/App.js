@@ -20,9 +20,16 @@ import GoogleSearch from "./pages/google/GoogleSearch";
 import IsPrivate from "./components/auth/IsPrivate";
 import IsAnon from "./components/auth/IsAnon";
 
+// Import ThemeContext so we can access its states and functions:
+import { ThemeContext } from "./context/theme.context";
+import { useContext } from "react";
+
 
 function App() {
-    return <div className="App app-container">
+    // Get the theme from context:
+    const {theme} = useContext(ThemeContext)
+    
+    return <div className={`App app-container ${theme}`}>
       <Navbar />
       
       {/* Let's define our routes: */}

@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react"
 import { useNavigate, useParams } from "react-router-dom"
 import { changeTodoIsCheckedService, createSingleTodo, deleteCheckedTodosService, deleteTodoListService, editTodoListService, getAllTodosFromList, getTodoListDetailsService } from "../../services/todoLists.services";
+import { BounceLoader } from "react-spinners"
 
 
 
@@ -152,7 +153,11 @@ function TodoListDetails() {
 
   // Create a check clause for when it isLoading:
   if (isLoading) {
-    return <h3>...Loading</h3>
+    return (
+      <div className="spinner-container">
+        <BounceLoader color="blanchedalmond" size={100} />
+      </div>
+    )
   }
 
   return (

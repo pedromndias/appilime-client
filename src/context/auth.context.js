@@ -15,7 +15,7 @@ function AuthWrapper(props) {
     // State to manage when the data is loading (the App starts by validating the token)
     const [isLoading, setIsLoading] = useState(true)
 
-    //? reate a useEffect to run authenticateUser when the component mounts (the AuthWrapper, that is wrapping our App). It will first check if there is a token and render the spinner while waiting for the response. The authenticateUser function was only being called when the person was doing login, but we should check if there is a token so the isLoggedIn and user state are correct and we can use them even if we refresh the page.
+    //? Create a useEffect to run authenticateUser when the component mounts (the AuthWrapper, that is wrapping our App). It will first check if there is a token and render the spinner while waiting for the response. The authenticateUser function was only being called when the person was doing login, but we should check if there is a token so the isLoggedIn and user state are correct and we can use them even if we refresh the page.
     useEffect(() => {
         authenticateUser()
     }, [])

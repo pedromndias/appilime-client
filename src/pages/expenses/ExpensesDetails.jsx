@@ -6,6 +6,7 @@ import { useNavigate, useParams } from "react-router-dom";
 import { deleteExpenseService, editExpenseService, getExpenseDetailsService } from "../../services/expenses.services";
 import ExpensesForm from "./ExpensesForm";
 import axios from "axios";
+import { BounceLoader } from "react-spinners"
 
 
 function ExpensesDetails() {
@@ -86,7 +87,6 @@ function ExpensesDetails() {
     
   }
 
-  // todo show already the 3 map option when editing: Ask Jorge
   // Create a handler to show the edit form:
   const handleShowEditForm = () => {
     setIsEditing(true)
@@ -182,7 +182,11 @@ function ExpensesDetails() {
 
   // Use a check clause for when isLoading
   if (isLoading) {
-    return <h3>...Loading</h3>
+    return (
+      <div className="spinner-container">
+        <BounceLoader color="blanchedalmond" size={100} />
+      </div>
+    )
   }
 
   return (

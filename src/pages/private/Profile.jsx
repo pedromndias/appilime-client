@@ -3,6 +3,8 @@ import { editProfilePicService, editUsernameService, getUserDetails } from "../.
 import { useNavigate } from "react-router-dom"
 import appleLogo from "../../assets/apple-logo.png"
 import { uploadImageService } from "../../services/upload.services"
+// Import a react spinner from react spinners (npm install react-spinners):
+import { BounceLoader } from "react-spinners"
 
 function Profile() {
   const navigate = useNavigate()
@@ -96,7 +98,11 @@ function Profile() {
   
   // Create a check clause if we are still loading (and give time to the Backend to return the data):
   if (isLoading) {
-    return <h3>...Loading</h3>
+    return (
+      <div className="spinner-container">
+        <BounceLoader color="blanchedalmond" size={100} />
+      </div>
+    )
   }
 
   return (
@@ -116,7 +122,9 @@ function Profile() {
             />
             <button onClick={() => setShowUploadingPictureForm(false)}>Cancel</button>
             </div>}
-            {isUploading ? <h3>... uploading image</h3> : null}
+            {isUploading ? <div className="spinner-container">
+              <BounceLoader color="blanchedalmond" size={100} />
+            </div> : null}
           </div>
           
         </div>

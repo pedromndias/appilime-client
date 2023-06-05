@@ -3,6 +3,7 @@ import { useNavigate } from "react-router-dom"
 import { createExpenseService } from "../../services/expenses.services"
 import ExpensesForm from "./ExpensesForm"
 import axios from "axios"
+import { BounceLoader } from "react-spinners"
 
 function ExpensesAddNew() {
   const navigate = useNavigate()
@@ -91,7 +92,11 @@ function ExpensesAddNew() {
 
   // Use a check clause for when isLoading
   if (isLoading) {
-    return <h3>...Loading</h3>
+    return (
+      <div className="spinner-container">
+        <BounceLoader color="blanchedalmond" size={100} />
+      </div>
+    )
   }
 
   return (

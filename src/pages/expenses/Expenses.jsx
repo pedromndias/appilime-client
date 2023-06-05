@@ -4,6 +4,7 @@ import { useEffect, useState } from "react";
 import { MapContainer, TileLayer, Marker, Popup } from "react-leaflet";
 import { Link, useNavigate } from "react-router-dom";
 import { deleteAllExpensesService, getAllExpensesService } from "../../services/expenses.services";
+import { BounceLoader } from "react-spinners"
 
 function Expenses() {
   let barcelonaCoords = [41.390106945633164, 2.1766662597656254]
@@ -83,7 +84,11 @@ function Expenses() {
 
   // Create a check clause if we are still loading (and give time to the Backend to return the data):
   if (isLoading) {
-    return <h3>...Loading</h3>
+    return (
+      <div className="spinner-container">
+        <BounceLoader color="blanchedalmond" size={100} />
+      </div>
+    )
   }
 
   return (
