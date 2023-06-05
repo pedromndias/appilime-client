@@ -25,26 +25,28 @@ function ThemeWrapper(props) {
 
     // Create a function to manage the theme:
     const manageTheme = async () => {
-        // Call the verifyService so we get access to the user:
-        const verifyResponse = await verifyService()
-        setUser(verifyResponse.data.payload)
-        // console.log(response.data.payload);
-        setIsLoading(false)
-        // Get the user's mood:
-        const userResponse = await getUserDetails(verifyResponse.data.payload._id)
-        // console.log(userResponse.data.mood);
-        let userMood = userResponse.data.mood;
-
-        // Check which theme according with the mood:
-        userMood==="focus" && setTheme("darkTheme");
-        userMood==="tired" && setTheme("grayTheme");
-        userMood==="excited" && setTheme("redTheme");
-        userMood==="sad" && setTheme("blueTheme");
-
-    }
-
+        try {
+            // Call the verifyService so we get access to the user:
+            const verifyResponse = await verifyService()
+            setUser(verifyResponse.data.payload)
+            // console.log(response.data.payload);
+            setIsLoading(false)
+            // Get the user's mood:
+            const userResponse = await getUserDetails(verifyResponse.data.payload._id)
+            // console.log(userResponse.data.mood);
+            let userMood = userResponse.data.mood;
     
-
+            // Check which theme according with the mood:
+            userMood==="focus" && setTheme("darkTheme");
+            userMood==="tired" && setTheme("grayTheme");
+            userMood==="excited" && setTheme("redTheme");
+            userMood==="sad" && setTheme("blueTheme");
+        } catch (error) {
+            setUser(null)
+            setIsLoading(false)
+        }
+    }
+    
 
     //2. The context object we will pass:
     const passedContext = {

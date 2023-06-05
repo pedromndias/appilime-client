@@ -186,8 +186,8 @@
 /* PROFILE */
 
 .profile-container {
-  width: 400px;
-  height: 200px;
+  width: 300px;
+  height: 330px;
   margin: 10px auto;
   display: flex;
   flex-direction: column;
@@ -195,7 +195,7 @@
   justify-content: center;
   gap: 20px;
   border: 2px solid lightgray;
-  
+  padding: 20px;
 }
 .profile-image-container {
   margin-top: 50px;
@@ -214,7 +214,7 @@
   width: 300px;
   display: flex;
   flex-direction: column;
-  align-items: flex-start;
+  align-items: center;
 }
 .profile-info-container-username {
   display: flex;
@@ -243,7 +243,11 @@
     flex-direction: row;
     justify-content: space-around;
     width: 500px;
+    height: 200px;
   }
   
+  .profile-info-container {
+    align-items: flex-start;
+  }
 
 }

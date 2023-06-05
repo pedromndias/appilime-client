@@ -85,6 +85,8 @@ function Profile() {
       setIsLoading(false)
       setShowEditUsername(false)
       setErrorMessage("")
+      // Call getData() again to show the updated username:
+      getData()
     } catch(error) {
       console.log(error);
       setIsLoading(false)

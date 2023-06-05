@@ -38,8 +38,8 @@ function ExpensesDetails() {
   const handlePriceChange = (e) => setPriceInput(e.target.value)
   const handleGeoLocationChange = (e) => {
     setLocationInput(e.target.value)
-    const locationInputed = e.target.value
-    findAddress(locationInputed)
+    // Call finAddress with the e.target.value to find 3 possible address matches with that location:
+    findAddress(e.target.value)
   }
 
   // getData function:
@@ -84,16 +84,12 @@ function ExpensesDetails() {
       console.log(error);
       navigate("/error")
     }
-    
   }
 
   // Create a handler to show the edit form:
   const handleShowEditForm = () => {
     setIsEditing(true)
   }
-
-  // Create a variable to get the name of the location when editing the Expense. Note that the geoLocationInput sent the the ExpensesForm will have the name of the location and not the coordinates, it is easier to manipulate as a user.
-  // let locationName = ""
 
   // Create a function to find an address, using the Nominatim maps api:
   const findAddress = async(locationInputed) => {
@@ -112,10 +108,9 @@ function ExpensesDetails() {
 
   
   // Create a function to handle the click on a selected location:
-  const handleSelectedLocation = (eachLocation) => {
-    // console.log(eachLocation.lat, eachLocation.lon)
-    setCoordinates([Number(eachLocation.lat), Number(eachLocation.lon)])
-    // locationName = eachLocation.display_name
+  const handleSelectedLocation = (chosenLocation) => {
+    // console.log(chosenLocation.lat, chosenLocation.lon)
+    setCoordinates([Number(chosenLocation.lat), Number(chosenLocation.lon)])
 
   }
 
@@ -142,8 +137,8 @@ function ExpensesDetails() {
         expense = {
           name: nameInput,
           price: priceInput,
-          location: locationInput,
-          geoLocation: responsePrevious.data.geoLocation
+          location: "",
+          geoLocation: [] 
         }
       }
     
@@ -157,17 +152,22 @@ function ExpensesDetails() {
       setNameInput(response.data.name)
       setPriceInput(response.data.price)
       
+      // Set the map marker depending if there is geoLocation or not:
       if(response.data.geoLocation.length !== 0) {
         setCenter(response.data.geoLocation)
         setMarkerPosition(response.data.geoLocation)
-      } else {
-        setCenter(coordinates)
-        setMarkerPosition(coordinates)
-      }
-      // If successful we can show the details again:
+      } 
+      // else {
+      //   setCenter(coordinates)
+      //   setMarkerPosition(coordinates)
+      // } //! This is causing an error when we update an expense and there is still no location inputed.
+
+      // If all successful we can reset the states:
       setIsLoading(false)
       setIsEditing(false)
       setErrorMessage("")
+      // Call getData() to show updated Expense:
+      getData()
     } catch (error) {
       // If we get a 400 error we can show a message:
       setIsLoading(false)

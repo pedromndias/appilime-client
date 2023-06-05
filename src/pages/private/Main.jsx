@@ -44,9 +44,9 @@ function Main() {
       <h2>How's your mood?</h2>
       <div>
         <button onClick={()=>handleMoodChange("focus")}>focus</button>
-        <button onClick={()=>handleMoodChange("tired")}>lazy</button>
+        <button onClick={()=>handleMoodChange("lazy")}>lazy</button>
         <button onClick={()=>handleMoodChange("excited")}>excited</button>
-        <button onClick={()=>handleMoodChange("sad")}>melancholic</button>
+        <button onClick={()=>handleMoodChange("melancholic")}>melancholic</button>
       </div>
     </div>
   )
