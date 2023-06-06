@@ -148,7 +148,7 @@ function Profile() {
         </div>
       </div>
         <div>
-          <h3>Current mood: {user.mood}</h3>
+          <h3>Current mood: <span className={`${user.mood}-word`}>{user.mood}</span></h3>
         </div>
       {errorMessage && <p style={{color: "red"}}>{errorMessage}</p>}
     </div>

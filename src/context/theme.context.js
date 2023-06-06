@@ -21,7 +21,7 @@ function ThemeWrapper(props) {
     // Create a useEffect to run our manageTheme function when the component mounts:
     useEffect(() => {
         manageTheme()
-    }, [])
+    }, []) // user?
 
     // Create a function to manage the theme:
     const manageTheme = async () => {
@@ -46,6 +46,7 @@ function ThemeWrapper(props) {
             setIsLoading(false)
         }
     }
+    
 
     //2. The context object we will pass:
     const passedContext = {

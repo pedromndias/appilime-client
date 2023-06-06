@@ -36,17 +36,16 @@ function Main() {
       </div>
     )
   }
-
-
+  
   return (
     <div>
       <img src={logo} alt="logo" />
       <h2>How's your mood?</h2>
-      <div>
-        <button onClick={()=>handleMoodChange("focus")}>focus</button>
-        <button onClick={()=>handleMoodChange("lazy")}>lazy</button>
-        <button onClick={()=>handleMoodChange("excited")}>excited</button>
-        <button onClick={()=>handleMoodChange("melancholic")}>melancholic</button>
+      <div className="theme-button-container">
+        <button className="theme-button focus-button" onClick={()=>handleMoodChange("focus")}>focus</button>
+        <button className="theme-button lazy-button" onClick={()=>handleMoodChange("lazy")}>lazy</button>
+        <button className="theme-button excited-button" onClick={()=>handleMoodChange("excited")}>excited</button>
+        <button className="theme-button melancholic-button" onClick={()=>handleMoodChange("melancholic")}>melancholic</button>
       </div>
     </div>
   )

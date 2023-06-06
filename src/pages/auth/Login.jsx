@@ -79,7 +79,7 @@ function Login() {
 
         <br />
         
-        <button type="submit">Login</button>
+        <button className="login-button" type="submit">Login</button>
 
         {/* If we have an error, we will show it: */}
         {errorMessage && <p style={{color: "red"}}>{errorMessage}</p>}

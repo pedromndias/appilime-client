@@ -1,6 +1,6 @@
 .App {
   text-align: center;
-  background-color:azure;
+  background-color:rgba(249, 249, 55, 0.4);
 }
 
 .leaflet-container {
@@ -30,7 +30,7 @@
   z-index: 10; */
   height: 50px;
   display: flex;
-  background-color: lightblue;
+  background-color: rgba(127, 255, 212, 0.5);
   justify-content: space-around;
   align-items: center;
 }
@@ -44,10 +44,12 @@
 .footer {
   height: 50px;
   display: flex;
-  background-color: lightblue;
+  background-color: rgba(127, 255, 212, 0.5);
   justify-content: space-around;
   align-items: center;
 }
+
+/* HOME */
 
 .home-container {
   width: 300px;
@@ -65,18 +67,64 @@
   text-decoration: none;
   cursor: pointer;
   color: black;
-  border: 2px solid lightgray;
   border-radius: 10px;
-  padding: 10px 15px;
+  padding: 15px 20px;
   font-size: 1.7em;
+  background-color: rgba(255, 204, 0, 0.5);
+  border: none;
 }
 .home-container a:hover {
-  
+  background-color: rgb(255, 204, 0);
 }
 
 .spinner-container {
   width: 100px;
   margin: 20px auto;
+}
+
+/* SIGN UP and LOGIN*/
+.signup-form-container,
+.login-form-container {
+  border: 1px solid #FC0;
+  border-radius: 20px;
+  width: 250px;
+  height: 250px;
+  margin: 0 auto;
+  padding: 20px;
+  background-color: rgba(127, 255, 212, 0.3);
+  background-image: url("./assets/logo-01.png");
+  background-position: center;
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-blend-mode:color-dodge;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+.signup-form-container h1,
+.login-form-container h1 {
+  margin-top: 0px;
+  text-shadow: #FC0 1px 0 2px;
+}
+.signup-form-input,
+.login-form-input {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 10px;
+  text-shadow: #FC0 1px 0 2px;
+}
+.signup-button,
+.login-button {
+  background-color: rgba(255, 204, 0, 0.5);
+  border: none;
+  padding: 10px 15px;
+  font-size: 1.2em;
+  border-radius: 10px;
+  cursor: pointer;
+}
+.signup-button:hover,
+.login-button:hover {
+  background-color: rgb(255, 204, 0);
 }
 
 /* THEMES */
@@ -93,7 +141,7 @@
 .grayTheme {
   .navbar,
   .footer {
-    background-color: gray;
+    background-color: rgba(190, 255, 61, 0.8);
     color: black;
   }
   .navbar a {
@@ -103,7 +151,7 @@
 .redTheme {
   .navbar,
   .footer {
-    background-color: darkred;
+    background-color: rgb(209, 0, 0);
     color: white;
   }
   .navbar a {
@@ -113,12 +161,58 @@
 .blueTheme {
   .navbar,
   .footer {
-    background-color: lightblue;
+    background-color:rgba(0, 213, 255, 0.8);
     color: white;
   }
   .navbar a {
     color: white;
   }
+}
+
+.theme-button-container {
+  width: 400px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 0 auto;
+}
+
+.theme-button {
+  background-color: rgba(255, 204, 0, 0.5);
+  border: none;
+  padding: 9px 14px;
+  font-size: 1.2em;
+  border-radius: 10px;
+  cursor: pointer;
+  margin: 2px;
+}
+.focus-button {
+  background-color: black;
+  color: white;
+}
+.focus-button:hover {
+  background-color: rgba(0, 0, 0, 0.5);
+}
+.lazy-button {
+  background-color: rgba(190, 255, 61, 0.8);
+  color: black;
+}
+.lazy-button:hover {
+  background-color: rgba(190, 255, 61, 0.5);
+}
+.excited-button {
+  background-color: rgb(209, 0, 0);
+  color: white;
+}
+.excited-button:hover {
+  background-color: rgba(209, 0, 0, 0.5);
+}
+.melancholic-button {
+  background-color:rgba(0, 213, 255, 0.8);
+  color: white;
+}
+.melancholic-button:hover {
+  background-color:rgba(0, 213, 255, 0.5);
 }
 
 /* LISTS */
@@ -263,6 +357,22 @@
 .profile-info-container-username button {
   height: 25px;
   cursor: pointer;
+}
+.focus-word {
+  color: black;
+  text-shadow: #757575 1px 0 1px;
+}
+.lazy-word {
+  color: rgba(190, 255, 61, 0.8);
+  text-shadow: #757575 1px 0 1px;
+}
+.excited-word {
+  color: rgb(209, 0, 0);
+  text-shadow: #757575 1px 0 1px;
+}
+.melancholic-word {
+ color: rgba(0, 213, 255, 0.8);
+ text-shadow: #757575 1px 0 1px;
 }
 
 
