@@ -16,7 +16,7 @@ import Expenses from "./pages/expenses/Expenses";
 import ExpensesAddNew from "./pages/expenses/ExpensesAddNew";
 import ExpensesDetails from "./pages/expenses/ExpensesDetails";
 import Timer from "./pages/timer/Timer.jsx"
-import GoogleSearch from "./pages/google/GoogleSearch";
+import Game from "./pages/google/Game";
 import IsPrivate from "./components/auth/IsPrivate";
 import IsAnon from "./components/auth/IsAnon";
 
@@ -52,7 +52,7 @@ function App() {
         <Route path="/expenses/:expenseId" element={<IsPrivate><ExpensesDetails /></IsPrivate>}/>
 
         <Route path="/timer" element={<IsPrivate><Timer /></IsPrivate>}/>
-        <Route path="/google" element={<IsPrivate><GoogleSearch /></IsPrivate>} />
+        <Route path="/game" element={<IsPrivate><Game /></IsPrivate>} />
 
         {/* Error routes */}
         <Route path="/error" element={<Error />}/>

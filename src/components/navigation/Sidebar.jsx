@@ -6,7 +6,7 @@ function Sidebar() {
       <Link to={"/lists"}>To-Dos</Link>
       <Link to={"/expenses"}>Expenses</Link>
       <Link to={"/timer"}>Timer</Link>
-      <Link to={"/google"}>Google</Link>
+      <Link to={"/game"}>Game</Link>
     </div>
   )
 }

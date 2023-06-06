@@ -19,26 +19,37 @@
 }
 
 .navbar {
-  /* position: fixed;
-  height: 100vh;
-  right: 0;
-  top: 0;
-  width: 200px;
-  max-width: 50%;
-  text-align: center;
-  padding: 15px;
-  flex-direction: column;
-  z-index: 10; */
   height: 50px;
   display: flex;
   background-color: rgba(127, 255, 212, 0.5);
   justify-content: space-around;
   align-items: center;
-
+  box-shadow: 0px 5px 5px gray;
+}
+.open-nav-button {
+  display: block;
+}
+.open-nav {
+  position: fixed;
+  height: 100vh;
+  right: 0;
+  top: 0;
+  width: 200px;
+  max-width: 70%;
+  text-align: center;
+  padding: 15px;
+  flex-direction: column;
+  /* Note the high z-index so it shows over any other element: */
+  z-index: 10000;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
   box-shadow: 0px 5px 5px gray;
 }
 
-.navbar a {
+.navbar a,
+.open-nav a,
+.open-nav-button {
   margin: 20px;
   text-decoration: none;
   color: black;
@@ -65,10 +76,11 @@
   position: absolute;
   top: 70px;
   left: 20px;
-  visibility:hidden;
+  visibility: hidden;
 }
 
-.logout-button {
+.logout-button,
+.logout-button-mobile {
   background-color: rgba(0, 0, 0, 0.3);
   color: white;
   cursor: pointer;
@@ -77,9 +89,33 @@
   border-radius: 10px;
   font-size: 1.1em;
 }
+.logout-button {
+  display: none;
+}
+.logout-button-mobile {
+  visibility: visible;
+}
 .logout-button:hover{
   background-color: black;
 }
+
+.show-game-container {
+  display: none;
+}
+.show-game {
+  width: 660px;
+  height: 830px;
+}
+.show-game-warning {
+  width: 300px;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  position: absolute;
+  top: 100px;
+  left: 65px;
+}
+
 
 /* HOME */
 
@@ -197,7 +233,9 @@
   display: flex;
   flex-direction: column;
 }
-.sidebar-container a {
+.sidebar-container a,
+.open-nav button,
+.open-nav a {
   background-color: rgba(255, 204, 0, 0.5);
   border: none;
   font-size: 1.2em;
@@ -212,6 +250,15 @@
   align-items: center;
   box-shadow: 0px 0px 10px gray;
 }
+.open-nav button {
+  width: 50px;
+}
+.open-nav button.logout-button-mobile {
+  width: 120px;
+  color: white;
+}
+
+
 .sidebar-container a:hover {
   background-color: rgb(255, 204, 0);
 }
@@ -407,9 +454,14 @@
 
 .darkTheme {
   .navbar,
+  .open-nav,
   .footer,
   .sidebar-container,
-  .allExpenses {
+  .allExpenses,
+  .open-nav-button,
+  .open-nav a,
+  .open-nav button,
+  .open-nav button.logout-button-mobile {
     background-color: black;
     color: white;
   }
@@ -423,11 +475,13 @@
   .add-expense-link a:hover{
     background-color: lightgray;
   }
-  .navbar a {
+  .navbar a,
+  .open-nav a,
+  .open-nav-button  {
     color: white;
   }
   .logout-button:hover,
-  .navbar a:hover{
+  .navbar a:hover {
     background-color: gray;
   }
 }
@@ -438,13 +492,22 @@
   .navbar,
   .footer,
   .sidebar-container,
-  .allExpenses {
+  .allExpenses,
+  .open-nav-button,
+  .open-nav a,
+  .open-nav button,
+  .open-nav button.logout-button-mobile {
     background-color: rgba(190, 255, 61, 0.8);
     color: black;
   }
-  .navbar a {
+  .open-nav {
+    background-color: rgb(190, 255, 61);
+  }
+  .navbar a,
+  .open-nav a {
     color: black;
   }
+  
   .logout-button:hover{
     background-color: rgba(190, 255, 61, 0.8);
     color: black;
@@ -468,13 +531,19 @@
 }
 .redTheme {
   .navbar,
+  .open-nav,
   .footer,
   .sidebar-container,
-  .allExpenses {
+  .allExpenses,
+  .open-nav-button,
+  .open-nav a,
+  .open-nav button,
+  .open-nav button.logout-button-mobile  {
     background-color: rgb(209, 0, 0);
     color: rgba(255, 204, 0, 0.5);
   }
   .navbar,
+  .open-nav,
   .footer,
   .allExpenses{
     text-shadow: 0px 0px 1px white;
@@ -483,6 +552,7 @@
     box-shadow: 0px 0px 5px black;
   }
   .navbar a,
+  .open-nav a,
   .add-expense-link a {
     color: rgba(255, 204, 0, 0.5);
   }
@@ -503,11 +573,19 @@
 }
 .blueTheme {
   .navbar,
+  .open-nav,
   .footer,
   .sidebar-container,
-  .allExpenses {
+  .allExpenses,
+  .open-nav-button,
+  .open-nav a,
+  .open-nav button,
+  .open-nav button.logout-button-mobile  {
     background-color:rgba(0, 213, 255, 0.8);
     color: white;
+  }
+  .open-nav {
+    background-color:rgb(0, 213, 255);
   }
   .sidebar-container a {
     background-color:white;
@@ -515,7 +593,8 @@
   .sidebar-container a:hover {
     background-color:rgba(0, 213, 255, 0.8);
   }
-  .navbar a {
+  .navbar a,
+  .open-nav a {
     color: white;
   }
   .logout-button:hover,
@@ -622,6 +701,21 @@
     width: 100px;
     height: 280px;
   }
+
+  .show-game-warning {
+    visibility: hidden;
+  }
+  .show-game-container {
+    display: block;
+  }
+  .open-nav-button {
+    display: none;
+  }
+  
+  .logout-button {
+    display: block;
+  }
+  
 
 
 }
