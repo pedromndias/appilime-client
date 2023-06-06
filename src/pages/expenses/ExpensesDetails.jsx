@@ -7,6 +7,7 @@ import { deleteExpenseService, editExpenseService, getExpenseDetailsService } fr
 import ExpensesForm from "./ExpensesForm";
 import axios from "axios";
 import { BounceLoader } from "react-spinners"
+import Sidebar from "../../components/navigation/Sidebar";
 
 
 function ExpensesDetails() {
@@ -60,6 +61,7 @@ function ExpensesDetails() {
         setMarkerPosition(response.data.geoLocation)
       } else {
         setCenter(barcelonaCoords)
+        setMarkerPosition(null)
       }
       setIsLoading(false)
     } catch (error) {
@@ -125,7 +127,7 @@ function ExpensesDetails() {
       console.log(responsePrevious)
       // Check if there were coordinates inputed:
       let expense;
-      if (coordinates.length !== 0) {
+      if (coordinates.length !== 0 && locationInput !== "") {
         // Create an object with the Expense state values:
         expense = {
           name: nameInput,
@@ -142,7 +144,6 @@ function ExpensesDetails() {
         }
       }
     
-      
       // console.log(expense);
       // Use a service to edit the Expense (and it will return the updated Expense):
       const response = await editExpenseService(params.expenseId, expense)
@@ -156,12 +157,15 @@ function ExpensesDetails() {
       if(response.data.geoLocation.length !== 0) {
         setCenter(response.data.geoLocation)
         setMarkerPosition(response.data.geoLocation)
-      } 
+      } else {
+        setCenter(barcelonaCoords)
+      }
       // else {
       //   setCenter(coordinates)
       //   setMarkerPosition(coordinates)
       // } //! This is causing an error when we update an expense and there is still no location inputed.
 
+    
       // If all successful we can reset the states:
       setIsLoading(false)
       setIsEditing(false)
@@ -190,30 +194,36 @@ function ExpensesDetails() {
   }
 
   return (
-    <div>
-      
-      {!isEditing && <div className="expense-details-container">
-        <h2>{expense.name}</h2>
-        <h3>€{expense.price}</h3>
-        <MapContainer center={center} zoom={13} scrollWheelZoom={false}>
-          <TileLayer
-            attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
-            url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
-          />
-
-          { markerPosition !== null && <Marker position={markerPosition} /> }
-
-        </MapContainer>
-        <button onClick={handleDeleteExpense}>Delete</button>
-        <button onClick={handleShowEditForm}>Edit</button>
-      </div>}
-      {isEditing && 
+    <div className="container-with-sidebar">
+      <div className="sidebar">
+        <Sidebar />
+      </div>
       <div>
-        <ExpensesForm 
-          nameInput={nameInput} priceInput={priceInput} locationInput={locationInput} handleSubmit={handleSubmit} handleNameChange={handleNameChange} handlePriceChange={handlePriceChange} handleGeoLocationChange={handleGeoLocationChange} errorMessage={errorMessage} isEditingAnExpense={true} searchLocationResults={searchLocationResults} handleSelectedLocation={handleSelectedLocation}
-        />
-      </div>}
-      
+        
+        {!isEditing && <div className="expense-details-container">
+          <h2>{expense.name}</h2>
+          <h3>€{expense.price}</h3>
+          <MapContainer center={center} zoom={13} scrollWheelZoom={false}>
+            <TileLayer
+              attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+              url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
+            />
+
+            { markerPosition !== null && <Marker position={markerPosition} /> }
+
+          </MapContainer>
+          <button onClick={handleDeleteExpense}>Delete</button>
+          <button onClick={handleShowEditForm}>Edit</button>
+        </div>}
+        {isEditing && 
+        <div>
+          <h2>Edit {expense.name} expense</h2>
+          <ExpensesForm 
+            nameInput={nameInput} priceInput={priceInput} locationInput={locationInput} handleSubmit={handleSubmit} handleNameChange={handleNameChange} handlePriceChange={handlePriceChange} handleGeoLocationChange={handleGeoLocationChange} errorMessage={errorMessage} isEditingAnExpense={true} searchLocationResults={searchLocationResults} handleSelectedLocation={handleSelectedLocation}
+          />
+        </div>}
+        
+      </div>
     </div>
   )
 }

@@ -1,7 +1,9 @@
 
 function GoogleSearch() {
   return (
-    <div>GoogleSearch</div>
+    <div>
+      <iframe src="www.google.com"></iframe>
+    </div>
   )
 }
 

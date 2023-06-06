@@ -4,6 +4,7 @@ import { Link, useNavigate } from "react-router-dom"
 import { getAllTodoListsService } from "../../services/todoLists.services"
 import SingleTodoList from "../../components/SingleTodoList"
 import { BounceLoader } from "react-spinners"
+import Sidebar from "../../components/navigation/Sidebar"
 
 function TodoList() {
   const navigate = useNavigate()
@@ -43,26 +44,31 @@ function TodoList() {
   }
 
   return (
-    <div className="allTodoLists">
-      <div className="allTodoLists-header">
-        <h1>To-Do Lists</h1>
-        <Link to={"/lists/create"}>+ Add List</Link>
+    <div className="container-with-sidebar">
+      <div className="sidebar">
+        <Sidebar />
       </div>
-      <div className="allTodoLists-container">
-      {todosList.map(eachTodoList => {
-        return (
-          <div className="eachTodoList" key={eachTodoList._id}>
-            <Link className="eachTodoList-link" to={`/lists/${eachTodoList._id}`}>
-            <SingleTodoList
-                todoListId={eachTodoList._id}
-            />
-            </Link>
-            
-          </div>
-        )
-      })}
+      <div className="allTodoLists">
+        <div className="allTodoLists-header">
+          <h1>To-Do Lists</h1>
+          <Link to={"/lists/create"}>+ Add List</Link>
+        </div>
+        <div className="allTodoLists-container">
+        {todosList.map(eachTodoList => {
+          return (
+            <div className="eachTodoList" key={eachTodoList._id}>
+              <Link className="eachTodoList-link" to={`/lists/${eachTodoList._id}`}>
+              <SingleTodoList
+                  todoListId={eachTodoList._id}
+              />
+              </Link>
+              
+            </div>
+          )
+        })}
+        </div>
+        
       </div>
-      
     </div>
   )
 }

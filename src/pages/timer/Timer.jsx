@@ -1,7 +1,15 @@
+import Sidebar from "../../components/navigation/Sidebar"
 
 function Timer() {
   return (
-    <div>Timer</div>
+    <div className="container-with-sidebar">
+      <div className="sidebar">
+        <Sidebar />
+      </div>
+      <div>
+
+      </div>
+    </div>
   )
 }
 

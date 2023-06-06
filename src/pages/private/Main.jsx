@@ -4,6 +4,7 @@ import { BounceLoader } from "react-spinners"
 import { useNavigate } from "react-router-dom"
 import { editUserMoodService } from "../../services/main.services"
 import { ThemeContext } from "../../context/theme.context";
+import Sidebar from "../../components/navigation/Sidebar"
 
 function Main() {
   const navigate = useNavigate()
@@ -38,14 +39,21 @@ function Main() {
   }
   
   return (
-    <div>
-      <img src={logo} alt="logo" />
-      <h2>How's your mood?</h2>
-      <div className="theme-button-container">
-        <button className="theme-button focus-button" onClick={()=>handleMoodChange("focus")}>focus</button>
-        <button className="theme-button lazy-button" onClick={()=>handleMoodChange("lazy")}>lazy</button>
-        <button className="theme-button excited-button" onClick={()=>handleMoodChange("excited")}>excited</button>
-        <button className="theme-button melancholic-button" onClick={()=>handleMoodChange("melancholic")}>melancholic</button>
+    <div className="main-container-general">
+      <Sidebar />
+      <div className="main-container">
+        <img src={logo} alt="logo" />
+        <h2>How's your mood?</h2>
+        <div className="theme-button-container">
+          <button className="theme-button focus-button" onClick={()=>handleMoodChange("focus")}>focus</button>
+          <button className="theme-button lazy-button" onClick={()=>handleMoodChange("lazy")}>lazy</button>
+          <button className="theme-button excited-button" onClick={()=>handleMoodChange("excited")}>excited</button>
+          <button className="theme-button melancholic-button" onClick={()=>handleMoodChange("melancholic")}>melancholic</button>
+        </div>
+      </div>
+      <div className="weather-price-container">
+        <h2>WEATHER</h2>
+        <h2>PRICES</h2>
       </div>
     </div>
   )

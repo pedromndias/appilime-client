@@ -5,6 +5,7 @@ import { MapContainer, TileLayer, Marker, Popup } from "react-leaflet";
 import { Link, useNavigate } from "react-router-dom";
 import { deleteAllExpensesService, getAllExpensesService } from "../../services/expenses.services";
 import { BounceLoader } from "react-spinners"
+import Sidebar from "../../components/navigation/Sidebar";
 
 function Expenses() {
   let barcelonaCoords = [41.390106945633164, 2.1766662597656254]
@@ -92,42 +93,51 @@ function Expenses() {
   }
 
   return (
-    <div className="allExpenses">
-      <div className="allExpenses-header">
-        <h1>Expenses</h1>
-        <Link to={"/expenses/create"}>+Add</Link>
+    <div className="container-with-sidebar">
+      <div className="sidebar">
+        <Sidebar />
       </div>
-      <div className="allExpenses-container">
-        {expenses.map(eachExpense => {
-          return (
-            <Link key={eachExpense._id} to={`/expenses/${eachExpense._id}`} className="eachExpense-link">
-              <h3>{eachExpense.name}</h3>
-              <p>€{eachExpense.price}</p>
-            </Link>
-          )
-        })}
-      </div>
-
-      <MapContainer center={center} zoom={12} scrollWheelZoom={false}>
-          <TileLayer
-            attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
-            url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
-          />
-          {/* Show a Marker for each value on our allMarkers state array: */}
-          {allMarkers.map((eachMarker, index) => {
-            return eachMarker !== null && <Marker key={index} position={eachMarker} />
+      <div className="allExpenses">
+        <div className="allExpenses-header">
+          <h1>Expenses</h1>
+          <div className="add-expense-link">
+            <Link to={"/expenses/create"}>+Add</Link>
+          </div>
+        </div>
+        <div className="allExpenses-container">
+          {expenses.map(eachExpense => {
+            return (
+              <div className="add-expense-link-each">
+                <Link key={eachExpense._id} to={`/expenses/${eachExpense._id}`} className="eachExpense-link">
+                  <h3>{eachExpense.name}</h3>
+                  <p>€{eachExpense.price}</p>
+                </Link>
+              </div>
+            )
           })}
+        </div>
 
-      </MapContainer>
+        <MapContainer center={center} zoom={12} scrollWheelZoom={false}>
+            <TileLayer
+              attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+              url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
+            />
+            {/* Show a Marker for each value on our allMarkers state array: */}
+            {allMarkers.map((eachMarker, index) => {
+              return eachMarker !== null && <Marker key={index} position={eachMarker} />
+            })}
 
-      <div className="allExpenses-total">
-        <h3>Total</h3>
-        <p>€{totalPrice}</p>
+        </MapContainer>
+
+        <div className="allExpenses-total">
+          <h3>Total</h3>
+          <p>€{totalPrice}</p>
+        </div>
+        {!showDeletionConfirmation && <button onClick={()=> setShowDeletionConfirmation(true)}>Delete All Expenses</button>}
+        {showDeletionConfirmation && <div>
+          <p>Are you sure you want to delete all Expenses?</p><button onClick={handleDeleteAllExpenses}>Yes</button><button onClick={() => setShowDeletionConfirmation(false)}>No</button>
+        </div>}
       </div>
-      {!showDeletionConfirmation && <button onClick={()=> setShowDeletionConfirmation(true)}>Delete All Expenses</button>}
-      {showDeletionConfirmation && <div>
-        <p>Are you sure you want to delete all Expenses?</p><button onClick={handleDeleteAllExpenses}>Yes</button><button onClick={() => setShowDeletionConfirmation(false)}>No</button>
-      </div>}
     </div>
   )
 }

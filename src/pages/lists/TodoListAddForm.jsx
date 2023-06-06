@@ -1,6 +1,7 @@
 import { useState } from "react"
 import { useNavigate } from "react-router-dom"
 import { createTodoListService } from "../../services/todoLists.services"
+import Sidebar from "../../components/navigation/Sidebar"
 
 
 function TodoListAddForm() {
@@ -37,16 +38,21 @@ function TodoListAddForm() {
   }
 
   return (
-    <div>
-      <h2>New To-Do List</h2>
-      <form onSubmit={handleSubmit}>
-        <label htmlFor="name">Name: </label>
-        <input type="text" name="name" onChange={handleNameChange} value={nameInput} autoComplete="off"/>
+    <div className="container-with-sidebar">
+      <div className="sidebar">
+        <Sidebar />
+      </div>
+      <div>
+        <h2>New To-Do List</h2>
+        <form onSubmit={handleSubmit}>
+          <label htmlFor="name">Name: </label>
+          <input type="text" name="name" onChange={handleNameChange} value={nameInput} autoComplete="off"/>
 
-        <button type="submit">+ Add List</button>
+          <button type="submit">+ Add List</button>
 
-      </form>
-      {errorMessage && <p style={{color: "red"}}>{errorMessage}</p>}
+        </form>
+        {errorMessage && <p style={{color: "red"}}>{errorMessage}</p>}
+      </div>
     </div>
   )
 }

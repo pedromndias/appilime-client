@@ -4,6 +4,7 @@ import { createExpenseService } from "../../services/expenses.services"
 import ExpensesForm from "./ExpensesForm"
 import axios from "axios"
 import { BounceLoader } from "react-spinners"
+import Sidebar from "../../components/navigation/Sidebar"
 
 function ExpensesAddNew() {
   const navigate = useNavigate()
@@ -100,12 +101,17 @@ function ExpensesAddNew() {
   }
 
   return (
-    <div>
-      <h2>ExpensesAddNew</h2>
-      <ExpensesForm 
-        nameInput={nameInput} priceInput={priceInput} locationInput={locationInput} handleSubmit={handleSubmit} handleNameChange={handleNameChange} handlePriceChange={handlePriceChange} handleGeoLocationChange={handleGeoLocationChange} errorMessage={errorMessage} isCreatingAnExpense={true} searchLocationResults={searchLocationResults} handleSelectedLocation={handleSelectedLocation}
-        
-      />
+    <div className="container-with-sidebar">
+      <div className="sidebar">
+        <Sidebar />
+      </div>
+      <div>
+        <h2>Add a new expense</h2>
+        <ExpensesForm 
+          nameInput={nameInput} priceInput={priceInput} locationInput={locationInput} handleSubmit={handleSubmit} handleNameChange={handleNameChange} handlePriceChange={handlePriceChange} handleGeoLocationChange={handleGeoLocationChange} errorMessage={errorMessage} isCreatingAnExpense={true} searchLocationResults={searchLocationResults} handleSelectedLocation={handleSelectedLocation}
+          
+        />
+      </div>
     </div>
   )
 }

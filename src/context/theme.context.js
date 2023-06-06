@@ -35,12 +35,15 @@ function ThemeWrapper(props) {
             const userResponse = await getUserDetails(verifyResponse.data.payload._id)
             // console.log(userResponse.data.mood);
             let userMood = userResponse.data.mood;
-    
-            // Check which theme according with the mood:
-            userMood==="focus" && setTheme("darkTheme");
-            userMood==="lazy" && setTheme("grayTheme");
-            userMood==="excited" && setTheme("redTheme");
-            userMood==="melancholic" && setTheme("blueTheme");
+            if(userMood) {
+                // Check which theme according with the mood:
+                userMood==="focus" && setTheme("darkTheme");
+                userMood==="lazy" && setTheme("grayTheme");
+                userMood==="excited" && setTheme("redTheme");
+                userMood==="melancholic" && setTheme("blueTheme");
+            } else {
+                setTheme("")
+            }
         } catch (error) {
             // setUser(null)
             setIsLoading(false)
@@ -51,6 +54,7 @@ function ThemeWrapper(props) {
     //2. The context object we will pass:
     const passedContext = {
         theme,
+        setTheme,
         manageTheme
     }
 

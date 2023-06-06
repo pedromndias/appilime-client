@@ -2,6 +2,7 @@ import { useEffect, useState } from "react"
 import { useNavigate, useParams } from "react-router-dom"
 import { changeTodoIsCheckedService, createSingleTodo, deleteCheckedTodosService, deleteTodoListService, editTodoListService, getAllTodosFromList, getTodoListDetailsService } from "../../services/todoLists.services";
 import { BounceLoader } from "react-spinners"
+import Sidebar from "../../components/navigation/Sidebar";
 
 
 
@@ -161,40 +162,45 @@ function TodoListDetails() {
   }
 
   return (
-    <div>
-      <div>
-        {!isNameInputShowing && <h2>{todoList.name}</h2>}
-        {isNameInputShowing && <form onSubmit={handleNameInputSubmit}>
-            <input type="text" value={todoList.name} onChange={(e) => setTodoList({...todoList, name: e.target.value})}/>
-            <button type="submit">Update</button>
-          </form>}
-          {!isNameInputShowing && <button onClick={handleEditTodoList}>Edit</button>}
-          {!isNameInputShowing && <button onClick={handleDeleteTodoList}>Delete</button>}
+    <div className="container-with-sidebar">
+      <div className="sidebar">
+        <Sidebar />
       </div>
       <div>
-        {todosFromList.map(eachTodo => {
+        <div>
+          {!isNameInputShowing && <h2>{todoList.name}</h2>}
+          {isNameInputShowing && <form onSubmit={handleNameInputSubmit}>
+              <input type="text" value={todoList.name} onChange={(e) => setTodoList({...todoList, name: e.target.value})}/>
+              <button type="submit">Update</button>
+            </form>}
+            {!isNameInputShowing && <button onClick={handleEditTodoList}>Edit</button>}
+            {!isNameInputShowing && <button onClick={handleDeleteTodoList}>Delete</button>}
+        </div>
+        <div>
+          {todosFromList.map(eachTodo => {
+            
+            return (
+              <div key={eachTodo._id}>
+                <form className="list-details-single-todo">
+                  <label htmlFor="todo">
+                    {eachTodo.name}
+                  </label>
+                  {!isNameInputShowing && (!isNewTodoInputShowing &&<input type="checkbox" id="name" name="todo" defaultChecked={eachTodo.isChecked} onChange={(event) => handleIsChecked(event, eachTodo._id)}/>)}
+                </form>
+              </div>
+            )
+          })}
+        </div>
+        <div>
+          {!isNameInputShowing && (!isNewTodoInputShowing && <button onClick={handleShowNewTodoInput}>Add To-Do</button>)}
           
-          return (
-            <div key={eachTodo._id}>
-              <form className="list-details-single-todo">
-                <label htmlFor="todo">
-                  {eachTodo.name}
-                </label>
-                {!isNameInputShowing && (!isNewTodoInputShowing &&<input type="checkbox" id="name" name="todo" defaultChecked={eachTodo.isChecked} onChange={(event) => handleIsChecked(event, eachTodo._id)}/>)}
-              </form>
-            </div>
-          )
-        })}
-      </div>
-      <div>
-        {!isNameInputShowing && (!isNewTodoInputShowing && <button onClick={handleShowNewTodoInput}>Add To-Do</button>)}
-        
-        {isNewTodoInputShowing && <form onSubmit={handleCreateNewTodo}>
-          <input type="text" value={newSingleTodoName} onChange={(event) => setNewSingleTodoName(event.target.value)}/>
-          <button type="submit">Add To-Do</button>
-          </form>}
-        {!isNameInputShowing && (!isNewTodoInputShowing &&<button onClick={handleDeleteCheckedTodos}>Remove Done</button>)}
-        {errorMessage && <p style={{color: "red"}}>{errorMessage}</p>}
+          {isNewTodoInputShowing && <form onSubmit={handleCreateNewTodo}>
+            <input type="text" value={newSingleTodoName} onChange={(event) => setNewSingleTodoName(event.target.value)}/>
+            <button type="submit">Add To-Do</button>
+            </form>}
+          {!isNameInputShowing && (!isNewTodoInputShowing &&<button onClick={handleDeleteCheckedTodos}>Remove Done</button>)}
+          {errorMessage && <p style={{color: "red"}}>{errorMessage}</p>}
+        </div>
       </div>
     </div>
   )

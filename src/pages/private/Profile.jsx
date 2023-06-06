@@ -5,6 +5,7 @@ import appleLogo from "../../assets/apple-logo.png"
 import { uploadImageService } from "../../services/upload.services"
 // Import a react spinner from react spinners (npm install react-spinners):
 import { BounceLoader } from "react-spinners"
+import Sidebar from "../../components/navigation/Sidebar"
 
 function Profile() {
   const navigate = useNavigate()
@@ -108,49 +109,54 @@ function Profile() {
   }
 
   return (
-    <div className="profile">
-      <h2>{user.username}' profile</h2>
-      <div className="profile-container">
-        <div className="profile-image-container">
-          <img className="profile-pic" src={user.imageUrl ? user.imageUrl : appleLogo} alt="profile" />
-          <div>
-            {!showUploadingPictureForm && <button onClick={() => setShowUploadingPictureForm(true)}>Update Picture</button>}
-            {showUploadingPictureForm && 
-            <div><input
-              type="file"
-              name="image"
-              onChange={handleFileUpload}
-              disabled={isUploading}
-            />
-            <button onClick={() => setShowUploadingPictureForm(false)}>Cancel</button>
-            </div>}
-            {isUploading ? <div className="spinner-container">
-              <BounceLoader color="blanchedalmond" size={100} />
-            </div> : null}
-          </div>
-          
-        </div>
-        <div className="profile-info-container">
-        {!showEditUsername && <div  className="profile-info-container-username">
-            <h4 >Username: {user.username}</h4>
-            <button onClick={() => setShowEditUsername(true)}>✎</button>
-          </div>}
-        {showEditUsername && <div className="profile-info-container-username">
-            <form onSubmit={handleEditUsernameSubmit}>
-              <input type="text" value={usernameInput} onChange={(e) => setUsernameInput(e.target.value)}/>
-              <button type="submit">Update</button>
-              <button type="button" onClick={() => setShowEditUsername(false)}>Cancel</button>
-            </form>
-          </div>}
-              
-          <h4>Email: {user.email}</h4>
-          <h5>Member since: {user.createdAt.slice(0,10)}</h5>
-        </div>
+    <div className="container-with-sidebar">
+      <div className="sidebar">
+        <Sidebar />
       </div>
-        <div>
-          <h3>Current mood: <span className={`${user.mood}-word`}>{user.mood}</span></h3>
+      <div className="profile">
+        <h2>{user.username}' profile</h2>
+        <div className="profile-container">
+          <div className="profile-image-container">
+            <img className="profile-pic" src={user.imageUrl ? user.imageUrl : appleLogo} alt="profile" />
+            <div>
+              {!showUploadingPictureForm && <button onClick={() => setShowUploadingPictureForm(true)}>Update Picture</button>}
+              {showUploadingPictureForm && 
+              <div><input
+                type="file"
+                name="image"
+                onChange={handleFileUpload}
+                disabled={isUploading}
+              />
+              <button onClick={() => setShowUploadingPictureForm(false)}>Cancel</button>
+              </div>}
+              {isUploading ? <div className="spinner-container">
+                <BounceLoader color="blanchedalmond" size={100} />
+              </div> : null}
+            </div>
+            
+          </div>
+          <div className="profile-info-container">
+          {!showEditUsername && <div  className="profile-info-container-username">
+              <h4 >Username: {user.username}</h4>
+              <button onClick={() => setShowEditUsername(true)}>✎</button>
+            </div>}
+          {showEditUsername && <div className="profile-info-container-username">
+              <form onSubmit={handleEditUsernameSubmit}>
+                <input type="text" value={usernameInput} onChange={(e) => setUsernameInput(e.target.value)}/>
+                <button type="submit">Update</button>
+                <button type="button" onClick={() => setShowEditUsername(false)}>Cancel</button>
+              </form>
+            </div>}
+                
+            <h4>Email: {user.email}</h4>
+            <h5>Member since: {user.createdAt.slice(0,10)}</h5>
+          </div>
         </div>
-      {errorMessage && <p style={{color: "red"}}>{errorMessage}</p>}
+          <div>
+            <h3>Current mood: <span className={`${user.mood}-word`}>{user.mood}</span></h3>
+          </div>
+        {errorMessage && <p style={{color: "red"}}>{errorMessage}</p>}
+      </div>
     </div>
   )
 }

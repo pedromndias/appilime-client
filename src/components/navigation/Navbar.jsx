@@ -1,8 +1,12 @@
 import { useContext } from "react"
 import { Link, useNavigate } from "react-router-dom"
 import { AuthContext } from "../../context/auth.context"
+// Import ThemeContext so we can access its states and functions:
+import { ThemeContext } from "../../context/theme.context";
 
 function Navbar() {
+  // Get the theme from context:
+  const {setTheme} = useContext(ThemeContext)
   const navigate = useNavigate()
 
   // Let's create state for if the user is logged in or not (we get it from context):
@@ -14,7 +18,9 @@ function Navbar() {
     localStorage.removeItem("authToken")
     //2. Validate with Backend that the token was deleted (calling authenticateUser without a valid token will reset isLoggedIn and user states):
     authenticateUser()
-    //3. Redirect to Home:
+    //3. Change the context theme to default (""):
+    setTheme("")
+    //4. Redirect to Home:
     navigate("/")
   }
 
@@ -26,9 +32,7 @@ function Navbar() {
 
       {isLoggedIn && <Link to="/main">Home</Link>}
       {isLoggedIn && <Link to="/profile">Profile</Link>}
-      {isLoggedIn && <Link to="/lists">Todo Lists</Link>}
-      {isLoggedIn && <Link to="/expenses">Expenses</Link>}
-      {isLoggedIn && <button onClick={handleLougout}>Logout</button>}
+      {isLoggedIn && <button className="logout-button" onClick={handleLougout}>Logout</button>}
     </div>
   )
 }
