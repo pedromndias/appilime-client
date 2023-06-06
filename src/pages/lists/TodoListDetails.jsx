@@ -176,22 +176,22 @@ function TodoListDetails() {
           
           return (
             <div key={eachTodo._id}>
-              <form>
+              <form className="list-details-single-todo">
                 <label htmlFor="todo">
-                  <p>{eachTodo.name}</p>
+                  {eachTodo.name}
                 </label>
-                {!isNameInputShowing && (!isNewTodoInputShowing &&<input type="checkbox" name="todo" defaultChecked={eachTodo.isChecked} onChange={(event) => handleIsChecked(event, eachTodo._id)}/>)}
+                {!isNameInputShowing && (!isNewTodoInputShowing &&<input type="checkbox" id="name" name="todo" defaultChecked={eachTodo.isChecked} onChange={(event) => handleIsChecked(event, eachTodo._id)}/>)}
               </form>
             </div>
           )
         })}
       </div>
       <div>
-        {!isNameInputShowing && (!isNewTodoInputShowing && <button onClick={handleShowNewTodoInput}>1Add To-Do</button>)}
+        {!isNameInputShowing && (!isNewTodoInputShowing && <button onClick={handleShowNewTodoInput}>Add To-Do</button>)}
         
         {isNewTodoInputShowing && <form onSubmit={handleCreateNewTodo}>
           <input type="text" value={newSingleTodoName} onChange={(event) => setNewSingleTodoName(event.target.value)}/>
-          <button type="submit">2Add To-Do</button>
+          <button type="submit">Add To-Do</button>
           </form>}
         {!isNameInputShowing && (!isNewTodoInputShowing &&<button onClick={handleDeleteCheckedTodos}>Remove Done</button>)}
         {errorMessage && <p style={{color: "red"}}>{errorMessage}</p>}

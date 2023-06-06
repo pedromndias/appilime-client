@@ -1,6 +1,7 @@
 import { useState } from "react"
 import { useNavigate } from "react-router-dom"
 import { signupService } from "../../services/auth.services"
+import { BounceLoader } from "react-spinners"
 
 
 
@@ -14,6 +15,8 @@ function Signup() {
   const [password, setPassword] = useState("")
   // State for an error message:
   const [errorMessage, setErrorMessage] = useState("")
+  // Create state for when the data is loading:
+  const [isLoading, setIsLoading] = useState(false)
 
   // Create the handlers for when each input changes:
   const handleUsernameChange = (e) => setUsername(e.target.value);
@@ -26,6 +29,7 @@ function Signup() {
     e.preventDefault();
 
     try {
+      setIsLoading(true)
       // Create an user object to use it with the signupService:
       const user = {
         username,
@@ -35,9 +39,10 @@ function Signup() {
       // Call the service (async process, it will contact the DB):
       await signupService(user)
       // If successful we can redirect to the login page:
+      setIsLoading(false)
       navigate("/auth/login")
-      
     } catch (error) {
+      setIsLoading(false)
       // If we get a 400 error (bad request because the cliente sent the wrong data), we can specify the error message that comes from the Backend validation:
       if (error.response.status === 400) {
         setErrorMessage(error.response.data.errorMessage)
@@ -46,6 +51,15 @@ function Signup() {
         navigate("/error");
       }
     }
+  }
+
+  // Create a check clause if we are still loading (and give time to the Backend to return the data):
+  if (isLoading) {
+    return (
+      <div className="spinner-container">
+        <BounceLoader color="blanchedalmond" size={100} />
+      </div>
+    )
   }
 
   return (

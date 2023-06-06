@@ -1,6 +1,7 @@
 import { useState, useContext } from "react"
 import { useNavigate } from "react-router-dom"
 import { loginService } from "../../services/auth.services"
+import { BounceLoader } from "react-spinners"
 
 // Import AuthContext so we can access its states and functions:
 import { AuthContext } from "../../context/auth.context"
@@ -17,6 +18,8 @@ function Login() {
   const [password, setPassword] = useState("")
   // State for the error message:
   const [errorMessage, setErrorMessage] = useState("")
+  // Create state for when the data is loading:
+  const [isLoading, setIsLoading] = useState(false)
 
   // Create handlers for when the input changes:
   const handleEmailChange = (e) => setEmail(e.target.value);
@@ -27,6 +30,7 @@ function Login() {
     e.preventDefault();
 
     try {
+      setIsLoading(true)
       // Get the response from the loginService (it will be a token):
       const response = await loginService({
         email,
@@ -38,10 +42,11 @@ function Login() {
       localStorage.setItem("authToken", response.data.authToken)
       // 2. Call authenticateUser to validate the token (know who the user is and if he is logged in):
       await authenticateUser()
-
+      setIsLoading(false)
       // Navigate to Main:
       navigate("/main")
     } catch (error) {
+      setIsLoading(false)
       if (error.response.status === 400) {
         setErrorMessage(error.response.data.errorMessage)
       } else {
@@ -50,6 +55,14 @@ function Login() {
     }
   }
 
+  // Create a check clause if we are still loading (and give time to the Backend to return the data):
+  if (isLoading) {
+    return (
+      <div className="spinner-container">
+        <BounceLoader color="blanchedalmond" size={100} />
+      </div>
+    )
+  }
 
   return (
     <div className="login-form-container">

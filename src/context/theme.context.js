@@ -16,7 +16,7 @@ function ThemeWrapper(props) {
     // State for the theme:
     const [theme, setTheme] = useState("")
     // State for the use:
-    const [user, setUser] = useState(null)
+    // const [user, setUser] = useState(null)
 
     // Create a useEffect to run our manageTheme function when the component mounts:
     useEffect(() => {
@@ -28,7 +28,7 @@ function ThemeWrapper(props) {
         try {
             // Call the verifyService so we get access to the user:
             const verifyResponse = await verifyService()
-            setUser(verifyResponse.data.payload)
+            // setUser(verifyResponse.data.payload)
             // console.log(response.data.payload);
             setIsLoading(false)
             // Get the user's mood:
@@ -38,15 +38,14 @@ function ThemeWrapper(props) {
     
             // Check which theme according with the mood:
             userMood==="focus" && setTheme("darkTheme");
-            userMood==="tired" && setTheme("grayTheme");
+            userMood==="lazy" && setTheme("grayTheme");
             userMood==="excited" && setTheme("redTheme");
-            userMood==="sad" && setTheme("blueTheme");
+            userMood==="melancholic" && setTheme("blueTheme");
         } catch (error) {
-            setUser(null)
+            // setUser(null)
             setIsLoading(false)
         }
     }
-    
 
     //2. The context object we will pass:
     const passedContext = {

@@ -1,5 +1,5 @@
 import { useState, useContext } from "react"
-import logo from "../../assets/logo-with-name.png"
+import logo from "../../assets/logo-with-name-02.png"
 import { BounceLoader } from "react-spinners"
 import { useNavigate } from "react-router-dom"
 import { editUserMoodService } from "../../services/main.services"
