@@ -4,7 +4,7 @@ import { useEffect, useState } from "react";
 import { MapContainer, TileLayer, Marker, Popup } from "react-leaflet";
 import { Link, useNavigate } from "react-router-dom";
 import { deleteAllExpensesService, getAllExpensesService } from "../../services/expenses.services";
-import { BounceLoader } from "react-spinners"
+import { GridLoader } from "react-spinners"
 import Sidebar from "../../components/navigation/Sidebar";
 
 function Expenses() {
@@ -87,13 +87,13 @@ function Expenses() {
   if (isLoading) {
     return (
       <div className="spinner-container">
-        <BounceLoader color="blanchedalmond" size={100} />
+        <GridLoader color="rgba(0, 0, 0, 0.62)" size={50}/>
       </div>
     )
   }
 
   return (
-    <div className="container-with-sidebar">
+    <div className="container-with-sidebar ">
       <div className="sidebar">
         <Sidebar />
       </div>

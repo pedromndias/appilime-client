@@ -1,7 +1,7 @@
 import { useState } from "react"
 import { useNavigate } from "react-router-dom"
 import { signupService } from "../../services/auth.services"
-import { BounceLoader } from "react-spinners"
+import { GridLoader } from "react-spinners"
 
 
 
@@ -57,7 +57,7 @@ function Signup() {
   if (isLoading) {
     return (
       <div className="spinner-container">
-        <BounceLoader color="blanchedalmond" size={100} />
+        <GridLoader color="rgba(0, 0, 0, 0.62)" size={50}/>
       </div>
     )
   }

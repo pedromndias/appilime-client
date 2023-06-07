@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react"
 import { getAllTodosFromList, getTodoListDetailsService } from "../services/todoLists.services"
+import { GridLoader } from "react-spinners"
 
 function SingleTodoList(props) {
   const {todoListId} = props
@@ -33,7 +34,11 @@ function SingleTodoList(props) {
 
   // Create a check clause for when it isLoading:
   if (isLoading) {
-    return <h3>...Loading</h3>
+    return (
+      <div className="spinner-container">
+        <GridLoader color="rgba(0, 0, 0, 0.62)" size={50}/>
+      </div>
+    )
   }
   
   return (

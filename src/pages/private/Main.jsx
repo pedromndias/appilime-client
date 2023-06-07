@@ -1,6 +1,6 @@
 import { useState, useContext } from "react"
 import logo from "../../assets/logo-with-name-02.png"
-import { BounceLoader } from "react-spinners"
+import { GridLoader } from "react-spinners"
 import { useNavigate } from "react-router-dom"
 import { editUserMoodService } from "../../services/main.services"
 import { ThemeContext } from "../../context/theme.context";
@@ -35,7 +35,7 @@ function Main() {
   if (isLoading) {
     return (
       <div className="spinner-container">
-        <BounceLoader color="blanchedalmond" size={100} />
+        <GridLoader color="rgba(0, 0, 0, 0.62)" size={50}/>
       </div>
     )
   }

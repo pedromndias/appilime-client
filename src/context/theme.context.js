@@ -1,6 +1,6 @@
 //* Let's create state for the theme routes context:
 import {createContext, useEffect, useState} from "react"
-import { BounceLoader } from "react-spinners"
+import { GridLoader } from "react-spinners"
 import { verifyService } from "../services/auth.services"
 import { getUserDetails } from "../services/profile.services"
 
@@ -62,7 +62,7 @@ function ThemeWrapper(props) {
     if (isLoading) {
         return (
           <div className="spinner-container">
-            <BounceLoader color="blanchedalmond" size={100} />
+            <GridLoader color="rgba(0, 0, 0, 0.62)" size={50}/>
           </div>
         )
     }

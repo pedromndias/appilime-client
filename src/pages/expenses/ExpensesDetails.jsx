@@ -1,12 +1,10 @@
-
 import { useEffect, useState } from "react";
 // Make use of react-leaflet to render maps:
 import { MapContainer, TileLayer, Marker, Popup } from "react-leaflet";
 import { Link, useNavigate, useParams } from "react-router-dom";
 import { deleteExpenseService, editExpenseService, getExpenseDetailsService } from "../../services/expenses.services";
-import ExpensesForm from "./ExpensesForm";
 import axios from "axios";
-import { BounceLoader } from "react-spinners"
+import { GridLoader } from "react-spinners"
 import Sidebar from "../../components/navigation/Sidebar";
 
 
@@ -22,21 +20,28 @@ function ExpensesDetails() {
 
   // States:
   const [expense, setExpense] = useState(null)
-  const [isLoading, setIsLoading] = useState(true)
+
   const [isEditing, setIsEditing] = useState(false)
   const [nameInput, setNameInput] = useState("")
   const [priceInput, setPriceInput] = useState(0)
   const [locationInput, setLocationInput] = useState("")
   // State for an error message:
   const [errorMessage, setErrorMessage] = useState("")
+  // Create state for when it is loading:
+  const [isLoading, setIsLoading] = useState(true)
   // Create state for the search location results:
   const [searchLocationResults, setSearchLocationResults] = useState(null)
   // Create state for the coordinates:
   const [coordinates, setCoordinates] = useState([])
 
   // Create handlers for each input change:
-  const handleNameChange = (e) => setNameInput(e.target.value)
-  const handlePriceChange = (e) => setPriceInput(e.target.value)
+  const handleNameChange = (e) => {
+    // console.log(e.target.value)
+    setNameInput(e.target.value)
+  }
+  const handlePriceChange = (e) => {
+    setPriceInput(e.target.value)
+  }
   const handleGeoLocationChange = (e) => {
     setLocationInput(e.target.value)
     // Call finAddress with the e.target.value to find 3 possible address matches with that location:
@@ -123,9 +128,8 @@ function ExpensesDetails() {
     try {
       // Get the previous results:
       setIsLoading(true)
-      const responsePrevious = await getExpenseDetailsService(params.expenseId)
-      console.log(responsePrevious)
-      // Check if there were coordinates inputed:
+      // const responsePrevious = await getExpenseDetailsService(params.expenseId)
+      // console.log(responsePrevious)
       let expense;
       if (coordinates.length !== 0 && locationInput !== "") {
         // Create an object with the Expense state values:
@@ -152,7 +156,6 @@ function ExpensesDetails() {
       setExpense(response.data)
       setNameInput(response.data.name)
       setPriceInput(response.data.price)
-      
       // Set the map marker depending if there is geoLocation or not:
       if(response.data.geoLocation.length !== 0) {
         setCenter(response.data.geoLocation)
@@ -160,11 +163,6 @@ function ExpensesDetails() {
       } else {
         setCenter(barcelonaCoords)
       }
-      // else {
-      //   setCenter(coordinates)
-      //   setMarkerPosition(coordinates)
-      // } //! This is causing an error when we update an expense and there is still no location inputed.
-
     
       // If all successful we can reset the states:
       setIsLoading(false)
@@ -188,7 +186,7 @@ function ExpensesDetails() {
   if (isLoading) {
     return (
       <div className="spinner-container">
-        <BounceLoader color="blanchedalmond" size={100} />
+        <GridLoader color="rgba(0, 0, 0, 0.62)" size={50}/>
       </div>
     )
   }
@@ -201,32 +199,66 @@ function ExpensesDetails() {
       <div>
         
         {!isEditing && <div className="expense-details-container">
-          <div className="expense-details-container-header">
-            <h1>{expense.name}</h1>
-            <h3>€{expense.price}</h3>
-          </div>
-          <MapContainer center={center} zoom={13} scrollWheelZoom={false}>
-            <TileLayer
-              attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
-              url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
-            />
+            <div className="expense-details-container-header">
+              <h1>{expense.name}</h1>
+              <h3>€{expense.price}</h3>
+            </div>
+            <MapContainer center={center} zoom={13} scrollWheelZoom={false}>
+              <TileLayer
+                attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+                url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
+              />
 
-            { markerPosition !== null && <Marker position={markerPosition} /> }
+              { markerPosition !== null && <Marker position={markerPosition} /> }
 
-          </MapContainer>
-          <div className="expense-details-container-buttons">
-            <button className="expense-details-container-buttons-delete" onClick={handleDeleteExpense}>Delete</button>
-            <button className="expense-details-container-buttons-edit" onClick={handleShowEditForm}>Edit</button>
-            <button className="expense-details-container-buttons-back"><Link to={"/expenses"}>Back</Link></button>
+            </MapContainer>
+            <div className="expense-details-container-buttons">
+              <button className="expense-details-container-buttons-delete" onClick={handleDeleteExpense}>Delete</button>
+              <button className="expense-details-container-buttons-edit" onClick={handleShowEditForm}>Edit</button>
+              <button className="expense-details-container-buttons-back"><Link to={"/expenses"}>Back</Link></button>
+            </div>
+          </div>}
+          {isEditing && 
+          <div>
+          <form onSubmit={handleSubmit} className="expenses-form">
+          <h2>Edit {expense.name} expense</h2>
+          <div className="expenses-form-each-input">
+            <label htmlFor="name">Name: </label>
+            <input type="text" name="name" maxLength="18" onChange={handleNameChange} value={nameInput} autoComplete="off"/>
           </div>
-        </div>}
-        {isEditing && 
+          <div className="expenses-form-each-input">
+            <label htmlFor="price">Price: </label>
+            <input step=".01" max="10000000" type="number" name="price" onChange={handlePriceChange} value={priceInput} />
+          </div>
+          <div className="expenses-form-each-input">
+            <label htmlFor="location">Location: </label>
+            <input type="text" name="location" onChange={handleGeoLocationChange} value={locationInput}/>
+          </div>
+          
+          
+          <br />
+          <div><button className="expenses-form-button" type="submit">Update</button>
+            <button className="expenses-form-button expenses-form-button-back"><Link to={"/expenses"}>Back</Link></button>
+            {errorMessage && <p style={{color: "red"}}>{errorMessage}</p>}
+          </div>
+
+        </form>
         <div>
-          <ExpensesForm expense={expense}
-            nameInput={nameInput} priceInput={priceInput} locationInput={locationInput} handleSubmit={handleSubmit} handleNameChange={handleNameChange} handlePriceChange={handlePriceChange} handleGeoLocationChange={handleGeoLocationChange} errorMessage={errorMessage} isEditingAnExpense={true} searchLocationResults={searchLocationResults} handleSelectedLocation={handleSelectedLocation}
-          />
-        </div>}
-        
+            {searchLocationResults && 
+            <div className="eachLocation-container">
+              {searchLocationResults.map((eachLocation, index) => {
+                return (
+                  <div key={index} className="eachLocation">
+                    <p onClick={() => handleSelectedLocation(eachLocation)}>{eachLocation.display_name}</p>
+                  </div>
+                )
+              })}
+              </div>
+            }
+          </div>
+          
+        </div>
+        }
       </div>
     </div>
   )

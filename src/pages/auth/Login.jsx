@@ -1,7 +1,7 @@
 import { useState, useContext } from "react"
 import { useNavigate } from "react-router-dom"
 import { loginService } from "../../services/auth.services"
-import { BounceLoader } from "react-spinners"
+import { GridLoader } from "react-spinners"
 
 // Import ThemeContext so we can access its states and functions:
 import { ThemeContext } from "../../context/theme.context";
@@ -67,7 +67,7 @@ function Login() {
   if (isLoading) {
     return (
       <div className="spinner-container">
-        <BounceLoader color="blanchedalmond" size={100} />
+        <GridLoader color="rgba(0, 0, 0, 0.62)" size={50}/>
       </div>
     )
   }

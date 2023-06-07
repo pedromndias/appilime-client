@@ -1,8 +1,31 @@
 .App {
   text-align: center;
   background-color:rgba(249, 249, 55, 0.4);
+  /* Create effect to show a delay on the changing backgrounds */
+  transition-property: all;
+  transition-duration: 2s;
+  
+}
+
+/* ANIMATIONS */
+.upload-element-animated {
+  /* The next property will grab the keyframe named "upload-element". The animation will last 500ms with an ease-in effect and it will only start after 500ms of page loading. */
+  animation: upload-element 500ms ease-in 500ms;
+  /* The next property will make sure that the animation result will be definite on the element (opacity: 1), because by default it has opacity: 0 */
+  animation-fill-mode: forwards;
 
 }
+@keyframes upload-element {
+  0% {
+      opacity: 0;
+  }
+
+  100% {
+      opacity: 1;
+  }
+}
+
+/* MAP */
 
 .leaflet-container {
   height: 200px;
@@ -10,6 +33,7 @@
   margin: 10px auto;
   border-radius: 20px;
   box-shadow: 0px 0px 10px gray;
+  
 }
 
 .app-container {
@@ -17,9 +41,13 @@
   flex-direction: column;
   justify-content: space-between;
   min-height: 100dvh;
+  
 }
 a {
   text-decoration: none;
+}
+a:visited {
+  color:black;
 }
 
 .navbar {
@@ -81,6 +109,7 @@ a {
   top: 70px;
   left: 20px;
   visibility: hidden;
+  transition: top 0.5s ease-out;
 }
 
 .logout-button,
@@ -136,6 +165,7 @@ a {
   justify-content: center;
   align-items: center;
   gap: 30px;
+  
 }
 .home-container img {
   width: 250px;
@@ -160,7 +190,9 @@ a {
   margin: 20px auto;
 }
 
+
 /* SIGN UP and LOGIN*/
+
 .signup-form-container,
 .login-form-container {
   border: 1px solid #FC0;
@@ -191,7 +223,6 @@ a {
   justify-content: space-between;
   margin-top: 10px;
   text-shadow: #FC0 1px 0 2px;
-  
 }
 .signup-button,
 .login-button {
@@ -208,6 +239,7 @@ a {
   background-color: rgb(255, 204, 0);
 }
 
+
 /* MAIN */
 
 .main-container-general {
@@ -219,10 +251,10 @@ a {
   align-items: center;
   height: 100%;
 }
-
 .main-container {
   margin-top: 50px;
 }
+
 
 /* SIDEBAR */
 
@@ -402,6 +434,9 @@ a {
 .add-new-list-button-container {
   margin-top: 20px;
 }
+.list-details-button-back:hover {
+  background-color: black;
+}
 
 
 /* EXPENSES */
@@ -564,7 +599,7 @@ a {
 
 .profile-container {
   width: 300px;
-  height: 330px;
+  height: 350px;
   margin: 10px auto;
   display: flex;
   flex-direction: column;
@@ -573,51 +608,73 @@ a {
   gap: 20px;
   border: 2px solid lightgray;
   padding: 20px;
-}
-.profile-image-container {
-  margin-top: 50px;
-  width: 150px;
-  height: 190px;
+  border-radius: 20px;
+  box-shadow: 0px 0px 10px gray;
 }
 
 .profile-pic {
-  width: 100px;
-  height: 100px;
+  width: 150px;
+  height: 150px;
   border: 2px solid lightgray;
-  border-radius: 5px;
+  border-radius: 10px;
 }
 
 .profile-info-container {
   width: 300px;
   display: flex;
   flex-direction: column;
+  justify-content: center;
   align-items: center;
+  height: 300px;
+  margin-top: 20px;
 }
 .profile-info-container-username {
   display: flex;
   align-items: center;
   gap: 3px;
+  
+}
+.profile-container h3,
+.profile-container h5 {
+  margin-top: 10px;
+  margin-bottom: 10px;
 }
 .profile-info-container-username button {
   height: 25px;
   cursor: pointer;
+  text-align: center;
 }
-.focus-word {
+.update-pic-input-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 170px;
+  margin: 3px auto;
+}
+.update-pic-button,
+.update-pic-input {
   color: black;
-  text-shadow: #757575 1px 0 1px;
+  cursor: pointer;
+  padding: 5px 10px;
+  border-radius: 10px;
+  font-size: 1.1em;
+  opacity: 0.5;
+  border: none;
+  box-shadow: 0px 0px 5px gray;
 }
-.lazy-word {
-  color: rgba(190, 255, 61, 0.8);
-  text-shadow: #757575 1px 0 1px;
+.update-pic-input {
+  font-size: 0.9em;
+  display: flex;
+  align-items: center;
+  opacity: 1;
+  width: 170px;
+  margin: 2px auto;
 }
-.excited-word {
-  color: rgb(209, 0, 0);
-  text-shadow: #757575 1px 0 1px;
+.update-pic-button-cancel {
+  font-size: 1em;
+  margin: 2px;
 }
-.melancholic-word {
- color: rgba(0, 213, 255, 0.8);
- text-shadow: #757575 1px 0 1px;
-}
+
 
 /* THEMES */
 
@@ -636,10 +693,12 @@ a {
   .add-list-link,
   .singleTodoList,
   .list-details-button-normal,
-  .add-new-list-container {
+  .add-new-list-container,
+  .profile-container {
     background-color: black;
     color: white;
   }
+  
   .sidebar-container a,
   .add-expense-link a,
   .add-list-link:hover,
@@ -667,7 +726,8 @@ a {
   }
   .expenses-form-button:hover,
   .expense-details-container-buttons-back:hover,
-  .list-details-button-cancel:hover {
+  .list-details-button-cancel:hover,
+  .update-pic-button:hover {
     background-color: white;
     opacity: 1;
   }
@@ -696,7 +756,8 @@ a {
   .open-nav button,
   .open-nav button.logout-button-mobile,
   .singleTodoList,
-  .add-new-list-container  {
+  .add-new-list-container,
+  .profile-container  {
     background-color: rgba(190, 255, 61, 0.8);
     color: black;
   }
@@ -734,7 +795,8 @@ a {
   .eachLocation:hover,
   .expenses-form-button:hover,
   .add-list-link:hover,
-  .list-details-button-normal  {
+  .list-details-button-normal,
+  .update-pic-button:hover  {
     background-color: rgba(190, 255, 61, 0.8);
     opacity: 1;
   }
@@ -764,7 +826,8 @@ a {
   .singleTodoList,
   .add-list-link,
   .list-details-single-todo:hover,
-  .add-new-list-container {
+  .add-new-list-container,
+  .profile-container {
     background-color: rgb(209, 0, 0);
     color: rgba(255, 204, 0, 0.5);
   }
@@ -811,7 +874,8 @@ a {
   .expense-details-container-buttons-back:hover,
   .expenses-form-button-back:hover,
   .list-details-button-normal:hover,
-  .list-details-button-cancel:hover{
+  .list-details-button-cancel:hover,
+  .update-pic-button:hover{
     background-color: white;
     opacity: 0.8;
   }
@@ -835,7 +899,8 @@ a {
   .singleTodoList,
   .add-list-link,
   .list-details-button-normal,
-  .add-new-list-container {
+  .add-new-list-container,
+  .profile-container {
     background-color:rgba(0, 213, 255, 0.8);
     color: white;
   }
@@ -862,7 +927,8 @@ a {
   .singleTodoList:hover,
   .add-list-link:hover,
   .list-details-button-normal:hover, 
-  .list-details-button-cancel:hover { 
+  .list-details-button-cancel:hover,
+  .update-pic-button:hover { 
     background-color: white;
     opacity: 1;
     color: rgba(0, 213, 255, 0.8);
@@ -929,6 +995,23 @@ a {
   background-color:rgba(0, 213, 255, 0.5);
 }
 
+#focus-word {
+  color: black;
+  text-shadow: #757575 1px 0 1px;
+}
+#lazy-word {
+  color: rgba(190, 255, 61, 0.8);
+  text-shadow: #757575 1px 0 1px;
+}
+#excited-word {
+  color: rgb(209, 0, 0);
+  text-shadow: #757575 1px 0 1px;
+}
+#melancholic-word {
+ color: rgba(0, 213, 255, 0.8);
+ text-shadow: #757575 1px 0 1px;
+}
+
 @media (min-width: 870px) {
   .navbar {
     flex-direction: row;
@@ -948,13 +1031,18 @@ a {
   .profile-container {
     flex-direction: row;
     justify-content: space-around;
-    width: 500px;
-    height: 200px;
+    width: 450px;
+    height: 250px;
   }
   
   .profile-info-container {
-    align-items: flex-start;
+    margin: 0;
   }
+  .profile-container h3,
+  .profile-container h5 {
+    margin-top: 20px;
+    margin-bottom: 20px;
+}
 
   .main-container-general {
     flex-direction: row;

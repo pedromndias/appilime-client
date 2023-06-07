@@ -1,10 +1,10 @@
 import { useState } from "react"
 import { useNavigate } from "react-router-dom"
 import { createExpenseService } from "../../services/expenses.services"
-import ExpensesForm from "./ExpensesForm"
 import axios from "axios"
-import { BounceLoader } from "react-spinners"
+import { GridLoader } from "react-spinners"
 import Sidebar from "../../components/navigation/Sidebar"
+import { Link } from "react-router-dom"
 
 function ExpensesAddNew() {
   const navigate = useNavigate()
@@ -15,7 +15,7 @@ function ExpensesAddNew() {
   const [locationInput, setLocationInput] = useState("")
   // State for an error message:
   const [errorMessage, setErrorMessage] = useState("")
-  // Create state for when it is loading:
+  
   const [isLoading, setIsLoading] = useState(false)
   // Create state for the search location results:
   const [searchLocationResults, setSearchLocationResults] = useState(null)
@@ -25,6 +25,10 @@ function ExpensesAddNew() {
   // Create handlers for name and price input change:
   const handleNameChange = (e) => setNameInput(e.target.value)
   const handlePriceChange = (e) => {
+    // let number2Dec = Number(e.target.value).toFixed(2)
+    // const valueInt = number2Dec.split(".")[0]
+    // const valueDec = number2Dec.split(".")[1]
+    // setPriceInput(valueInt + "." + valueDec.slice(0, 2))
     setPriceInput(e.target.value)
   }
   // Create state for the geoLocation change (it will update the input value and will call a findAddress function with the value of the input)
@@ -95,7 +99,7 @@ function ExpensesAddNew() {
   if (isLoading) {
     return (
       <div className="spinner-container">
-        <BounceLoader color="blanchedalmond" size={100} />
+        <GridLoader color="rgba(0, 0, 0, 0.62)" size={50}/>
       </div>
     )
   }
@@ -106,10 +110,53 @@ function ExpensesAddNew() {
         <Sidebar />
       </div>
       <div>
-        <ExpensesForm 
-          nameInput={nameInput} priceInput={priceInput} locationInput={locationInput} handleSubmit={handleSubmit} handleNameChange={handleNameChange} handlePriceChange={handlePriceChange} handleGeoLocationChange={handleGeoLocationChange} errorMessage={errorMessage} isCreatingAnExpense={true} searchLocationResults={searchLocationResults} handleSelectedLocation={handleSelectedLocation}
+      <div className="container-with-sidebar">
+      <div className="sidebar">
+        <Sidebar />
+      </div>
+      <div>
+          <form onSubmit={handleSubmit} className="expenses-form">
+          <h2>Add a new expense</h2>
+          <div className="expenses-form-each-input">
+            <label htmlFor="name">Name: </label>
+            <input type="text" name="name" maxLength="18" onChange={handleNameChange} value={nameInput} autoComplete="off"/>
+          </div>
+          <div className="expenses-form-each-input">
+            <label htmlFor="price">Price: </label>
+            <input step=".01" max="10000000" type="number" name="price" onChange={handlePriceChange} value={priceInput} />
+          </div>
+          <div className="expenses-form-each-input">
+            <label htmlFor="location">Location: </label>
+            <input type="text" name="location" onChange={handleGeoLocationChange} value={locationInput}/>
+          </div>
           
-        />
+          
+          <br />
+          <div>
+            <button className="expenses-form-button" type="submit">+Add</button>
+            <button className="expenses-form-button expenses-form-button-back"><Link to={"/expenses"}>Back</Link></button>
+            {errorMessage && <p style={{color: "red"}}>{errorMessage}</p>}
+          </div>
+
+        </form>
+        <div>
+          {/* In case we have some element on the searchLocationResults array, we will render them on the page. If we click one of them it will call a handler to select the coordinates of that specific location */}
+            {searchLocationResults && 
+            <div className="eachLocation-container">
+              {searchLocationResults.map((eachLocation, index) => {
+                // console.log(eachLocation)
+                return (
+                  <div key={index} className="eachLocation">
+                    <p onClick={() => handleSelectedLocation(eachLocation)}>{eachLocation.display_name}</p>
+                  </div>
+                )
+              })}
+              </div>
+            }
+          </div>
+          
+      </div>
+    </div>
       </div>
     </div>
   )

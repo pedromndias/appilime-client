@@ -3,7 +3,7 @@ import { Link, useNavigate } from "react-router-dom"
 
 import { getAllTodoListsService } from "../../services/todoLists.services"
 import SingleTodoList from "../../components/SingleTodoList"
-import { BounceLoader } from "react-spinners"
+import { GridLoader } from "react-spinners"
 import Sidebar from "../../components/navigation/Sidebar"
 
 function TodoList() {
@@ -38,7 +38,7 @@ function TodoList() {
   if (isLoading) {
     return (
       <div className="spinner-container">
-        <BounceLoader color="blanchedalmond" size={100} />
+        <GridLoader color="rgba(0, 0, 0, 0.62)" size={50}/>
       </div>
     )
   }

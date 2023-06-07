@@ -7,7 +7,7 @@ function Timer() {
         <Sidebar />
       </div>
       <div>
-
+          
       </div>
     </div>
   )

@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react"
 import { Link, useNavigate, useParams } from "react-router-dom"
 import { changeTodoIsCheckedService, createSingleTodo, deleteCheckedTodosService, deleteTodoListService, editTodoListService, getAllTodosFromList, getTodoListDetailsService } from "../../services/todoLists.services";
-import { BounceLoader } from "react-spinners"
+import { GridLoader } from "react-spinners"
 import Sidebar from "../../components/navigation/Sidebar";
 
 
@@ -171,7 +171,7 @@ function TodoListDetails() {
   if (isLoading) {
     return (
       <div className="spinner-container">
-        <BounceLoader color="blanchedalmond" size={100} />
+        <GridLoader color="rgba(0, 0, 0, 0.62)" size={50}/>
       </div>
     )
   }

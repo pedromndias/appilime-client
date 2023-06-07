@@ -1,10 +1,14 @@
 //* This is a form component that will be reused (create new Expense and edit an Expense)
+// ! Currently not in use
 
 import { Link } from "react-router-dom"
 import Sidebar from "../../components/navigation/Sidebar"
 
 function ExpensesForm(props) {
+
+  
     const {expense, nameInput, priceInput, locationInput, handleSubmit, handleNameChange, handlePriceChange, handleGeoLocationChange, errorMessage, isEditingAnExpense, isCreatingAnExpense,searchLocationResults, handleSelectedLocation} = props
+
   return (
     <div className="container-with-sidebar">
       <div className="sidebar">

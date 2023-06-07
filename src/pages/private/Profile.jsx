@@ -4,7 +4,7 @@ import { useNavigate } from "react-router-dom"
 import appleLogo from "../../assets/apple-logo.png"
 import { uploadImageService } from "../../services/upload.services"
 // Import a react spinner from react spinners (npm install react-spinners):
-import { BounceLoader } from "react-spinners"
+import { GridLoader } from "react-spinners"
 import Sidebar from "../../components/navigation/Sidebar"
 
 function Profile() {
@@ -103,7 +103,7 @@ function Profile() {
   if (isLoading) {
     return (
       <div className="spinner-container">
-        <BounceLoader color="blanchedalmond" size={100} />
+        <GridLoader color="rgba(0, 0, 0, 0.62)" size={50}/>
       </div>
     )
   }
@@ -116,28 +116,28 @@ function Profile() {
       <div className="profile">
         <h2>{user.username}' profile</h2>
         <div className="profile-container">
-          <div className="profile-image-container">
+          <div>
             <img className="profile-pic" src={user.imageUrl ? user.imageUrl : appleLogo} alt="profile" />
-            <div>
-              {!showUploadingPictureForm && <button onClick={() => setShowUploadingPictureForm(true)}>Update Picture</button>}
+            <div className="update-pic-input-container">
+              {!showUploadingPictureForm && <button className="update-pic-button" onClick={() => setShowUploadingPictureForm(true)}>Update Picture</button>}
               {showUploadingPictureForm && 
-              <div><input
+              <div className="update-pic-input"><input 
                 type="file"
                 name="image"
                 onChange={handleFileUpload}
                 disabled={isUploading}
               />
-              <button onClick={() => setShowUploadingPictureForm(false)}>Cancel</button>
+              <button className="update-pic-button update-pic-button-cancel" onClick={() => setShowUploadingPictureForm(false)}>Cancel</button>
               </div>}
               {isUploading ? <div className="spinner-container">
-                <BounceLoader color="blanchedalmond" size={100} />
+                <GridLoader color="rgba(0, 0, 0, 0.62)" size={50}/>
               </div> : null}
             </div>
             
           </div>
           <div className="profile-info-container">
           {!showEditUsername && <div  className="profile-info-container-username">
-              <h4 >Username: {user.username}</h4>
+              <h3>Username: {user.username}</h3>
               <button onClick={() => setShowEditUsername(true)}>✎</button>
             </div>}
           {showEditUsername && <div className="profile-info-container-username">
@@ -148,12 +148,12 @@ function Profile() {
               </form>
             </div>}
                 
-            <h4>Email: {user.email}</h4>
+            <h3>Email: {user.email}</h3>
             <h5>Member since: {user.createdAt.slice(0,10)}</h5>
           </div>
         </div>
           <div>
-            <h3>Current mood: <span className={`${user.mood}-word`}>{user.mood}</span></h3>
+            <h3>Current mood: <span id={`${user.mood}-word`}>{user.mood}</span></h3>
           </div>
         {errorMessage && <p style={{color: "red"}}>{errorMessage}</p>}
       </div>
