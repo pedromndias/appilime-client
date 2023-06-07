@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react"
-import { useNavigate, useParams } from "react-router-dom"
+import { Link, useNavigate, useParams } from "react-router-dom"
 import { changeTodoIsCheckedService, createSingleTodo, deleteCheckedTodosService, deleteTodoListService, editTodoListService, getAllTodosFromList, getTodoListDetailsService } from "../../services/todoLists.services";
 import { BounceLoader } from "react-spinners"
 import Sidebar from "../../components/navigation/Sidebar";
@@ -92,11 +92,26 @@ function TodoListDetails() {
 
   // Create handler to change the isChecked status of a single Todo:
   const handleIsChecked = async (event, todoId) => {
-    // console.log(event.target.checked)
+    // ? Since we can click both on the todo name and checkbox to send the isChecked value, we need to separate those events (the div or the checkbox):
+    // Create a variable to then send it to the DB:
+    let eventToSendToDB;
+    // If the click is on the "father element" of the checkbox:
+    if(event.target.children[1]) {
+      // Manually toggle the checked value of the checkbox:
+      event.target.children[1].checked = !event.target.children[1].checked
+      // Assign it to our eventToSendToDB variable:
+      eventToSendToDB = event.target.children[1].checked
+      // console.log(event.target.children[1].checked, "father")
+    } else {
+      // In case we click directly on the checkbox, just assign the value to the variable:
+      eventToSendToDB = event.target.checked
+      // console.log(event.target.checked, "checkbox")
+    }
+    
     // console.log(todoId);
     try {
       // Use a service to call our backend:
-      await changeTodoIsCheckedService(todoId, event.target.checked)
+      await changeTodoIsCheckedService(todoId, eventToSendToDB)
     } catch (error) {
       console.log(error)
       navigate("/error")
@@ -166,42 +181,65 @@ function TodoListDetails() {
       <div className="sidebar">
         <Sidebar />
       </div>
-      <div>
+      <div className="list-details">
         <div>
           {!isNameInputShowing && <h2>{todoList.name}</h2>}
           {isNameInputShowing && <form onSubmit={handleNameInputSubmit}>
-              <input type="text" value={todoList.name} onChange={(e) => setTodoList({...todoList, name: e.target.value})}/>
-              <button type="submit">Update</button>
+            <div className="edit-name-todo-container">
+              <label htmlFor="edit-name-todo">Edit Name</label>
+              <input type="text" id="edit-name-todo" maxLength="20" value={todoList.name} onChange={(e) => setTodoList({...todoList, name: e.target.value})}/>
+            </div>
+              
+              <div className="edit-list-details-name-buttons">
+                <button className="list-details-button list-details-button-normal"  type="submit">Update</button>
+                <button className="list-details-button list-details-button-cancel"  onClick={() => setIsNameInputShowing(false)}>Cancel</button>
+              </div>
+              
             </form>}
-            {!isNameInputShowing && <button onClick={handleEditTodoList}>Edit</button>}
-            {!isNameInputShowing && <button onClick={handleDeleteTodoList}>Delete</button>}
+            {(!isNewTodoInputShowing &&!isNameInputShowing) && <button className="list-details-button list-details-button-normal" onClick={handleEditTodoList}>Edit</button>}
+            {(!isNewTodoInputShowing &&!isNameInputShowing) && <button className="list-details-button list-details-button-red"  onClick={handleDeleteTodoList}>Delete</button>}
         </div>
-        <div>
+        <div className="list-details-all-todos">
           {todosFromList.map(eachTodo => {
             
             return (
               <div key={eachTodo._id}>
-                <form className="list-details-single-todo">
-                  <label htmlFor="todo">
-                    {eachTodo.name}
-                  </label>
-                  {!isNameInputShowing && (!isNewTodoInputShowing &&<input type="checkbox" id="name" name="todo" defaultChecked={eachTodo.isChecked} onChange={(event) => handleIsChecked(event, eachTodo._id)}/>)}
+                <form>
+                  <div className="list-details-single-todo" onClick={(event) => handleIsChecked(event, eachTodo._id)}>
+                    <label htmlFor={eachTodo._id}>
+                      {eachTodo.name}
+                    </label>
+                    {!isNameInputShowing && (!isNewTodoInputShowing &&<input type="checkbox" id={eachTodo._id} name="todo" defaultChecked={eachTodo.isChecked} />)}
+                  </div>
                 </form>
               </div>
             )
           })}
         </div>
         <div>
-          {!isNameInputShowing && (!isNewTodoInputShowing && <button onClick={handleShowNewTodoInput}>Add To-Do</button>)}
+          {!isNameInputShowing && (!isNewTodoInputShowing && <button className="list-details-button list-details-button-normal" onClick={handleShowNewTodoInput}>Add To-Do</button>)}
           
           {isNewTodoInputShowing && <form onSubmit={handleCreateNewTodo}>
-            <input type="text" value={newSingleTodoName} onChange={(event) => setNewSingleTodoName(event.target.value)}/>
-            <button type="submit">Add To-Do</button>
+            <div className="new-todo-container">
+              <label htmlFor="new-todo">New To-Do</label>
+              <input id="new-todo" type="text" maxLength="25" value={newSingleTodoName} onChange={(event) => setNewSingleTodoName(event.target.value)}/>
+            </div>
+            
+            <div className="edit-list-details-name-buttons">
+              <button className="list-details-button list-details-button-normal" type="submit">Add To-Do</button>
+              <button className="list-details-button list-details-button-cancel" onClick={() => setIsNewTodoInputShowing(false)}>Cancel</button>
+            </div>
             </form>}
-          {!isNameInputShowing && (!isNewTodoInputShowing &&<button onClick={handleDeleteCheckedTodos}>Remove Done</button>)}
+          {!isNameInputShowing && (!isNewTodoInputShowing &&<button className="list-details-button list-details-button-red" onClick={handleDeleteCheckedTodos}>Remove Done</button>)}
+          <div className="list-details-button-back-container">
+            <button className="list-details-button list-details-button-back"><Link to={"/lists"}>Back</Link></button>
+          </div>
+          
           {errorMessage && <p style={{color: "red"}}>{errorMessage}</p>}
         </div>
+        
       </div>
+      
     </div>
   )
 }

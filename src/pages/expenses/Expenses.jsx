@@ -107,8 +107,8 @@ function Expenses() {
         <div className="allExpenses-container">
           {expenses.map(eachExpense => {
             return (
-              <div className="add-expense-link-each">
-                <Link key={eachExpense._id} to={`/expenses/${eachExpense._id}`} className="eachExpense-link">
+              <div key={eachExpense._id}className="add-expense-link-each">
+                <Link  to={`/expenses/${eachExpense._id}`} className="eachExpense-link">
                   <h3>{eachExpense.name}</h3>
                   <p>€{eachExpense.price}</p>
                 </Link>

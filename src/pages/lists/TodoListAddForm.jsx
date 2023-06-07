@@ -1,5 +1,5 @@
 import { useState } from "react"
-import { useNavigate } from "react-router-dom"
+import { Link, useNavigate } from "react-router-dom"
 import { createTodoListService } from "../../services/todoLists.services"
 import Sidebar from "../../components/navigation/Sidebar"
 
@@ -42,14 +42,16 @@ function TodoListAddForm() {
       <div className="sidebar">
         <Sidebar />
       </div>
-      <div>
+      <div className="add-new-list-container">
         <h2>New To-Do List</h2>
         <form onSubmit={handleSubmit}>
           <label htmlFor="name">Name: </label>
-          <input type="text" name="name" onChange={handleNameChange} value={nameInput} autoComplete="off"/>
-
-          <button type="submit">+ Add List</button>
-
+          <input type="text" maxLength="20" name="name" onChange={handleNameChange} value={nameInput} autoComplete="off"/>
+          <div className="add-new-list-button-container">
+            <button className="add-new-list-button add-new-list-button-normal" type="submit">+ Add List</button>
+          <button className="list-details-button list-details-button-back"><Link className="list-details-button-link" to={"/lists"}>Back</Link></button>
+          </div>
+          
         </form>
         {errorMessage && <p style={{color: "red"}}>{errorMessage}</p>}
       </div>

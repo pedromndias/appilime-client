@@ -2,7 +2,7 @@
 import { useEffect, useState } from "react";
 // Make use of react-leaflet to render maps:
 import { MapContainer, TileLayer, Marker, Popup } from "react-leaflet";
-import { useNavigate, useParams } from "react-router-dom";
+import { Link, useNavigate, useParams } from "react-router-dom";
 import { deleteExpenseService, editExpenseService, getExpenseDetailsService } from "../../services/expenses.services";
 import ExpensesForm from "./ExpensesForm";
 import axios from "axios";
@@ -147,7 +147,7 @@ function ExpensesDetails() {
       // console.log(expense);
       // Use a service to edit the Expense (and it will return the updated Expense):
       const response = await editExpenseService(params.expenseId, expense)
-      console.log("Document updated");
+      // console.log("Document updated");
       // Update states:
       setExpense(response.data)
       setNameInput(response.data.name)
@@ -217,6 +217,7 @@ function ExpensesDetails() {
           <div className="expense-details-container-buttons">
             <button className="expense-details-container-buttons-delete" onClick={handleDeleteExpense}>Delete</button>
             <button className="expense-details-container-buttons-edit" onClick={handleShowEditForm}>Edit</button>
+            <button className="expense-details-container-buttons-back"><Link to={"/expenses"}>Back</Link></button>
           </div>
         </div>}
         {isEditing && 

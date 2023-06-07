@@ -1,5 +1,6 @@
 //* This is a form component that will be reused (create new Expense and edit an Expense)
 
+import { Link } from "react-router-dom"
 import Sidebar from "../../components/navigation/Sidebar"
 
 function ExpensesForm(props) {
@@ -15,11 +16,11 @@ function ExpensesForm(props) {
           {isEditingAnExpense && <h2>Edit {expense.name} expense</h2>}
           <div className="expenses-form-each-input">
             <label htmlFor="name">Name: </label>
-            <input type="text" name="name" onChange={handleNameChange} value={nameInput} autoComplete="off"/>
+            <input type="text" name="name" maxLength="18" onChange={handleNameChange} value={nameInput} autoComplete="off"/>
           </div>
           <div className="expenses-form-each-input">
             <label htmlFor="price">Price: </label>
-            <input type="number" name="price" onChange={handlePriceChange} value={priceInput} />
+            <input step=".01" max="10000000" type="number" name="price" onChange={handlePriceChange} value={priceInput} />
           </div>
           <div className="expenses-form-each-input">
             <label htmlFor="location">Location: </label>
@@ -28,11 +29,13 @@ function ExpensesForm(props) {
           
           
           <br />
-          {/* Show different buttons depending on if we are creating or editing: */}
-          {isCreatingAnExpense && <button className="expenses-form-button" type="submit">+Add</button>}
-          {isEditingAnExpense && <button className="expenses-form-button" type="submit">Update</button>}
-
-          {errorMessage && <p style={{color: "red"}}>{errorMessage}</p>}
+          <div>
+            {/* Show different buttons depending on if we are creating or editing: */}
+            {isCreatingAnExpense && <button className="expenses-form-button" type="submit">+Add</button>}
+            {isEditingAnExpense && <button className="expenses-form-button" type="submit">Update</button>}
+            <button className="expenses-form-button expenses-form-button-back"><Link to={"/expenses"}>Back</Link></button>
+            {errorMessage && <p style={{color: "red"}}>{errorMessage}</p>}
+          </div>
 
         </form>
         <div>

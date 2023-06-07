@@ -307,15 +307,29 @@ a {
   border: 2px solid lightgray;
   margin: 20px;
   border-radius: 10px;
+  box-shadow: 0px 0px 10px gray;
+}
+.list-details,
+.add-new-list-container {
+  width: 300px;
+  margin: 10px auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-between;
+  align-items: center;
+  border-radius: 20px;
+  margin: 0 auto;
+  padding: 20px;
+  box-shadow: 0px 0px 10px gray;
+}
+.add-new-list-container {
+  padding: 0 0 20px;
+}
+.list-details-button-link{
+  text-decoration: none;
 }
 
-.list-details-single-todo {
-  width: 200px;
-  margin: 5px auto;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
 .add-list-link {
   color: black;
   cursor: pointer;
@@ -324,11 +338,71 @@ a {
   font-size: 1.1em;
   border: none;
   text-decoration: none;
+  box-shadow: 0px 0px 10px gray;
 }
 .add-list-link:visited,
 .allTodoLists a:visit {
   color: black;
 }
+.list-details-all-todos {
+  margin-top: 10px;
+  margin-bottom: 20px;
+}
+.list-details-button,
+.add-new-list-button {
+  color: black;
+  cursor: pointer;
+  padding: 3px 10px;
+  border-radius: 10px;
+  font-size: 1.1em;
+  border: none;
+  box-shadow: 0px 0px 5px gray;
+  margin-right: 5px;
+}
+.list-details-single-todo {
+  font-size: 1.2em;
+  display: flex;
+  width: 250px;
+  margin: 10px auto;
+  justify-content: space-between;
+  align-items: center;
+  padding: 3px;
+  border-radius: 5px;
+}
+
+.list-details-single-todo label {
+  word-wrap: break-word;
+}
+.edit-list-details-name-buttons {
+  margin-top: 5px;
+}
+.list-details-button-red {
+  background-color: red;
+  opacity: 0.8;
+  color: white;
+}
+.list-details-button-red:hover {
+  opacity: 0.3;
+}
+.new-todo-container,
+.edit-name-todo-container {
+  display: flex;
+  gap: 5px;
+  margin-bottom: 10px;
+}
+.list-details-button-back-container {
+  margin-top: 10px;
+}
+.list-details-button-back-container a{
+  color: black;
+}
+.list-details-button-normal {
+  opacity: 1;
+}
+.add-new-list-button-container {
+  margin-top: 20px;
+}
+
 
 /* EXPENSES */
 
@@ -408,6 +482,10 @@ a {
   font-size: 1.1em;
   opacity: 0.5;
   border: none;
+  box-shadow: 0px 0px 5px gray;
+}
+.expenses-form-button {
+  margin-right: 10px;
 }
 .allExpenses-delete-button:hover,
 .allExpenses-delete-button-yes:hover {
@@ -429,6 +507,13 @@ a {
   align-items: center;
   width: 300px;
 }
+.expense-details-container-header {
+  flex-direction: column;
+}
+.expense-details-container-header h1,
+.expense-details-container-header h3 {
+  margin: 7px;
+}
 .expense-details-container-buttons {
   display: flex;
   justify-content: center;
@@ -446,6 +531,10 @@ a {
 .expense-details-container-buttons-edit:hover {
   background-color: greenyellow;
   opacity: 1;
+}
+.expense-details-container-buttons-back a,
+.expenses-form-button a{
+  color: black;
 }
 .expenses-form {
   width: 300px;
@@ -545,21 +634,30 @@ a {
   .open-nav button,
   .open-nav button.logout-button-mobile,
   .add-list-link,
-  .singleTodoList {
+  .singleTodoList,
+  .list-details-button-normal,
+  .add-new-list-container {
     background-color: black;
     color: white;
   }
   .sidebar-container a,
   .add-expense-link a,
   .add-list-link:hover,
-  .singleTodoList:hover {
+  .singleTodoList:hover,
+  .add-new-list-button:hover {
     background-color: white;
     box-shadow: none;
     color: black;
   }
+  
+  
   .sidebar-container a:hover,
   .add-expense-link a:hover,
-  .eachLocation {
+  .eachLocation,
+  .add-list-link:hover,
+  .singleTodoList:hover,
+  .list-details-single-todo:hover,
+  .list-details-button-normal:hover {
     background-color: lightgray;
   }
   .eachLocation:hover,
@@ -567,7 +665,9 @@ a {
     background-color: black;
     color: white;
   }
-  .expenses-form-button:hover {
+  .expenses-form-button:hover,
+  .expense-details-container-buttons-back:hover,
+  .list-details-button-cancel:hover {
     background-color: white;
     opacity: 1;
   }
@@ -595,7 +695,8 @@ a {
   .open-nav a,
   .open-nav button,
   .open-nav button.logout-button-mobile,
-  .singleTodoList {
+  .singleTodoList,
+  .add-new-list-container  {
     background-color: rgba(190, 255, 61, 0.8);
     color: black;
   }
@@ -615,7 +716,8 @@ a {
     color: black;
   }
   .add-expense-link-each a:hover,
-  .eachLocation {
+  .eachLocation,
+  .add-new-list-button:hover {
     background-color: rgba(255, 204, 0, 0.5);
   }
   .navbar a:hover,
@@ -631,9 +733,19 @@ a {
   .add-expense-link a:hover,
   .eachLocation:hover,
   .expenses-form-button:hover,
-  .add-list-link:hover {
+  .add-list-link:hover,
+  .list-details-button-normal  {
     background-color: rgba(190, 255, 61, 0.8);
     opacity: 1;
+  }
+
+  .expense-details-container-buttons-back:hover,
+  .expenses-form-button-back:hover,
+  .list-details-single-todo:hover,
+  .list-details-button-cancel:hover,
+  .list-details-button-normal:hover {
+    background-color: white;
+    opacity: 0.7;
   }
   
 }
@@ -650,7 +762,9 @@ a {
   .open-nav button.logout-button-mobile,
   .eachLocation,
   .singleTodoList,
-  .add-list-link {
+  .add-list-link,
+  .list-details-single-todo:hover,
+  .add-new-list-container {
     background-color: rgb(209, 0, 0);
     color: rgba(255, 204, 0, 0.5);
   }
@@ -675,7 +789,9 @@ a {
   .logout-button:hover,
   .navbar a:hover,
   .eachLocation:hover,
-  .expenses-form-button:hover { 
+  .expenses-form-button:hover,
+  .list-details-button-normal,
+  .add-new-list-button:hover { 
     background-color: rgba(255, 204, 0, 0.5);
   }
   .add-expense-link-each a:hover {
@@ -691,6 +807,13 @@ a {
   .add-list-link:hover { 
     background-color: rgba(255, 204, 0, 0.5);
     color: rgb(209, 0, 0);
+  }
+  .expense-details-container-buttons-back:hover,
+  .expenses-form-button-back:hover,
+  .list-details-button-normal:hover,
+  .list-details-button-cancel:hover{
+    background-color: white;
+    opacity: 0.8;
   }
   
 }
@@ -710,7 +833,9 @@ a {
   .open-nav button,
   .open-nav button.logout-button-mobile ,
   .singleTodoList,
-  .add-list-link  {
+  .add-list-link,
+  .list-details-button-normal,
+  .add-new-list-container {
     background-color:rgba(0, 213, 255, 0.8);
     color: white;
   }
@@ -718,7 +843,8 @@ a {
     background-color:rgb(0, 213, 255);
   }
   .sidebar-container a,
-  .eachLocation {
+  .eachLocation,
+  .add-new-list-button:hover {
     background-color:white;
   }
   .sidebar-container a:hover,
@@ -734,7 +860,9 @@ a {
   .add-expense-link-each a:hover,
   .expenses-form-button:hover,
   .singleTodoList:hover,
-  .add-list-link:hover { 
+  .add-list-link:hover,
+  .list-details-button-normal:hover, 
+  .list-details-button-cancel:hover { 
     background-color: white;
     opacity: 1;
     color: rgba(0, 213, 255, 0.8);
@@ -743,10 +871,13 @@ a {
     background-color: white;
     color: rgba(0, 213, 255, 0.8);
   }
-  .add-expense-link a:hover{
+  .add-expense-link a:hover,
+  .expense-details-container-buttons-back:hover,
+  .expenses-form-button-back:hover{
     background-color: rgba(0, 213, 255, 0.8);
     color: white;
   }
+  
 }
 .App.blueTheme{
   background-color:rgba(0, 213, 255, 0.1);
