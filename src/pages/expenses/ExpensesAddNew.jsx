@@ -106,7 +106,6 @@ function ExpensesAddNew() {
         <Sidebar />
       </div>
       <div>
-        <h2>Add a new expense</h2>
         <ExpensesForm 
           nameInput={nameInput} priceInput={priceInput} locationInput={locationInput} handleSubmit={handleSubmit} handleNameChange={handleNameChange} handlePriceChange={handlePriceChange} handleGeoLocationChange={handleGeoLocationChange} errorMessage={errorMessage} isCreatingAnExpense={true} searchLocationResults={searchLocationResults} handleSelectedLocation={handleSelectedLocation}
           

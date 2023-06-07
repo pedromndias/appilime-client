@@ -40,18 +40,20 @@ function Navbar() {
         {!isLoggedIn && <Link to="/auth/signup">Register</Link>}
         {!isLoggedIn && <Link to="/auth/login">Access</Link>}
 
-        {isLoggedIn && <Link to="/main">Home</Link>}
-        {isLoggedIn && <Link to="/profile">Profile</Link>}
+        {isLoggedIn && <Link onClick={() => setShowNavMenu(false)} to="/main">Home</Link>}
+        {isLoggedIn && <Link onClick={() => setShowNavMenu(false)} to="/profile">Profile</Link>}
         {isLoggedIn && <button className="logout-button" onClick={handleLougout}>Logout</button>}
         {isLoggedIn && <button className="open-nav-button" onClick={handleShowNavMenu}>Menu</button>}
       </div>
-      {showNavMenu && <div className="open-nav">
+      {(showNavMenu && isLoggedIn) && <div className="open-nav">
         <button onClick={handleShowNavMenu}>X</button>
-        {isLoggedIn && <Link onClick={handleShowNavMenu} to="/lists">To-Dos</Link>}
-        {isLoggedIn && <Link onClick={handleShowNavMenu} to="/expenses">Expenses</Link>}
-        {isLoggedIn && <Link onClick={handleShowNavMenu} to="/timer">Timer</Link>}
-        {isLoggedIn && <Link onClick={handleShowNavMenu} to="/game">Game</Link>}
-        {isLoggedIn && <button className="logout-button-mobile" onClick={handleLougout}>Logout</button>}
+         <Link onClick={handleShowNavMenu} to="/lists">To-Dos</Link>
+        <Link onClick={handleShowNavMenu} to="/expenses">Expenses</Link>
+        <Link onClick={handleShowNavMenu} to="/timer">Timer</Link>
+        <Link onClick={handleShowNavMenu} to="/game">Game</Link>
+        <button className="logout-button-mobile" onClick={() => {
+          handleLougout()
+          handleShowNavMenu()}}>Logout</button>
       </div>} 
     </div>
   )

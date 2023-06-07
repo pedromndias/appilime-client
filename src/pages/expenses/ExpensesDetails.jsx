@@ -201,8 +201,10 @@ function ExpensesDetails() {
       <div>
         
         {!isEditing && <div className="expense-details-container">
-          <h2>{expense.name}</h2>
-          <h3>€{expense.price}</h3>
+          <div className="expense-details-container-header">
+            <h1>{expense.name}</h1>
+            <h3>€{expense.price}</h3>
+          </div>
           <MapContainer center={center} zoom={13} scrollWheelZoom={false}>
             <TileLayer
               attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
@@ -212,13 +214,14 @@ function ExpensesDetails() {
             { markerPosition !== null && <Marker position={markerPosition} /> }
 
           </MapContainer>
-          <button onClick={handleDeleteExpense}>Delete</button>
-          <button onClick={handleShowEditForm}>Edit</button>
+          <div className="expense-details-container-buttons">
+            <button className="expense-details-container-buttons-delete" onClick={handleDeleteExpense}>Delete</button>
+            <button className="expense-details-container-buttons-edit" onClick={handleShowEditForm}>Edit</button>
+          </div>
         </div>}
         {isEditing && 
         <div>
-          <h2>Edit {expense.name} expense</h2>
-          <ExpensesForm 
+          <ExpensesForm expense={expense}
             nameInput={nameInput} priceInput={priceInput} locationInput={locationInput} handleSubmit={handleSubmit} handleNameChange={handleNameChange} handlePriceChange={handlePriceChange} handleGeoLocationChange={handleGeoLocationChange} errorMessage={errorMessage} isEditingAnExpense={true} searchLocationResults={searchLocationResults} handleSelectedLocation={handleSelectedLocation}
           />
         </div>}

@@ -130,12 +130,12 @@ function Expenses() {
         </MapContainer>
 
         <div className="allExpenses-total">
-          <h3>Total</h3>
+          <h2>Total</h2>
           <p>€{totalPrice}</p>
         </div>
-        {!showDeletionConfirmation && <button onClick={()=> setShowDeletionConfirmation(true)}>Delete All Expenses</button>}
+        {!showDeletionConfirmation && <button className="allExpenses-delete-button" onClick={()=> setShowDeletionConfirmation(true)}>Delete All Expenses</button>}
         {showDeletionConfirmation && <div>
-          <p>Are you sure you want to delete all Expenses?</p><button onClick={handleDeleteAllExpenses}>Yes</button><button onClick={() => setShowDeletionConfirmation(false)}>No</button>
+          <p>Are you sure you want to delete all Expenses?</p><button className="allExpenses-delete-button-yes"  onClick={handleDeleteAllExpenses}>Yes</button><button className="allExpenses-delete-button-no"  onClick={() => setShowDeletionConfirmation(false)}>No</button>
         </div>}
       </div>
     </div>

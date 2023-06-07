@@ -51,13 +51,17 @@ function TodoList() {
       <div className="allTodoLists">
         <div className="allTodoLists-header">
           <h1>To-Do Lists</h1>
-          <Link to={"/lists/create"}>+ Add List</Link>
+            <Link to={"/lists/create"}>
+          <div className="add-list-link">
+              + Add List
+          </div>
+              </Link>
         </div>
         <div className="allTodoLists-container">
         {todosList.map(eachTodoList => {
           return (
             <div className="eachTodoList" key={eachTodoList._id}>
-              <Link className="eachTodoList-link" to={`/lists/${eachTodoList._id}`}>
+              <Link to={`/lists/${eachTodoList._id}`}>
               <SingleTodoList
                   todoListId={eachTodoList._id}
               />

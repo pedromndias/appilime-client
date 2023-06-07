@@ -38,7 +38,7 @@ function ThemeWrapper(props) {
             if(userMood) {
                 // Check which theme according with the mood:
                 userMood==="focus" && setTheme("darkTheme");
-                userMood==="lazy" && setTheme("grayTheme");
+                userMood==="lazy" && setTheme("greenTheme");
                 userMood==="excited" && setTheme("redTheme");
                 userMood==="melancholic" && setTheme("blueTheme");
             } else {

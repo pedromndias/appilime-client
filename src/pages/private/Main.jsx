@@ -5,6 +5,8 @@ import { useNavigate } from "react-router-dom"
 import { editUserMoodService } from "../../services/main.services"
 import { ThemeContext } from "../../context/theme.context";
 import Sidebar from "../../components/navigation/Sidebar"
+import Weather from "../../components/Weather"
+import CryptoPrices from "../../components/CryptoPrices"
 
 function Main() {
   const navigate = useNavigate()
@@ -52,8 +54,12 @@ function Main() {
         </div>
       </div>
       <div className="weather-price-container">
-        <h2>WEATHER</h2>
-        <h2>PRICES</h2>
+        <div className="weather-component">
+          <Weather />
+        </div>
+        <div className="crypto-component">
+          <CryptoPrices />
+        </div>
       </div>
     </div>
   )

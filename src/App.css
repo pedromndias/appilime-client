@@ -1,6 +1,7 @@
 .App {
   text-align: center;
   background-color:rgba(249, 249, 55, 0.4);
+
 }
 
 .leaflet-container {
@@ -15,7 +16,10 @@
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-  height: 100dvh;
+  min-height: 100dvh;
+}
+a {
+  text-decoration: none;
 }
 
 .navbar {
@@ -31,7 +35,7 @@
 }
 .open-nav {
   position: fixed;
-  height: 100vh;
+  height: 80vh;
   right: 0;
   top: 0;
   width: 200px;
@@ -114,6 +118,11 @@
   position: absolute;
   top: 100px;
   left: 65px;
+}
+
+.weather-component,
+.crypto-component {
+  display: none;
 }
 
 
@@ -257,8 +266,6 @@
   width: 120px;
   color: white;
 }
-
-
 .sidebar-container a:hover {
   background-color: rgb(255, 204, 0);
 }
@@ -287,8 +294,12 @@
   flex-wrap: wrap;
 }
 
-.eachTodoList-link {
+.eachTodoList {
   text-decoration: none;
+  color: black;
+}
+.eachTodoList:visited {
+  color: black;
 }
 
 .singleTodoList {
@@ -305,18 +316,25 @@
   justify-content: center;
   align-items: center;
 }
+.add-list-link {
+  color: black;
+  cursor: pointer;
+  padding: 7px 15px;
+  border-radius: 10px;
+  font-size: 1.1em;
+  border: none;
+  text-decoration: none;
+}
+.add-list-link:visited,
+.allTodoLists a:visit {
+  color: black;
+}
 
 /* EXPENSES */
 
-.expense-details-container {
-  width: 350px;
-  padding: 20px;
-  margin: 10px auto;
-  border: 2px solid lightgray;
-  border-radius: 20px;
-}
-
-.allExpenses {
+.allExpenses,
+.expense-details-container,
+.expenses-form {
   width: 350px;
   margin: 10px auto;
   display: flex;
@@ -363,11 +381,12 @@
   align-items: center;
   width: 300px;
 }
-
 .eachExpense-link {
   display: flex;
   justify-content: space-between;
   text-decoration: none;
+  padding: 2px;
+  border-radius: 2px;
 }
 .eachExpense-link:hover {
   background-color: lightgray;
@@ -377,16 +396,77 @@
   margin-top: 2px;
   margin-bottom: 2px;
 }
+.allExpenses-delete-button,
+.allExpenses-delete-button-yes,
+.allExpenses-delete-button-no,
+.expense-details-container-buttons button,
+.expenses-form-button {
+  color: black;
+  cursor: pointer;
+  padding: 7px 15px;
+  border-radius: 10px;
+  font-size: 1.1em;
+  opacity: 0.5;
+  border: none;
+}
+.allExpenses-delete-button:hover,
+.allExpenses-delete-button-yes:hover {
+  background-color: red;
+  opacity: 1;
+  color: white;
+}
+.allExpenses-delete-button-yes {
+  margin-right: 5px;
+}
+.allExpenses-delete-button-no:hover {
+  background-color: greenyellow;
+  opacity: 1;
+}
+.expense-details-container-header,
+.expenses-form-each-input {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 300px;
+}
+.expense-details-container-buttons {
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+  margin-top: 10px;
+}
+.expense-details-container-buttons button {
+  padding: 5px 10px;
+}
+.expense-details-container-buttons-delete:hover {
+  background-color: red;
+  opacity: 1;
+  color: white;
+}
+.expense-details-container-buttons-edit:hover {
+  background-color: greenyellow;
+  opacity: 1;
+}
+.expenses-form {
+  width: 300px;
+}
+.expenses-form-each-input {
+  width: 250px;
+  margin: 5px;
+}
 
 /* SEARCH LOCATION */
 .eachLocation {
   cursor: pointer;
+  border-radius: 5px;
+  padding: 2px;
+  margin-bottom: 3px;
 }
 .eachLocation:hover {
   background-color: lightgray;
 }
 .eachLocation-container {
-  width: 350px;
+  width: 320px;
   margin: 10px auto;
 }
 
@@ -458,22 +538,38 @@
   .footer,
   .sidebar-container,
   .allExpenses,
+  .expense-details-container,
+  .expenses-form,
   .open-nav-button,
   .open-nav a,
   .open-nav button,
-  .open-nav button.logout-button-mobile {
+  .open-nav button.logout-button-mobile,
+  .add-list-link,
+  .singleTodoList {
     background-color: black;
     color: white;
   }
   .sidebar-container a,
-  .add-expense-link a{
+  .add-expense-link a,
+  .add-list-link:hover,
+  .singleTodoList:hover {
     background-color: white;
     box-shadow: none;
     color: black;
   }
   .sidebar-container a:hover,
-  .add-expense-link a:hover{
+  .add-expense-link a:hover,
+  .eachLocation {
     background-color: lightgray;
+  }
+  .eachLocation:hover,
+  .add-list-link a:hover{
+    background-color: black;
+    color: white;
+  }
+  .expenses-form-button:hover {
+    background-color: white;
+    opacity: 1;
   }
   .navbar a,
   .open-nav a,
@@ -488,15 +584,18 @@
 .App.darkTheme{
   background-color:white;
 }
-.grayTheme {
+.greenTheme {
   .navbar,
   .footer,
   .sidebar-container,
   .allExpenses,
+  .expense-details-container,
+  .expenses-form,
   .open-nav-button,
   .open-nav a,
   .open-nav button,
-  .open-nav button.logout-button-mobile {
+  .open-nav button.logout-button-mobile,
+  .singleTodoList {
     background-color: rgba(190, 255, 61, 0.8);
     color: black;
   }
@@ -515,17 +614,26 @@
   .add-expense-link-each a {
     color: black;
   }
-  .add-expense-link-each a:hover {
+  .add-expense-link-each a:hover,
+  .eachLocation {
     background-color: rgba(255, 204, 0, 0.5);
   }
-  .navbar a:hover {
+  .navbar a:hover,
+  .singleTodoList:hover {
     background-color: rgba(255, 204, 0, 0.5);
+  }
+  .add-list-link {
+    background-color: rgb(255, 204, 0)
   }
   .add-expense-link a {
     color: black;
   }
-  .add-expense-link a:hover{
+  .add-expense-link a:hover,
+  .eachLocation:hover,
+  .expenses-form-button:hover,
+  .add-list-link:hover {
     background-color: rgba(190, 255, 61, 0.8);
+    opacity: 1;
   }
   
 }
@@ -535,36 +643,54 @@
   .footer,
   .sidebar-container,
   .allExpenses,
+  .expense-details-container,
+  .expenses-form,
   .open-nav-button,
-  .open-nav a,
   .open-nav button,
-  .open-nav button.logout-button-mobile  {
+  .open-nav button.logout-button-mobile,
+  .eachLocation,
+  .singleTodoList,
+  .add-list-link {
     background-color: rgb(209, 0, 0);
     color: rgba(255, 204, 0, 0.5);
   }
   .navbar,
   .open-nav,
   .footer,
-  .allExpenses{
+  .allExpenses,
+  .expense-details-container,
+  .expenses-form{
     text-shadow: 0px 0px 1px white;
   }
   .sidebar-container a {
     box-shadow: 0px 0px 5px black;
   }
   .navbar a,
-  .open-nav a,
   .add-expense-link a {
     color: rgba(255, 204, 0, 0.5);
   }
+  .eachLocation {
+    color: white;
+  }
   .logout-button:hover,
-  .navbar a:hover{ 
+  .navbar a:hover,
+  .eachLocation:hover,
+  .expenses-form-button:hover { 
     background-color: rgba(255, 204, 0, 0.5);
   }
   .add-expense-link-each a:hover {
     background-color: rgba(255, 204, 0, 0.5);
   }
-  .add-expense-link a:hover{
+  .add-expense-link a:hover {
     background-color: rgba(255, 204, 0, 0.8);
+  }
+  .open-nav-button {
+    color:rgba(255, 204, 0, 0.8);
+  }
+  .singleTodoList:hover,
+  .add-list-link:hover { 
+    background-color: rgba(255, 204, 0, 0.5);
+    color: rgb(209, 0, 0);
   }
   
 }
@@ -577,20 +703,26 @@
   .footer,
   .sidebar-container,
   .allExpenses,
+  .expense-details-container,
+  .expenses-form,
   .open-nav-button,
   .open-nav a,
   .open-nav button,
-  .open-nav button.logout-button-mobile  {
+  .open-nav button.logout-button-mobile ,
+  .singleTodoList,
+  .add-list-link  {
     background-color:rgba(0, 213, 255, 0.8);
     color: white;
   }
   .open-nav {
     background-color:rgb(0, 213, 255);
   }
-  .sidebar-container a {
+  .sidebar-container a,
+  .eachLocation {
     background-color:white;
   }
-  .sidebar-container a:hover {
+  .sidebar-container a:hover,
+  .eachLocation:hover {
     background-color:rgba(0, 213, 255, 0.8);
   }
   .navbar a,
@@ -599,8 +731,12 @@
   }
   .logout-button:hover,
   .navbar a:hover,
-  .add-expense-link-each a:hover { 
+  .add-expense-link-each a:hover,
+  .expenses-form-button:hover,
+  .singleTodoList:hover,
+  .add-list-link:hover { 
     background-color: white;
+    opacity: 1;
     color: rgba(0, 213, 255, 0.8);
   }
   .add-expense-link a{
@@ -715,7 +851,11 @@
   .logout-button {
     display: block;
   }
-  
+
+  .weather-component,
+  .crypto-component {
+    display: block;
+}
 
 
 }
