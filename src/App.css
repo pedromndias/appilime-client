@@ -139,14 +139,22 @@ input {
   background-color: black;
 }
 
-.show-game-container {
+.show-game-container,
+.show-music-container {
   display: none;
 }
-.show-game {
+.show-music-container {
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+}
+.show-game,
+.show-music {
   width: 660px;
   height: 830px;
 }
-.show-game-warning {
+.show-game-warning,
+.show-music-warning {
   width: 300px;
   margin: 0 auto;
   display: flex;
@@ -157,7 +165,8 @@ input {
 }
 
 .weather-component,
-.crypto-component {
+.crypto-component,
+.timer-component {
   display: none;
 }
 
@@ -185,7 +194,7 @@ input {
   margin: 0;
 }
 .weather-emoji {
-  font-size: 5em;
+  font-size: 4em;
   margin: 0;
 }
 
@@ -201,10 +210,15 @@ input {
   align-items:flex-start;
   border-radius: 20px;
   margin: 0 auto;
-  padding: 15px;
-  padding-left: 20px;
+  padding: 10px;
   box-shadow: 0px 0px 10px gray;
   position: relative;
+}
+.crypto-prices-container p{
+  margin: 5px;
+}
+.crypto-prices-container span {
+  font-size: 1.4em;
 }
 
 /* HOME */
@@ -300,8 +314,9 @@ input {
   gap: 50px;
   flex-direction: column;
   justify-content: space-between;
-  
+  align-items: center;
   height: 100%;
+  width: 90%;
 }
 .main-container {
   margin-top: 50px;
@@ -318,15 +333,20 @@ input {
   border-radius: 20px;
   width: 260px;
   height: 150px;
-  margin: 0 auto;
   padding: 15px;
   box-shadow: 0px 0px 10px gray;
   position: relative;
 }
 .weather-price-container {
+  display: none;
+  flex-direction: column;
+  height: 500px;
+  justify-content: space-between;
+}
+.sidebar-crypto-container {
   display: flex;
   flex-direction: column;
-  height: 350px;
+  height: 170px;
   justify-content: space-between;
 }
 .sidebar-container a,
@@ -597,6 +617,9 @@ input {
 .expense-details-container-header {
   flex-direction: column;
 }
+.expense-details-container-header div {
+  display: flex;
+}
 .expense-details-container-header h1,
 .expense-details-container-header h3 {
   margin: 7px;
@@ -740,6 +763,61 @@ input {
 }
 
 
+/* TIMER */
+
+.timer-container {
+  width: 150px;
+  margin: 10px auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-between;
+  align-items: center;
+  border-radius: 20px;
+  margin: 0 auto;
+  padding: 10px;
+  box-shadow: 0px 0px 10px gray;
+}
+.timer-container h1 {
+  margin: 5px;
+}
+.timer-container-inputs {
+  display: flex;
+  justify-content: center;
+  gap: 5px;
+}
+.timer-container-inputs input {
+  width: 50px;
+  height: 30px;
+  font-size: 1.4em;
+}
+.timer-container-buttons {
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+  margin-top: 15px;
+}
+.timer-container-button {
+  color: black;
+  cursor: pointer;
+  padding: 5px 10px;
+  border-radius: 10px;
+  font-size: 1.1em;
+  opacity: 0.5;
+  border: none;
+  box-shadow: 0px 0px 5px gray;
+}
+.timer-container-button:hover {
+  opacity: 1;
+  background-color: rgba(190, 255, 61, 0.8);
+}
+.timer-container-button-reset:hover {
+  opacity: 1;
+  background-color: rgb(209, 0, 0);
+}
+
+
+
 /* THEMES */
 
 .darkTheme {
@@ -760,7 +838,8 @@ input {
   .add-new-list-container,
   .profile-container,
   .weather-container,
-  .crypto-prices-container   {
+  .crypto-prices-container,
+  .timer-container   {
     background-color: black;
     color: white;
   }
@@ -827,7 +906,8 @@ input {
   .add-new-list-container,
   .profile-container,
   .weather-container,
-  .crypto-prices-container   {
+  .crypto-prices-container,
+  .timer-container   {
     background-color: rgba(190, 255, 61, 0.8);
     color: black;
   }
@@ -900,7 +980,8 @@ input {
   .list-details-single-todo:hover,
   .add-new-list-container,
   .profile-container,
-  .crypto-prices-container  {
+  .crypto-prices-container,
+  .timer-container  {
     background-color: rgb(209, 0, 0);
     color: rgba(255, 204, 0, 0.5);
   }
@@ -947,7 +1028,8 @@ input {
     color:rgba(255, 204, 0, 0.8);
   }
   .singleTodoList:hover,
-  .add-list-link:hover { 
+  .add-list-link:hover,
+  .timer-container-button-reset:hover { 
     background-color: rgba(255, 204, 0, 0.5);
     color: rgb(209, 0, 0);
   }
@@ -983,7 +1065,8 @@ input {
   .add-new-list-container,
   .profile-container,
   .weather-container,
-  .crypto-prices-container {
+  .crypto-prices-container,
+  .timer-container {
     background-color:rgba(0, 213, 255, 0.8);
     color: white;
   }
@@ -1049,7 +1132,7 @@ input {
   font-size: 1.2em;
   border-radius: 10px;
   cursor: pointer;
-  margin: 2px;
+  margin: 3px;
 }
 .focus-button {
   background-color: black;
@@ -1144,10 +1227,12 @@ input {
     height: 280px;
   }
 
-  .show-game-warning {
+  .show-game-warning,
+  .show-music-warning {
     visibility: hidden;
   }
-  .show-game-container {
+  .show-game-container,
+  .show-music-container {
     display: block;
   }
   .open-nav-button {
@@ -1159,8 +1244,15 @@ input {
   }
 
   .weather-component,
-  .crypto-component {
+  .crypto-component,
+  .timer-component {
     display: block;
+}
+.weather-price-container {
+  display: flex;
+}
+.sidebar-crypto-container {
+  height: 500px;
 }
 
 

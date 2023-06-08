@@ -49,7 +49,7 @@ function Login() {
       await authenticateUser()
 
       // Call manageTheme and send the logged in user's mood:
-      manageTheme()
+      // await manageTheme()
       setIsLoading(false)
       // Navigate to Main:
       navigate("/main")

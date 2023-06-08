@@ -15,8 +15,9 @@ import TodoListDetails from "./pages/lists/TodoListDetails";
 import Expenses from "./pages/expenses/Expenses";
 import ExpensesAddNew from "./pages/expenses/ExpensesAddNew";
 import ExpensesDetails from "./pages/expenses/ExpensesDetails";
-import Timer from "./pages/timer/Timer.jsx"
+import Timer from "./components/Timer.jsx"
 import Game from "./pages/google/Game";
+import Music from "./pages/music/Music";
 import IsPrivate from "./components/auth/IsPrivate";
 import IsAnon from "./components/auth/IsAnon";
 
@@ -54,6 +55,7 @@ function App() {
 
         <Route path="/timer" element={<IsPrivate><Timer /></IsPrivate>}/>
         <Route path="/game" element={<IsPrivate><Game /></IsPrivate>} />
+        <Route path="/music" element={<IsPrivate><Music /></IsPrivate>} />
 
         {/* Error routes */}
         <Route path="/error" element={<Error />}/>

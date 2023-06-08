@@ -51,6 +51,7 @@ function Navbar() {
         <Link onClick={handleShowNavMenu} to="/expenses">Expenses</Link>
         <Link onClick={handleShowNavMenu} to="/timer">Timer</Link>
         <Link onClick={handleShowNavMenu} to="/game">Game</Link>
+        <Link onClick={handleShowNavMenu} to="/music">Music</Link>
         <button className="logout-button-mobile" onClick={() => {
           handleLougout()
           handleShowNavMenu()}}>Logout</button>

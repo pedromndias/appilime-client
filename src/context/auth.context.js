@@ -22,7 +22,8 @@ function AuthWrapper(props) {
 
     // Function that will invoke the verifyService to validate the token and receive the payload (should be called when the user logs in)
     const authenticateUser = async () => {
-
+        // Give time for the Login component to call authenticateUser and update "user":
+        setIsLoading(true)
         try {
             // Call the verifyService:
             const response = await verifyService()

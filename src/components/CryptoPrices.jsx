@@ -36,31 +36,38 @@ function CryptoPrices() {
   }
 
   // Create state for the prices:
-  const [cryptoPrice, setCryptoPrice] = useState({btcPrice: "", ethPrice: ""})
-  
+  const [cryptoPrice, setCryptoPrice] = useState({btcPrice: "", ethPrice: "", styleBtcPrice: {color: "black"}, styleEthPrice: {color: "black"}})
   // Create state for when the data is loading:
   const [isLoading, setIsLoading] = useState(true)
-
-  // Create state for the price styles:
-  const [priceStyle, setPriceStyle] = useState({styleBtcPrice: "", styleEthPrice: ""})
   
   // Create a function to get price data:
   const getData = async () => {
     try {
-      const btcResponse = await axios.get("https://api.binance.com/api/v3/ticker/price?symbol=BTCUSDT")
-      // console.log(btcResponse.data.price);
-      const ethResponse = await axios.get("https://api.binance.com/api/v3/ticker/price?symbol=ETHUSDT")
-      // console.log(ethResponse.data.price);
-      console.log(Number(btcResponse.data.price));
-      console.log(Number(cryptoPrice.btcPrice));
+      const allResponse = await Promise.all([axios.get("https://api.binance.com/api/v3/ticker/price?symbol=BTCUSDT"), axios.get("https://api.binance.com/api/v3/ticker/price?symbol=ETHUSDT")])
+      // console.log(allResponse);
+      // console.log(Number(allResponse[0].data.price));
+      // console.log(Number(cryptoPrice.btcPrice));
 
-      compareBtcPriceValues(btcResponse)
-      
-      compareEthPriceValues(ethResponse)
+      // ? Let's set the cryptoPrice state and update the style colors depending if the price is going up or down
+      setCryptoPrice(prevValue => {
+        //console.log(prevValue.btcPrice, allResponse[0].data.price, prevValue.styleBtcPrice);
 
-      setCryptoPrice({
-        ethPrice: Number(ethResponse.data.price).toFixed(2),
-        btcPrice: Number(btcResponse.data.price).toFixed(2)
+        // Create variable and the final object to return:
+        let finalToSet
+        let btcNewPrice = Number(allResponse[0].data.price)
+        let btcOldPrice = Number(prevValue.btcPrice)
+        let btcPriceStyle = btcNewPrice > btcOldPrice ? {color: "green"} : {color: "red"}
+        let ethNewPrice = Number(allResponse[1].data.price)
+        let ethOldPrice = Number(prevValue.ethPrice)
+        let ethPriceStyle = ethNewPrice > ethOldPrice ? {color: "green"} : {color: "red"}
+        
+        finalToSet = {
+          btcPrice: btcNewPrice,
+          ethPrice: ethNewPrice,
+          styleBtcPrice: btcPriceStyle,
+          styleEthPrice: ethPriceStyle
+        }
+        return finalToSet
       })
 
       setIsLoading(false)
@@ -68,40 +75,20 @@ function CryptoPrices() {
       console.log(error);
     }
   }
-
-  // Create functions to compare the price values:
-  const compareBtcPriceValues = (btcResponse) => {
-    // Change styles according to price up or down:
-    if (Number(btcResponse.data.price) > Number(cryptoPrice.btcPrice)){
-      priceStyle.styleBtcPrice = {color: "green"}
-    } else {
-      priceStyle.styleBtcPrice = {color: "red"}
-    }
-  }
-  // Create functions to compare the price values:
-  const compareEthPriceValues = (ethResponse) => {
-    if (Number(ethResponse.data.price) > Number(cryptoPrice.ethPrice)){
-      priceStyle.styleEthPrice = {color: "green"}
-    } else {
-      priceStyle.styleEthPrice = {color: "red"}
-    }
-  }
-  
   
   // useEffect to call getData every 5 seconds:
   useEffect(() => {
     getData()
     const id = setInterval(() => {
       getData()
+      
     }, 5000)
     // Create a return statment so the setInterval is cleared when the component is unmounted:
     return () => {
-      console.log("CryptoPrices unmounted");
+      // console.log("CryptoPrices unmounted");
       clearInterval(id)
     }
   }, [])
-
-
 
   // Create a check clause if we are still loading (and give time to the Backend to return the data):
   if (isLoading) {
@@ -115,8 +102,8 @@ function CryptoPrices() {
   return (
     <div ref= {ref} onMouseMove={mousePressedMove} onMouseDown={() => setPressed(true)} onMouseUp={() => setPressed(false)}>
       <div className="crypto-prices-container">
-        <p >Bitcoin BTC <span style={priceStyle.styleBtcPrice}>${cryptoPrice.btcPrice}</span></p>
-        <p >Ethereum ETH <span style={priceStyle.styleEthPrice}>${cryptoPrice.ethPrice}</span></p>
+        <p >Bitcoin BTC <span style={cryptoPrice.styleBtcPrice}>${cryptoPrice.btcPrice}</span></p>
+        <p >Ethereum ETH <span style={cryptoPrice.styleEthPrice}>${cryptoPrice.ethPrice}</span></p>
       </div>
     </div>
   )

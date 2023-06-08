@@ -33,7 +33,7 @@ function Expenses() {
     try {
       // Use a service to get the data:
       const response = await getAllExpensesService()
-      console.log(response.data);
+      // console.log(response.data);
       // Set the states
       // Set allMarkers as all the coordinates from each Expense:
       response.data.forEach(el => {
@@ -42,7 +42,7 @@ function Expenses() {
         }
       })
       setAllMarkers(allMarkersArray)
-      console.log(allMarkersArray);
+      // console.log(allMarkersArray);
       setExpenses(response.data)
       setIsLoading(false)
     } catch (error) {

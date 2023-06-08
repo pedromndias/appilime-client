@@ -201,7 +201,10 @@ function ExpensesDetails() {
         {!isEditing && <div className="expense-details-container">
             <div className="expense-details-container-header">
               <h1>{expense.name}</h1>
-              <h3>€{expense.price}</h3>
+              <div>
+                <h3>{expense.location}</h3>
+                <h3>€{expense.price}</h3>
+              </div>
             </div>
             <MapContainer center={center} zoom={13} scrollWheelZoom={false}>
               <TileLayer

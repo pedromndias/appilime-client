@@ -6,7 +6,7 @@ function Sidebar() {
   // When the component is pressed by the mouse:
   const [pressed, setPressed] = useState(false)
   // The position of the component. Start at {x: 20, y: 20}
-  const [sideBarposition, setSideBarPosition] = useState({x: 20, y: 20})
+  const [sideBarposition, setSideBarPosition] = useState({x: 0, y: 0})
   // useRef so we maintain a value between renders:
   const ref = useRef()
 
@@ -35,14 +35,12 @@ function Sidebar() {
 
   // ? Note our return, the container has a reference to our ref and responds to onMouseMove, onMouseDown (change setPressed to true) and onMouseUp (change setPressed to false) events.
   return (
-    <div ref= {ref} onMouseMove={mousePressedMove} onMouseDown={() => setPressed(true)} onMouseUp={() => setPressed(false)}>
-      <div className="sidebar-container">
+    <div className="sidebar-container" ref= {ref} onMouseMove={mousePressedMove} onMouseDown={() => setPressed(true)} onMouseUp={() => setPressed(false)}>
         <Link to={"/lists"}>To-Dos</Link>
         <Link to={"/expenses"}>Expenses</Link>
-        <Link to={"/timer"}>Timer</Link>
+        <Link to={"/music"}>Music</Link>
         <Link to={"/game"}>Game</Link>
       </div>
-    </div>
   )
 }
 
