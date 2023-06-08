@@ -12,7 +12,7 @@ function Main() {
   const navigate = useNavigate()
   // Get the manageTheme function:
   const {manageTheme} = useContext(ThemeContext)
-
+  // State for when it is loading:
   const [isLoading, setIsLoading] = useState(false)
 
  

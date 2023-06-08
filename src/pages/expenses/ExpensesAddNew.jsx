@@ -110,11 +110,6 @@ function ExpensesAddNew() {
         <Sidebar />
       </div>
       <div>
-      <div className="container-with-sidebar">
-      <div className="sidebar">
-        <Sidebar />
-      </div>
-      <div>
           <form onSubmit={handleSubmit} className="expenses-form">
           <h2>Add a new expense</h2>
           <div className="expenses-form-each-input">
@@ -154,9 +149,6 @@ function ExpensesAddNew() {
               </div>
             }
           </div>
-          
-      </div>
-    </div>
       </div>
     </div>
   )

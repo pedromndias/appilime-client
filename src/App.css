@@ -50,6 +50,13 @@ a:visited {
   color:black;
 }
 
+input {
+  border-radius: 5px;
+  border: none;
+  padding: 5px;
+  box-shadow: 0px 0px 5px gray;
+}
+
 .navbar {
   height: 50px;
   display: flex;
@@ -154,6 +161,51 @@ a:visited {
   display: none;
 }
 
+/* WEATHER */
+.weather-container {
+  width: 100px;
+  margin: 10px auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-between;
+  align-items: center;
+  border-radius: 20px;
+  margin: 0 auto;
+  padding: 15px;
+  box-shadow: 0px 0px 10px gray;
+  position: relative;
+}
+.weather-info {
+  display: flex;
+  gap: 5px;
+  
+}
+.weather-info p {
+  margin: 0;
+}
+.weather-emoji {
+  font-size: 5em;
+  margin: 0;
+}
+
+/* CRYPTO PRICES */
+
+.crypto-prices-container {
+  width: 150px;
+  margin: 10px auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-between;
+  align-items:flex-start;
+  border-radius: 20px;
+  margin: 0 auto;
+  padding: 15px;
+  padding-left: 20px;
+  box-shadow: 0px 0px 10px gray;
+  position: relative;
+}
 
 /* HOME */
 
@@ -248,7 +300,7 @@ a:visited {
   gap: 50px;
   flex-direction: column;
   justify-content: space-between;
-  align-items: center;
+  
   height: 100%;
 }
 .main-container {
@@ -267,12 +319,15 @@ a:visited {
   width: 260px;
   height: 150px;
   margin: 0 auto;
-  padding: 20px;
+  padding: 15px;
   box-shadow: 0px 0px 10px gray;
+  position: relative;
 }
 .weather-price-container {
   display: flex;
   flex-direction: column;
+  height: 350px;
+  justify-content: space-between;
 }
 .sidebar-container a,
 .open-nav button,
@@ -433,9 +488,6 @@ a:visited {
 }
 .add-new-list-button-container {
   margin-top: 20px;
-}
-.list-details-button-back:hover {
-  background-color: black;
 }
 
 
@@ -652,7 +704,8 @@ a:visited {
   margin: 3px auto;
 }
 .update-pic-button,
-.update-pic-input {
+.update-pic-input,
+.update-username-button {
   color: black;
   cursor: pointer;
   padding: 5px 10px;
@@ -674,6 +727,17 @@ a:visited {
   font-size: 1em;
   margin: 2px;
 }
+.update-username-buttons-container {
+  width: 200px;
+  margin: 4px auto;
+  display: flex;
+  justify-content: center;
+  gap: 5px;
+}
+.update-username-buttons-container button{
+  display: flex;
+  align-items: center;
+}
 
 
 /* THEMES */
@@ -694,7 +758,9 @@ a:visited {
   .singleTodoList,
   .list-details-button-normal,
   .add-new-list-container,
-  .profile-container {
+  .profile-container,
+  .weather-container,
+  .crypto-prices-container   {
     background-color: black;
     color: white;
   }
@@ -703,7 +769,7 @@ a:visited {
   .add-expense-link a,
   .add-list-link:hover,
   .singleTodoList:hover,
-  .add-new-list-button:hover {
+  .list-details-button-back:hover {
     background-color: white;
     box-shadow: none;
     color: black;
@@ -720,14 +786,16 @@ a:visited {
     background-color: lightgray;
   }
   .eachLocation:hover,
-  .add-list-link a:hover{
+  .add-list-link a:hover,
+  .list-details-button-cancel:hover {
     background-color: black;
     color: white;
   }
   .expenses-form-button:hover,
   .expense-details-container-buttons-back:hover,
-  .list-details-button-cancel:hover,
-  .update-pic-button:hover {
+  .update-pic-button:hover,
+  .update-username-button:hover,
+  .add-new-list-button:hover {
     background-color: white;
     opacity: 1;
   }
@@ -757,7 +825,9 @@ a:visited {
   .open-nav button.logout-button-mobile,
   .singleTodoList,
   .add-new-list-container,
-  .profile-container  {
+  .profile-container,
+  .weather-container,
+  .crypto-prices-container   {
     background-color: rgba(190, 255, 61, 0.8);
     color: black;
   }
@@ -796,7 +866,9 @@ a:visited {
   .expenses-form-button:hover,
   .add-list-link:hover,
   .list-details-button-normal,
-  .update-pic-button:hover  {
+  .update-pic-button:hover,
+  .update-username-button:hover,
+  .list-details-button-back:hover {
     background-color: rgba(190, 255, 61, 0.8);
     opacity: 1;
   }
@@ -827,8 +899,15 @@ a:visited {
   .add-list-link,
   .list-details-single-todo:hover,
   .add-new-list-container,
-  .profile-container {
+  .profile-container,
+  .crypto-prices-container  {
     background-color: rgb(209, 0, 0);
+    color: rgba(255, 204, 0, 0.5);
+  }
+  .weather-container {
+    background-color: rgb(209, 0, 0);
+  }
+  .weather-info p {
     color: rgba(255, 204, 0, 0.5);
   }
   .navbar,
@@ -854,7 +933,8 @@ a:visited {
   .eachLocation:hover,
   .expenses-form-button:hover,
   .list-details-button-normal,
-  .add-new-list-button:hover { 
+  .add-new-list-button:hover,
+  .list-details-button-back:hover { 
     background-color: rgba(255, 204, 0, 0.5);
   }
   .add-expense-link-each a:hover {
@@ -875,7 +955,8 @@ a:visited {
   .expenses-form-button-back:hover,
   .list-details-button-normal:hover,
   .list-details-button-cancel:hover,
-  .update-pic-button:hover{
+  .update-pic-button:hover,
+  .update-username-button:hover{
     background-color: white;
     opacity: 0.8;
   }
@@ -900,7 +981,9 @@ a:visited {
   .add-list-link,
   .list-details-button-normal,
   .add-new-list-container,
-  .profile-container {
+  .profile-container,
+  .weather-container,
+  .crypto-prices-container {
     background-color:rgba(0, 213, 255, 0.8);
     color: white;
   }
@@ -928,7 +1011,9 @@ a:visited {
   .add-list-link:hover,
   .list-details-button-normal:hover, 
   .list-details-button-cancel:hover,
-  .update-pic-button:hover { 
+  .update-pic-button:hover,
+  .update-username-button:hover,
+  .list-details-button-back:hover { 
     background-color: white;
     opacity: 1;
     color: rgba(0, 213, 255, 0.8);
@@ -1022,10 +1107,12 @@ a:visited {
   }
 
   .allTodoLists {
-    width: 1000px;
+    width: 850px;
   }
   .allTodoLists-container {
+    display: flex;
     flex-direction: row;
+    justify-content: center;
   }
 
   .profile-container {

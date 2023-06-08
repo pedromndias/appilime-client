@@ -143,8 +143,11 @@ function Profile() {
           {showEditUsername && <div className="profile-info-container-username">
               <form onSubmit={handleEditUsernameSubmit}>
                 <input type="text" value={usernameInput} onChange={(e) => setUsernameInput(e.target.value)}/>
-                <button type="submit">Update</button>
-                <button type="button" onClick={() => setShowEditUsername(false)}>Cancel</button>
+                <div className="update-username-buttons-container">
+                  <button className="update-username-button" type="submit">Update</button>
+                  <button type="button" className="update-username-button" onClick={() => setShowEditUsername(false)}>Cancel</button>
+                </div>
+                
               </form>
             </div>}
                 

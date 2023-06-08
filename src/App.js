@@ -25,6 +25,7 @@ import { ThemeContext } from "./context/theme.context";
 import { useContext } from "react";
 
 
+
 function App() {
     // Get the theme from context:
     const {theme} = useContext(ThemeContext)
