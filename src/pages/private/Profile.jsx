@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react"
 import { editProfilePicService, editUsernameService, getUserDetails } from "../../services/profile.services"
 import { useNavigate } from "react-router-dom"
-import appleLogo from "../../assets/apple-logo.png"
+import profilePicDefault from "../../assets/default-profile-pic.png"
 import { uploadImageService } from "../../services/upload.services"
 // Import a react spinner from react spinners (npm install react-spinners):
 import { GridLoader } from "react-spinners"
@@ -114,10 +114,10 @@ function Profile() {
         <Sidebar />
       </div>
       <div className="profile">
-        <h2>{user.username}' profile</h2>
+        <h2>{user.username}'s profile</h2>
         <div className="profile-container">
           <div>
-            <img className="profile-pic" src={user.imageUrl ? user.imageUrl : appleLogo} alt="profile" />
+            <img className="profile-pic" src={user.imageUrl ? user.imageUrl : profilePicDefault} alt="profile" />
             <div className="update-pic-input-container">
               {!showUploadingPictureForm && <button className="update-pic-button" onClick={() => setShowUploadingPictureForm(true)}>Update Picture</button>}
               {showUploadingPictureForm && 

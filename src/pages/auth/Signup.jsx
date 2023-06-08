@@ -84,7 +84,7 @@ function Signup() {
         <button className="signup-button"  type="submit">Signup</button>
 
         {/* If we have an error, we will show it: */}
-        {errorMessage && <p style={{color: "red"}}>{errorMessage}</p>}
+        {errorMessage && <p className="signup-error-message" style={{color: "red"}}>{errorMessage}</p>}
 
       </form>
     </div>

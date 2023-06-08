@@ -2,6 +2,7 @@
 
 import { createContext, useEffect, useState } from "react";
 import { verifyService } from "../services/auth.services";
+import { GridLoader } from "react-spinners"
 
 // The AuthContext component:
 const AuthContext = createContext()
@@ -56,9 +57,9 @@ function AuthWrapper(props) {
     // If isLoading we should return a spinner:
     if (isLoading) {
         return (
-            <div className="App">
-                <h3>...Validating credentials</h3>
-            </div>
+            <div className="spinner-container">
+            <GridLoader color="rgba(0, 0, 0, 0.62)" size={50}/>
+          </div>
         )
     }
 

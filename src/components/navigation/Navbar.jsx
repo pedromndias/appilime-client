@@ -3,8 +3,22 @@ import { Link, useNavigate } from "react-router-dom"
 import { AuthContext } from "../../context/auth.context"
 // Import ThemeContext so we can access its states and functions:
 import { ThemeContext } from "../../context/theme.context";
+// Import the NavLink tags for dealing with routes with special properties for Navbar links:
+import { NavLink } from "react-router-dom"
 
 function Navbar() {
+  // ? NavLink allow us to pass a callback function to className or styles that gives us info on if the link matches the URL or not.
+  const activeClass = (navInfo) => {
+    // console.log(navInfo);
+    if (navInfo.isActive === true) {
+      // If navInfo.isActive let's return the name of a class that we created in App.css for active links:
+      return "link-active"
+    } else {
+      // If navInfo.isActive is false let's return the name of a class that we created in App.css for inactive links:
+      return "link-inactive"
+    }
+  }
+
   // Get the theme from context:
   const {setTheme} = useContext(ThemeContext)
   const navigate = useNavigate()
@@ -36,12 +50,12 @@ function Navbar() {
   return (
     <div>
       <div className="navbar">
-        {!isLoggedIn && <Link to="/">Home</Link>}
-        {!isLoggedIn && <Link to="/auth/signup">Register</Link>}
-        {!isLoggedIn && <Link to="/auth/login">Access</Link>}
+        {!isLoggedIn && <NavLink className={activeClass} to="/">Home</NavLink>}
+        {!isLoggedIn && <NavLink className={activeClass} to="/auth/signup">Register</NavLink>}
+        {!isLoggedIn && <NavLink className={activeClass} to="/auth/login">Access</NavLink>}
 
-        {isLoggedIn && <Link onClick={() => setShowNavMenu(false)} to="/main">Home</Link>}
-        {isLoggedIn && <Link onClick={() => setShowNavMenu(false)} to="/profile">Profile</Link>}
+        {isLoggedIn && <NavLink className={activeClass} onClick={() => setShowNavMenu(false)} to="/main">Home</NavLink>}
+        {isLoggedIn && <NavLink className={activeClass} onClick={() => setShowNavMenu(false)} to="/profile">Profile</NavLink>}
         {isLoggedIn && <button className="logout-button" onClick={handleLougout}>Logout</button>}
         {isLoggedIn && <button className="open-nav-button" onClick={handleShowNavMenu}>Menu</button>}
       </div>

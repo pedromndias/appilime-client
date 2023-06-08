@@ -84,6 +84,7 @@ input {
   justify-content: space-around;
   align-items: center;
   box-shadow: 0px 5px 5px gray;
+  
 }
 
 .navbar a,
@@ -96,6 +97,20 @@ input {
   padding: 7px 15px;
   border-radius: 10px;
   font-size: 1.1em;
+}
+
+.navbar a.link-active{
+  background-color:rgba(249, 249, 55, 0.4);
+  box-shadow: 0px 0px 5px gray;
+}
+.navbar a.link-active:hover {
+  background-color:rgba(249, 249, 55, 0.8);
+}
+.navbar a.link-inactive {
+  background-color:rgba(249, 249, 55, 0.4);
+}
+.navbar a.link-inactive:hover {
+  background-color:rgba(249, 249, 55, 0.8);
 }
 
 .footer {
@@ -124,10 +139,10 @@ input {
   background-color: rgba(0, 0, 0, 0.3);
   color: white;
   cursor: pointer;
-  border: 1px solid white;
   padding: 7px 15px;
   border-radius: 10px;
   font-size: 1.1em;
+  border: none;
 }
 .logout-button {
   display: none;
@@ -168,6 +183,12 @@ input {
 .crypto-component,
 .timer-component {
   display: none;
+}
+
+.signup-error-message {
+  width: 250px;
+  margin: 2px auto;
+  font-size: 0.8em;
 }
 
 /* WEATHER */
@@ -252,8 +273,9 @@ input {
 }
 
 .spinner-container {
-  width: 100px;
-  margin: 20px auto;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 
@@ -277,6 +299,7 @@ input {
   flex-direction: column;
   justify-content: center;
   box-shadow: 0px 0px 5px gray;
+  
 }
 .signup-form-container h1,
 .login-form-container h1 {
@@ -321,6 +344,7 @@ input {
 .main-container {
   margin-top: 50px;
 }
+
 
 
 /* SIDEBAR */
@@ -839,7 +863,7 @@ input {
   .profile-container,
   .weather-container,
   .crypto-prices-container,
-  .timer-container   {
+  .timer-container {
     background-color: black;
     color: white;
   }
@@ -853,7 +877,11 @@ input {
     box-shadow: none;
     color: black;
   }
-  
+  .navbar a.link-active {
+    background-color: white;
+    color: black;
+    opacity: 0.8;
+  }
   
   .sidebar-container a:hover,
   .add-expense-link a:hover,
@@ -866,7 +894,8 @@ input {
   }
   .eachLocation:hover,
   .add-list-link a:hover,
-  .list-details-button-cancel:hover {
+  .list-details-button-cancel:hover,
+  .navbar a.link-inactive  {
     background-color: black;
     color: white;
   }
@@ -918,9 +947,13 @@ input {
   .open-nav a {
     color: black;
   }
+  .logout-button {
+    background-color:rgba(249, 249, 55, 0.4);
+    color: black;
+  }
   
   .logout-button:hover{
-    background-color: rgba(190, 255, 61, 0.8);
+    background-color:rgba(249, 249, 55, 0.8);
     color: black;
   }
   .add-expense-link-each a {
@@ -985,11 +1018,16 @@ input {
     background-color: rgb(209, 0, 0);
     color: rgba(255, 204, 0, 0.5);
   }
-  .weather-container {
+  .weather-container, 
+  .navbar a.link-inactive,
+  .logout-button{
     background-color: rgb(209, 0, 0);
   }
   .weather-info p {
     color: rgba(255, 204, 0, 0.5);
+  }
+  .logout-button{
+    color: rgba(255, 204, 0, 0.8);
   }
   .navbar,
   .open-nav,
@@ -1066,7 +1104,9 @@ input {
   .profile-container,
   .weather-container,
   .crypto-prices-container,
-  .timer-container {
+  .timer-container,
+  .navbar a.link-inactive,
+  .logout-button {
     background-color:rgba(0, 213, 255, 0.8);
     color: white;
   }
@@ -1253,6 +1293,9 @@ input {
 }
 .sidebar-crypto-container {
   height: 500px;
+}
+.main-container img {
+  width: 170px;
 }
 
 
