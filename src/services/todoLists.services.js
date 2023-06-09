@@ -34,17 +34,17 @@ const deleteTodoListService = (todoListId) => {
 
 // Create a function to change the isChecked status of a single Todo:
 const changeTodoIsCheckedService = (todoId, isChecked) => {
-    return service.patch(`http://localhost:5005/api/todo/${todoId}`, {isChecked})
+    return service.patch(`/todo/${todoId}`, {isChecked})
 }
 
 // Create a function to delete the todos that are checked from a specific List:
 const deleteCheckedTodosService = (todoListId) => {
-    return service.delete(`http://localhost:5005/api/todo/${todoListId}`)
+    return service.delete(`/todo/${todoListId}`)
 }
 
 // Create a function to create a new single Todo:
 const createSingleTodo = (todoListId, name) => {
-    return service.post(`http://localhost:5005/api/todo/${todoListId}`, {name})
+    return service.post(`/todo/${todoListId}`, {name})
 }
 
 // Export all services:
