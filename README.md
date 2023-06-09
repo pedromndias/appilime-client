@@ -69,6 +69,11 @@ HTML, CSS, Javascript, React, axios, React Context, Services, React Router, leaf
 
 - Navbar
 - Footer
+- Sidebar
+- SingleTodoList
+- Weather
+- CryptoPrices
+
 
 ## Services
 
@@ -77,16 +82,42 @@ HTML, CSS, Javascript, React, axios, React Context, Services, React Router, leaf
   - auth.signup(user)
   - auth.verify()
 
-- Backlog Service
-  - game.filter(type, status)
-  - game.detail(id)
-  - game.add(id)
-  - game.delete(id)
-  - game.update(id)
+- Main Service
+  - main.getUserMood()
+  - main.editUserMood(mood)
+
+- Profile Service
+  - profile.getUser()
+  - profile.editUsername(username)
+  - profile.editProfilePic(imageUrl)
+
+- Upload Service
+  - upload.uploadService(imageFile)
+
+- Expenses Service
+  - expenses()
+  - expenses.create(newExpense)
+  - expenses.details(expenseId)
+  - expenses.delete(expenseId)
+  - expenses.edit(expenseId, updatedExpense)
+  - expenses.deleteAll()
+
+- Todo List Service
+  - todolists()
+  - todolists.create(name)
+  - todolists.details(todoListId)
+  - todolists.delete(todoListId)
+  - todolists.edit(todoListId, name)
+  - todolists.getAllTodos(todoListId)
+  - todolists.changeIsChecked(todoId, isChecked)
+  - todolists.deleteIsChecked(todoListId)
+  - todolists.createSingleTodo(todoListId, name)
+
   
 - External API
-  - gameApi.details
-  - gameApi.list
+  - Nominatim Openstreetmap
+  - Binance
+  - Open-Meteo
   
 ## Context
 
@@ -95,23 +126,17 @@ HTML, CSS, Javascript, React, axios, React Context, Services, React Router, leaf
   
 ## Links
 
-### Collaborators
-
-[Developer 1 name](www.github-url.com)
-
-[Developer 2 name](www.github-url.com)
-
 ### Project
 
-[Repository Link Client](www.your-github-url-here.com)
+[Repository Link Client](https://github.com/pedromndias/appilime-client)
 
-[Repository Link Server](www.your-github-url-here.com)
+[Repository Link Server](https://github.com/pedromndias/appilime-server)
 
-[Deploy Link](www.your-deploy-url-here.com)
+[Deploy Link](https://appilime.netlify.app/)
 
 ### Trello
 
-[Link to your trello board](www.your-trello-url-here.com)
+[Link to your trello board](https://trello.com/b/ML2qaUGw/project-3)
 
 ### Slides
 
