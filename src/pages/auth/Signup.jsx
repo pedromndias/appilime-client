@@ -3,8 +3,6 @@ import { useNavigate } from "react-router-dom"
 import { signupService } from "../../services/auth.services"
 import { GridLoader } from "react-spinners"
 
-
-
 function Signup() {
   // useNavigate to redirect:
   const navigate = useNavigate()

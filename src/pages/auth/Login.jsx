@@ -3,15 +3,10 @@ import { useNavigate } from "react-router-dom"
 import { loginService } from "../../services/auth.services"
 import { GridLoader } from "react-spinners"
 
-// Import ThemeContext so we can access its states and functions:
-import { ThemeContext } from "../../context/theme.context";
-
 // Import AuthContext so we can access its states and functions:
 import { AuthContext } from "../../context/auth.context"
 
 function Login() {
-  // Get the theme from context:
-  const {manageTheme} = useContext(ThemeContext)
   // Get the authenticateUser function:
   const {authenticateUser} = useContext(AuthContext)
 
@@ -47,9 +42,6 @@ function Login() {
       localStorage.setItem("authToken", response.data.authToken)
       // 2. Call authenticateUser to validate the token (know who the user is and if he is logged in):
       await authenticateUser()
-
-      // Call manageTheme and send the logged in user's mood:
-      // await manageTheme()
       setIsLoading(false)
       // Navigate to Main:
       navigate("/main")

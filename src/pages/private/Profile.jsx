@@ -4,7 +4,7 @@ import { useNavigate } from "react-router-dom"
 import profilePicDefault from "../../assets/default-profile-pic.png"
 import { uploadImageService } from "../../services/upload.services"
 // Import a react spinner from react spinners (npm install react-spinners):
-import { GridLoader } from "react-spinners"
+import { GridLoader, BarLoader } from "react-spinners"
 import Sidebar from "../../components/navigation/Sidebar"
 
 function Profile() {
@@ -12,9 +12,7 @@ function Profile() {
   // Create state for the User:
   const [user, setUser] = useState(null)
   // Create state if the data is Loading:
-  const [isLoading, setIsLoading] = useState(true)
-  // Create state for the user's imageUrl:
-  // const [imageUrl, setImageUrl] = useState(null); 
+  const [isLoading, setIsLoading] = useState(true);
   const [isUploading, setIsUploading] = useState(false);
   const [showUploadingPictureForm, setShowUploadingPictureForm] = useState(false)
   const [showEditUsername, setShowEditUsername] = useState(false)
@@ -59,9 +57,7 @@ function Profile() {
     try {
       // Use a service to upload:
       const imageResponse = await uploadImageService(uploadData);
-      // Set the imageUrl with the imageUrl that comes back from the
-      // console.log(imageResponse.data.imageUrl);
-      // setImageUrl(imageResponse.data.imageUrl);
+      
       // Use a service to upload the picture to the User's document in the Database:
       const userResponse = await editProfilePicService(imageResponse.data.imageUrl);
       console.log(userResponse.data);
@@ -130,7 +126,7 @@ function Profile() {
               <button className="update-pic-button update-pic-button-cancel" onClick={() => setShowUploadingPictureForm(false)}>Cancel</button>
               </div>}
               {isUploading ? <div className="spinner-container">
-                <GridLoader color="rgba(0, 0, 0, 0.62)" size={50}/>
+                <BarLoader color="rgba(0, 0, 0, 0.62)" size={10}/>
               </div> : null}
             </div>
             

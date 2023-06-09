@@ -34,13 +34,13 @@ function Expenses() {
       // Use a service to get the data:
       const response = await getAllExpensesService()
       // console.log(response.data);
-      // Set the states
       // Set allMarkers as all the coordinates from each Expense:
       response.data.forEach(el => {
         if(el.geoLocation.length !== 0) {
           allMarkersArray.push(el.geoLocation)
         }
       })
+      // Set the states
       setAllMarkers(allMarkersArray)
       // console.log(allMarkersArray);
       setExpenses(response.data)
@@ -143,4 +143,3 @@ function Expenses() {
 }
 
 export default Expenses
-

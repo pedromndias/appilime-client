@@ -1,70 +1,101 @@
-# Getting Started with Create React App
+# appilime
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+## [See the App!](https://appilime.netlify.app/)
 
-## Available Scripts
+![App Logo](your-image-logo-path-or-name)
 
-In the project directory, you can run:
+## Description
 
-### `npm start`
+**NOTE -** Describe your project in one/two lines.
+#### [Client Repo here](www.your-github-url-here.com)
+#### [Server Repo here](www.your-github-url-here.com)
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+## Backlog Functionalities
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+**NOTE -** List here all functionalities you wish to add to your proyect later or you are currently working on
 
-### `npm test`
+## Technologies used
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+**NOTE -** List here all technologies used in the project like HTML, CSS, Javascript, React, axios, React Context etc.
 
-### `npm run build`
+# Client Structure
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+## User Stories
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+**NOTE -**  List here all the actions a user can do in the app. Example:
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+- **404** - As a user I want to see a nice 404 page when I go to a page that doesn’t exist so that I know it was my fault 
+- **500** - As a user I want to see a nice error page when the super team screws it up so that I know that is not my fault
+- **homepage** - As a user I want to be able to access the homepage so that I see what the app is about and login and signup
+- **sign up** - As a user I want to sign up on the webpage so that I can see all the events that I could attend
+- **login** - As a user I want to be able to log in on the webpage so that I can get back to my account
+- **logout** - As a user I want to be able to log out from the webpage so that I can make sure no one will access my account
+- **events list** - As a user I want to see all the events available so that I can choose which ones I want to attend
+- **events create** - As a user I want to create an event so that I can invite others to attend
 
-### `npm run eject`
+## Client Routes
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+**NOTE -** Use below table to list your frontend routes
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+## React Router Routes (React App)
+| Path                      | Page            | Components        | Permissions              | Behavior                                                      |
+| ------------------------- | ----------------| ----------------  | ------------------------ | ------------------------------------------------------------  |
+| `/`                       | Home            |                   | public                   | Home page                                                     |
+| `/signup`                 | Signup          |                   | anon only `<IsAnon>`     | Signup form, link to login, navigate to homepage after signup |
+| `/login`                  | Login           |                   | anon only `<IsAnon>`     | Login form, link to signup, navigate to homepage after login  |
+| `/profile`                | Profile         | EditProfile       | user only `<IsPrivate>`  | Navigate to homepage after logout, expire session             |
+| `/games/list`             | GameList        | AddGame, GameCard | user only `<IsPrivate>`  | Shows all films on backlog                                    |
+| `/games/edit`             | GamesEdit       |                   | user only `<IsPrivate>`  | Shows all games on backlog                                    |
+| `/games/favourites`       | FavouriteList   | GameCard          | user only `<IsPrivate>`  | Shows all games on backlog                                    |
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+## Other Components
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
+- Navbar
+- Footer
 
-## Learn More
+## Services
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+- Auth Service
+  - auth.login(user)
+  - auth.signup(user)
+  - auth.verify()
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+- Backlog Service
+  - game.filter(type, status)
+  - game.detail(id)
+  - game.add(id)
+  - game.delete(id)
+  - game.update(id)
+  
+- External API
+  - gameApi.details
+  - gameApi.list
+  
+## Context
 
-### Code Splitting
+- auth.context
+- theme.context
+  
+## Links
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
+### Collaborators
 
-### Analyzing the Bundle Size
+[Developer 1 name](www.github-url.com)
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
+[Developer 2 name](www.github-url.com)
 
-### Making a Progressive Web App
+### Project
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
+[Repository Link Client](www.your-github-url-here.com)
 
-### Advanced Configuration
+[Repository Link Server](www.your-github-url-here.com)
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
+[Deploy Link](www.your-deploy-url-here.com)
 
-### Deployment
+### Trello
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
+[Link to your trello board](www.your-trello-url-here.com)
 
-### `npm run build` fails to minify
+### Slides
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+[Slides Link](www.your-slides-url-here.com)

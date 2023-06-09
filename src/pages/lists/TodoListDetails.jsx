@@ -5,7 +5,6 @@ import { GridLoader } from "react-spinners"
 import Sidebar from "../../components/navigation/Sidebar";
 
 
-
 function TodoListDetails() {
   const navigate = useNavigate()
 

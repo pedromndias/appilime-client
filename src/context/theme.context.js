@@ -1,7 +1,6 @@
 //* Let's create state for the theme routes context:
 import {createContext, useEffect, useState, useContext} from "react"
 import { GridLoader } from "react-spinners"
-import { verifyService } from "../services/auth.services"
 import { getUserDetails } from "../services/profile.services"
 import { AuthContext } from "./auth.context"
 import { useNavigate } from "react-router-dom"
@@ -41,10 +40,6 @@ function ThemeWrapper(props) {
     // Create a function to manage the theme:
     const manageTheme = async () => {
         try {
-            // Call the verifyService so we get access to the user:
-            // const verifyResponse = await verifyService()
-            // console.log(verifyResponse.data.payload);
-            
             // If we don't have any user logged in, there is no theme selected (page shows default styles):
             // console.log(user);
             if(!user) {
@@ -66,7 +61,6 @@ function ThemeWrapper(props) {
             setIsLoading(false)
         }
     }
-    
 
     //2. The context object we will pass:
     const passedContext = {
@@ -91,7 +85,6 @@ function ThemeWrapper(props) {
             {props.children}
         </ThemeContext.Provider>
     )
-    
 }
 
 export {

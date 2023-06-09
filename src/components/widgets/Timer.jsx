@@ -1,5 +1,4 @@
 import { useEffect, useState, useRef } from "react"
-import Sidebar from "./navigation/Sidebar"
 
 function Timer() {
   // ? Let's create states to the drag functionality

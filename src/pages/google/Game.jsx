@@ -1,3 +1,4 @@
+// Use Iframe from the react-iframe package to embed an external page on our app:
 import Iframe from 'react-iframe'
 import logo from "../../assets/apple-logo.png"
 

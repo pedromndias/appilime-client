@@ -15,7 +15,7 @@ import TodoListDetails from "./pages/lists/TodoListDetails";
 import Expenses from "./pages/expenses/Expenses";
 import ExpensesAddNew from "./pages/expenses/ExpensesAddNew";
 import ExpensesDetails from "./pages/expenses/ExpensesDetails";
-import Timer from "./components/Timer.jsx"
+import Timer from "./components/widgets/Timer.jsx"
 import Game from "./pages/google/Game";
 import Music from "./pages/music/Music";
 import IsPrivate from "./components/auth/IsPrivate";
@@ -24,7 +24,6 @@ import IsAnon from "./components/auth/IsAnon";
 // Import ThemeContext so we can access its states and functions:
 import { ThemeContext } from "./context/theme.context";
 import { useContext } from "react";
-
 
 
 function App() {
@@ -61,8 +60,6 @@ function App() {
         <Route path="/error" element={<Error />}/>
         <Route path="*" element={<NotFound />}/>
       </Routes>
-
-      
 
       <Footer />
 
