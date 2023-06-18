@@ -124,6 +124,10 @@ HTML, CSS, Javascript, React, axios, React Context, Services, React Router, leaf
 - auth.context
 - theme.context
   
+## Usage
+
+If you want to run these files locally, you can download them, `cd into your project directory`, then run `npm install` to install the dependencies and finally `npm start`. Don't forget to also run the server repository (https://github.com/pedromndias/appilime-server)!
+
 ## Links
 
 ### Project
