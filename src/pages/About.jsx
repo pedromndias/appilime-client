@@ -16,7 +16,7 @@ function About() {
         <p className="about-container-slogan">the happy lime app</p>
         <br />
         <p className="about-container-description">
-            Appilime is a productivity app with focus environment and task features like To-Dos List, Expenses tracker, Timer, Weather, crypto prices and many more.
+            Appilime is a productivity app with focus environment and task features like to-dos lists, expenses tracker, timer, weather, crypto prices and many more.
         </p>
         <br />
         <h3>
@@ -73,7 +73,7 @@ function About() {
         <hr className="about-container-hr"/>
         <h3>Need a break? ☕️</h3>
         <p>
-            In case you need a break from your study/work, there's a simple but very fun game as well. It's a motorcycle game with two levels. Try to avoid the other vehicles!
+            In case you need a break from your work/study, there's a simple but very fun game as well. It's a motorcycle game with two levels. Try to avoid the other vehicles!
         </p>
         <img src={gamePic} alt="game" />
         <br />

@@ -89,16 +89,25 @@ input {
   
 }
 
-.navbar a,
+
 .open-nav a,
 .open-nav-button {
   margin: 10px;
   text-decoration: none;
   color: black;
   cursor: pointer;
-  padding: 7px 15px;
   border-radius: 10px;
+  padding: 7px 15px;
   font-size: 1.1em;
+}
+.navbar a {
+  margin: 10px;
+  text-decoration: none;
+  color: black;
+  cursor: pointer;
+  border-radius: 10px;
+  padding: 7px 13px;
+  font-size: 1em;
 }
 
 .navbar a.link-active{
@@ -277,7 +286,8 @@ input {
   
 }
 .home-container img {
-  width: 250px;
+  margin-top: 50px;
+  width: 200px;
 }
 .home-container a {
   text-decoration: none;
@@ -298,7 +308,6 @@ input {
   margin: 0;
 }
 
-
 .spinner-container {
   display: flex;
   justify-content: center;
@@ -312,7 +321,7 @@ input {
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  width: 370px;
+  width: 360px;
   margin: 40px auto;
 }
 .about-container img {
@@ -339,6 +348,9 @@ input {
 .about-container-description,
 .about-container-p {
   line-height: 1.5em;
+}
+.about-container-description {
+  font-size: 1.3em;
 }
 .about-container-responsive {
   display: flex;
@@ -412,7 +424,7 @@ input {
 /* MAIN */
 
 .main-container-general {
-  margin: 30px auto 0;
+  margin: 70px auto 0;
   display: flex;
   gap: 50px;
   flex-direction: column;
@@ -421,10 +433,6 @@ input {
   height: 100%;
   width: 90%;
 }
-.main-container {
-  margin-top: 50px;
-}
-
 
 
 /* SIDEBAR */
@@ -439,7 +447,8 @@ input {
   height: 150px;
   padding: 15px;
   box-shadow: 0px 0px 10px gray;
-  position: relative;
+  position: fixed;
+  align-self: center;
 }
 .weather-price-container {
   display: none;
@@ -485,7 +494,7 @@ input {
 /* LISTS */
 
 .allTodoLists {
-  width: 400px;
+  width: 370px;
   margin: 70px auto;
   display: flex;
   flex-direction: column;
@@ -629,7 +638,7 @@ input {
   align-items: center;
   border-radius: 20px;
   margin: 0 auto;
-  padding: 20px;
+  padding: 5px 5px 20px 5px;
   box-shadow: 0px 0px 10px gray;
 }
 .allExpenses a {
@@ -1345,6 +1354,7 @@ input {
   .sidebar-container {
     width: 100px;
     height: 280px;
+    position: relative;
   }
 
   .show-game-warning,
@@ -1398,6 +1408,12 @@ input {
   .allTodoLists-sidebar {
     position: fixed;
   }
+
+  .navbar a {
+    padding: 7px 15px;
+    font-size: 1.1em;
+  }
+  
 
 
 }

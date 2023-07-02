@@ -22,7 +22,7 @@ function Music() {
   return (
     <div className="music-container-general">
       <div className="show-music-warning">
-        <h2>Please use a computer to play music</h2>
+        <h2>Please use a computer to listen to music</h2>
         <img src={logo} alt="logo" />
       </div>
       <div className="show-music-container">

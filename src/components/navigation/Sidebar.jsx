@@ -36,11 +36,11 @@ function Sidebar() {
   // ? Note our return, the container has a reference to our ref and responds to onMouseMove, onMouseDown (change setPressed to true) and onMouseUp (change setPressed to false) events.
   return (
     <div className="sidebar-container" ref= {ref} onMouseMove={mousePressedMove} onMouseDown={() => setPressed(true)} onMouseUp={() => setPressed(false)}>
-        <Link to={"/lists"}>To-Dos</Link>
-        <Link to={"/expenses"}>Expenses</Link>
-        <Link to={"/music"}>Music</Link>
-        <Link to={"/game"}>Game</Link>
-      </div>
+      <Link to={"/lists"}>To-Dos</Link>
+      <Link to={"/expenses"}>Expenses</Link>
+      <Link to={"/music"}>Music</Link>
+      <Link to={"/game"}>Game</Link>
+    </div>
   )
 }
 
