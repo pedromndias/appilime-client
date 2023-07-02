@@ -1,4 +1,4 @@
-import logo from "../../assets/apple-logo.png"
+import logo from "../../assets/apple-computers.png"
 import { ThemeContext } from '../../context/theme.context'
 import { useContext } from 'react'
 import ReactPlayer from 'react-player'
@@ -21,13 +21,13 @@ function Music() {
     
   return (
     <div className="music-container-general">
-        <h2>Some {mood} music:</h2>
       <div className="show-music-warning">
         <h2>Please use a computer to play music</h2>
         <img src={logo} alt="logo" />
       </div>
       <div className="show-music-container">
-      <ReactPlayer url={playlistSourceLink}
+        <h2>Some {mood} music:</h2>
+        <ReactPlayer url={playlistSourceLink}
         style={{margin: "50px auto", maxWidth: "900px"}}
         controls={true}
         config={{

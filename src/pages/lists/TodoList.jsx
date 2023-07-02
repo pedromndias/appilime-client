@@ -45,7 +45,7 @@ function TodoList() {
 
   return (
     <div className="container-with-sidebar">
-      <div className="sidebar">
+      <div className="sidebar allTodoLists-sidebar">
         <Sidebar />
       </div>
       <div className="allTodoLists">

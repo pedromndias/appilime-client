@@ -51,21 +51,24 @@ function Navbar() {
     <div>
       <div className="navbar">
         {!isLoggedIn && <NavLink className={activeClass} to="/">Home</NavLink>}
+        {!isLoggedIn && <NavLink className={activeClass} to="/about">About</NavLink>}
         {!isLoggedIn && <NavLink className={activeClass} to="/auth/signup">Register</NavLink>}
         {!isLoggedIn && <NavLink className={activeClass} to="/auth/login">Access</NavLink>}
 
         {isLoggedIn && <NavLink className={activeClass} onClick={() => setShowNavMenu(false)} to="/main">Home</NavLink>}
         {isLoggedIn && <NavLink className={activeClass} onClick={() => setShowNavMenu(false)} to="/profile">Profile</NavLink>}
+        {isLoggedIn && <NavLink className={activeClass} to="/about">About</NavLink>}
         {isLoggedIn && <button className="logout-button" onClick={handleLougout}>Logout</button>}
         {isLoggedIn && <button className="open-nav-button" onClick={handleShowNavMenu}>Menu</button>}
       </div>
       {(showNavMenu && isLoggedIn) && <div className="open-nav">
         <button onClick={handleShowNavMenu}>X</button>
-         <Link onClick={handleShowNavMenu} to="/lists">To-Dos</Link>
+        <Link onClick={handleShowNavMenu} to="/lists">To-Dos</Link>
         <Link onClick={handleShowNavMenu} to="/expenses">Expenses</Link>
         <Link onClick={handleShowNavMenu} to="/timer">Timer</Link>
         <Link onClick={handleShowNavMenu} to="/game">Game</Link>
         <Link onClick={handleShowNavMenu} to="/music">Music</Link>
+        <Link onClick={handleShowNavMenu} to="/about">About</Link>
         <button className="logout-button-mobile" onClick={() => {
           handleLougout()
           handleShowNavMenu()}}>Logout</button>

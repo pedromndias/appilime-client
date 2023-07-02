@@ -2,9 +2,10 @@ import { Route, Routes } from "react-router-dom";
 import "./App.css";
 import Footer from "./components/navigation/Footer";
 import Navbar from "./components/navigation/Navbar";
-import Home from "./pages/Home"
-import Signup from "./pages/auth/Signup.jsx"
-import Login from "./pages/auth/Login.jsx"
+import Home from "./pages/Home";
+import About from "./pages/About";
+import Signup from "./pages/auth/Signup.jsx";
+import Login from "./pages/auth/Login.jsx";
 import Error from "./pages/errors/Error";
 import NotFound from "./pages/errors/NotFound";
 import Main from "./pages/private/Main.jsx"
@@ -16,7 +17,7 @@ import Expenses from "./pages/expenses/Expenses";
 import ExpensesAddNew from "./pages/expenses/ExpensesAddNew";
 import ExpensesDetails from "./pages/expenses/ExpensesDetails";
 import Timer from "./components/widgets/Timer.jsx"
-import Game from "./pages/google/Game";
+import Game from "./pages/game/Game";
 import Music from "./pages/music/Music";
 import IsPrivate from "./components/auth/IsPrivate";
 import IsAnon from "./components/auth/IsAnon";
@@ -37,6 +38,8 @@ function App() {
       <Routes>
         {/* Note the IsAnon as wrapper: */}
         <Route path="/" element={<IsAnon><Home /></IsAnon>}/>
+        {/* The About section will be available both on IsAnon and IsPrivate: */}
+        <Route path="/about" element={<About />}/>
         <Route path="/auth/signup" element={<IsAnon><Signup /></IsAnon>}/>
         <Route path="/auth/login" element={<IsAnon><Login /></IsAnon>}/>
         

@@ -6,6 +6,8 @@ function Home() {
     <div className="home-container">
       <img src={logo} alt="logo" />
       <Link to={"/auth/signup"}>Register</Link>
+      <p>or</p>
+      <Link to={"/about"}>Read More</Link>
     </div>
   )
 }

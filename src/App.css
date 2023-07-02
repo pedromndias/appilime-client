@@ -58,9 +58,11 @@ input {
 }
 
 .navbar {
+  position: fixed;
+  width: 100vw;
   height: 50px;
   display: flex;
-  background-color: rgba(127, 255, 212, 0.5);
+  background-color: rgb(127, 255, 212);
   justify-content: space-around;
   align-items: center;
   box-shadow: 0px 5px 5px gray;
@@ -90,7 +92,7 @@ input {
 .navbar a,
 .open-nav a,
 .open-nav-button {
-  margin: 20px;
+  margin: 10px;
   text-decoration: none;
   color: black;
   cursor: pointer;
@@ -114,6 +116,7 @@ input {
 }
 
 .footer {
+  width: 100%;
   height: 50px;
   display: flex;
   background-color: rgba(127, 255, 212, 0.5);
@@ -137,6 +140,7 @@ input {
   visibility: hidden;
   transition: top 0.5s ease-out;
 }
+
 
 .logout-button,
 .logout-button-mobile {
@@ -165,7 +169,7 @@ input {
 .show-music-container {
   justify-content: center;
   align-items: center;
-  height: 100vh;
+  height: 80vh;
 }
 .show-game,
 .show-music {
@@ -180,14 +184,16 @@ input {
   flex-direction: column;
   position: absolute;
   top: 100px;
-  left: 65px;
 }
 
-.music-container-general {
+.music-container-general,
+.game-container-general {
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
+}
+.music-container-general {
   margin-top: 50px;
 }
 
@@ -287,12 +293,70 @@ input {
 .home-container a:hover {
   background-color: rgb(255, 204, 0);
 }
+.home-container p {
+  font-size: 1.5em;
+  margin: 0;
+}
+
 
 .spinner-container {
   display: flex;
   justify-content: center;
   align-items: center;
 }
+
+/* ABOUT */
+
+.about-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 370px;
+  margin: 40px auto;
+}
+.about-container img {
+  width: 360px;
+}
+#about-container-logo {
+  margin-top: 50px;
+  width: 200px;
+}
+
+.about-container h1 {
+  font-size: 4em;
+  margin: 20px 0 5px 0;
+  letter-spacing: 2px;
+}
+.about-container h3 {
+  margin-top: 50px;
+}
+.about-container-slogan {
+  font-size: 1.9em;
+  margin: 5px;
+  letter-spacing: 0.8px;
+}
+.about-container-description,
+.about-container-p {
+  line-height: 1.5em;
+}
+.about-container-responsive {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 30px;
+}
+#about-container-responsive-computer {
+  width: 350px;
+}
+#about-container-responsive-mobile {
+  width: 200px;
+}
+.about-container-hr {
+  width: 100%;
+}
+
 
 
 /* SIGN UP and LOGIN*/
@@ -422,7 +486,7 @@ input {
 
 .allTodoLists {
   width: 400px;
-  margin: 10px auto;
+  margin: 70px auto;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -937,7 +1001,6 @@ input {
   background-color:white;
 }
 .greenTheme {
-  .navbar,
   .footer,
   .sidebar-container,
   .allExpenses,
@@ -956,7 +1019,8 @@ input {
     background-color: rgba(190, 255, 61, 0.8);
     color: black;
   }
-  .open-nav {
+  .open-nav,
+  .navbar {
     background-color: rgb(190, 255, 61);
   }
   .navbar a,
@@ -1102,9 +1166,7 @@ input {
   background-color:rgba(255, 204, 0, 0.7);
 }
 .blueTheme {
-  .navbar,
   .open-nav,
-  .footer,
   .sidebar-container,
   .allExpenses,
   .expense-details-container,
@@ -1126,7 +1188,9 @@ input {
     background-color:rgba(0, 213, 255, 0.8);
     color: white;
   }
-  .open-nav {
+  .open-nav,
+  .navbar,
+  .footer {
     background-color:rgb(0, 213, 255);
   }
   .sidebar-container a,
@@ -1268,7 +1332,7 @@ input {
   .profile-container h5 {
     margin-top: 20px;
     margin-bottom: 20px;
-}
+  }
 
   .main-container-general {
     flex-direction: row;
@@ -1303,20 +1367,37 @@ input {
   .crypto-component,
   .timer-component {
     display: block;
-}
-.weather-price-container {
-  display: flex;
-}
-.sidebar-crypto-container {
-  height: 500px;
-}
-.main-container img {
-  width: 170px;
-}
+  }
+  .weather-price-container {
+    display: flex;
+  }
+  .sidebar-crypto-container {
+    height: 500px;
+  }
+  .main-container img {
+    width: 170px;
+  }
 
-.logo404 {
-  width: 800px;
-}
+  .logo404 {
+    width: 800px;
+  }
+
+  .about-container {
+    width: 600px;
+  }
+  .about-container img {
+    width: 500px;
+  }
+  .about-container-responsive {
+    flex-direction: row;
+    gap: 50px;
+  }
+  #about-container-responsive-mobile {
+    width: 120px;
+  }
+  .allTodoLists-sidebar {
+    position: fixed;
+  }
 
 
 }
