@@ -49,8 +49,9 @@ HTML, CSS, Javascript, React, axios, React Context, Services, React Router, leaf
 | Path                      | Page            | Components        | Permissions              | Behavior                                                      |
 | ------------------------- | ----------------| ----------------  | ------------------------ | ------------------------------------------------------------  |
 | `/`                       | Home            |                   | public                   | Home page                                                     |
-| `/signup`                 | Signup          |                   | anon only `<IsAnon>`     | Signup form, link to login, navigate to homepage after signup |
-| `/login`                  | Login           |                   | anon only `<IsAnon>`     | Login form, link to signup, navigate to homepage after login  |
+| `/about`                       | About            |                   | public                   | About page                                                     |
+| `/auth/signup`                 | Signup          |                   | anon only `<IsAnon>`     | Signup form, link to login, navigate to homepage after signup |
+| `/auth/login`                  | Login           |                   | anon only `<IsAnon>`     | Login form, link to signup, navigate to homepage after login  |
 | `/profile`                | Profile         | EditProfile       | user only `<IsPrivate>`  | Navigate to homepage after logout, expire session             |
 | `/main`                   | Main        | Sidebar, CryptoPrices, Timer, Weather | user only `<IsPrivate>`  | Shows all the main features of the app            |
 | `/lists`             | TodoList       | Sidebar, SingleTodoList    | user only `<IsPrivate>`  | Shows all the To-Dos List                                    |

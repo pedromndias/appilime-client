@@ -8,6 +8,7 @@ import { AuthWrapper } from "./context/auth.context";
 import { ThemeWrapper } from "./context/theme.context";
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
+// ? Note the wrappers. Auth and Theme from context and BrowserRouter that enables navigation between the pages/components.
 root.render(
     <BrowserRouter>
         <AuthWrapper>
