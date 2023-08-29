@@ -74,7 +74,6 @@ function TodoListDetails() {
         navigate("/error");
       }
     }
-
   }
 
   // Create handler to delete the Todo List:
