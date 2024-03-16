@@ -8,11 +8,11 @@ const service = axios.create({
 })
 
 //? Tell the Frontend that in all Backend axios calls they need to search a token.
-// Let's invoke interceptors so it adds something to the call ritgh before it is processed:
+// Let's invoke interceptors so it adds something to the call right before it is processed:
 service.interceptors.request.use((config) => {
     // Get the token from localStorage:
     const authToken = localStorage.getItem("authToken")
-    // console.log(authToken) // ? Note how this is called on evety action. For example, when we login, it is called twice (first when the Login button is pressed and then when the verifyService is called by the authenticateUser function)
+    // console.log(authToken) // ? Note how this is called on every action. For example, when we login, it is called twice (first when the Login button is pressed and then when the verifyService is called by the authenticateUser function)
     // Validation:
     if (authToken) {
         // ? If it exists, we will add a new property called "authorization" to the headers of the config, that will include the token. Note that the isAuthenticated middleware verifies the token with "Bearer " + authToken.
